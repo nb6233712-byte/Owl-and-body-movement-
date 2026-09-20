@@ -195,16 +195,29 @@ function initOwlTracking() {
     shadowX: -3, shadowY: 6,
   };
 
-  // LERP factors
-  const LERP_BODY = 0.08;  // ~930 ms to 99% — organic body inertia
-  const LERP_FAST = 0.10;  // ~750 ms — snappier pupils for eye contact
+  // LERP factor (accelerated to eliminate tracking lag)
+  const LERP_BODY = 0.25;  // 0.22 - 0.28 range — fast, responsive body/head tracking
   const MAX_PUPIL = 5.5;   // px — guaranteed inside sclera (r26 - iris r16 = 10px buffer)
 
-  // ── Bounds cache ─────────────────────────────────────────────────────────────
-  let owlCenterX = 0;
-  let owlCenterY = 0;
-  let rafId      = null;
-  let isRunning  = false;
+  // ── Bounds cache & frame scheduling state ───────────────────────────────────
+  let owlCenterX        = 0;
+  let owlCenterY        = 0;
+  let rafId             = null;
+  let latestClientX     = 0;
+  let latestClientY     = 0;
+  let hasNewCoords      = false;
+  let isTouchActive     = false;
+  let isReturningToRest = false;
+  let returnStartTime   = 0;
+  let returnStartNormX  = 0;
+  let returnStartNormY  = 0;
+  let returnStartPupilX = 0;
+  let returnStartPupilY = 0;
+  let returnStartSpecX  = 0;
+  let returnStartSpecY  = 0;
+  let returnStartShadowX = -3;
+  let returnStartShadowY = 6;
+  const RETURN_DURATION_MS = 200; // brisk return over ~200ms
 
   const updateBounds = () => {
     const rect = owlSvg.getBoundingClientRect();
@@ -218,12 +231,26 @@ function initOwlTracking() {
   [owlRoot, owlHead, owlTorso, owlCollarTie, owlBg, owlEyes,
    leftPupil, rightPupil, owlSpecular]
     .filter(Boolean)
-    .forEach(el => { el.style.transition = 'none'; });
+    .forEach(el => {
+      el.style.transition = 'none';
+      el.style.setProperty('transition', 'none', 'important');
+    });
 
-  // ── Loop helpers ─────────────────────────────────────────────────────────────
-  const isSettled = (v) => Math.abs(v) < 0.0015;
-  const stopLoop  = () => { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } };
-  const startLoop = () => { if (rafId === null) rafId = requestAnimationFrame(tick); };
+  // ── Frame scheduling helpers (cancels redundant RAF ticks) ─────────────────
+  const stopLoop = () => {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  };
+
+  const scheduleFrame = () => {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    rafId = requestAnimationFrame(tick);
+  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   //  MICRO-ANIMATION 1 — ORGANIC BLINK
@@ -309,101 +336,157 @@ function initOwlTracking() {
   const BREATHE_CYCLE_MS  = 4000;  // period of one breath (in + out)
   const BREATHE_AMPLITUDE = 1.5;   // px — subtle, not cartoonish
 
-  let breatheActive  = false;
-  let breatheStart   = 0;           // timestamp when breathing began
+  let breatheActive       = false;
+  let breatheStart        = 0;     // timestamp when breathing began
+  let breatheTimer        = null;
+
+  function resetBreatheTimer() {
+    if (breatheTimer) clearTimeout(breatheTimer);
+    breatheActive = false;
+    breatheTimer  = setTimeout(() => {
+      breatheActive = true;
+      breatheStart  = performance.now();
+      scheduleFrame();
+    }, BREATHE_IDLE_MS);
+  }
 
   // ── Core rAF loop ────────────────────────────────────────────────────────────
   function tick() {
+    rafId = null;
+
     // Runtime reduced-motion guard
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       resetToRest();
       return;
     }
 
-    const now = performance.now();
-
-    // ── Breathing idle state machine ──────────────────────────────────────────
-    if (!breatheActive && (now - lastMoveTime) > BREATHE_IDLE_MS) {
-      breatheActive = true;
-      breatheStart  = now;
+    // Run calculations only when new coordinates arrive via mousemove or touchmove
+    if (hasNewCoords) {
+      hasNewCoords = false;
+      setTargetFromDelta(latestClientX - owlCenterX, latestClientY - owlCenterY);
     }
 
-    // Breathing offset: smooth sinusoid, 0 at start, rises then falls
-    // sin starts at 0, goes to +1 at π/2, back to 0 at π, etc.
-    // We use (1 - cos) / 2 so it starts at 0 and breathes up then back
+    const now = performance.now();
+
+    // Breathing offset: smooth sinusoid, only when idle breathing is active
     const breatheY = breatheActive
       ? -BREATHE_AMPLITUDE * Math.sin((now - breatheStart) * 2 * Math.PI / BREATHE_CYCLE_MS)
       : 0;
 
-    // LERP all scalars toward their targets
-    state.normX   = lerp(state.normX,   target.normX,   LERP_BODY);
-    state.normY   = lerp(state.normY,   target.normY,   LERP_BODY);
-    state.pupilX  = lerp(state.pupilX,  target.pupilX,  LERP_FAST);
-    state.pupilY  = lerp(state.pupilY,  target.pupilY,  LERP_FAST);
-    state.specX   = lerp(state.specX,   target.specX,   LERP_BODY);
-    state.specY   = lerp(state.specY,   target.specY,   LERP_BODY);
-    state.shadowX = lerp(state.shadowX, target.shadowX, LERP_BODY);
-    state.shadowY = lerp(state.shadowY, target.shadowY, LERP_BODY);
+    // ── Coordinate update: brisk 200ms ease-out return, instant touch reaction, or accelerated LERP ──
+    if (isReturningToRest) {
+      const elapsed  = now - returnStartTime;
+      const progress = Math.min(elapsed / RETURN_DURATION_MS, 1.0);
+      const easeOut  = 1 - (1 - progress) * (1 - progress); // brisk quadratic ease-out
 
-    // Decay pointer speed frame-by-frame so stationary pointer doesn't indefinitely suppress blinking
+      state.normX   = returnStartNormX   + (0  - returnStartNormX)   * easeOut;
+      state.normY   = returnStartNormY   + (0  - returnStartNormY)   * easeOut;
+      state.pupilX  = returnStartPupilX  + (0  - returnStartPupilX)  * easeOut;
+      state.pupilY  = returnStartPupilY  + (0  - returnStartPupilY)  * easeOut;
+      state.specX   = returnStartSpecX   + (0  - returnStartSpecX)   * easeOut;
+      state.specY   = returnStartSpecY   + (0  - returnStartSpecY)   * easeOut;
+      state.shadowX = returnStartShadowX + (-3 - returnStartShadowX) * easeOut;
+      state.shadowY = returnStartShadowY + (6  - returnStartShadowY) * easeOut;
+
+      if (progress >= 1.0) {
+        isReturningToRest = false;
+        state.normX   = 0;
+        state.normY   = 0;
+        state.pupilX  = 0;
+        state.pupilY  = 0;
+        state.specX   = 0;
+        state.specY   = 0;
+        state.shadowX = -3;
+        state.shadowY = 6;
+      }
+    } else if (isTouchActive) {
+      // Immediate Touch Reaction: bypass heavy smoothing so finger swipes track instantly
+      state.normX   = target.normX;
+      state.normY   = target.normY;
+      state.pupilX  = target.pupilX;
+      state.pupilY  = target.pupilY;
+      state.specX   = target.specX;
+      state.specY   = target.specY;
+      state.shadowX = target.shadowX;
+      state.shadowY = target.shadowY;
+    } else {
+      // Desktop mouse or gyro tracking — accelerated LERP factor
+      state.normX   = lerp(state.normX,   target.normX,   LERP_BODY);
+      state.normY   = lerp(state.normY,   target.normY,   LERP_BODY);
+      state.specX   = lerp(state.specX,   target.specX,   LERP_BODY);
+      state.specY   = lerp(state.specY,   target.specY,   LERP_BODY);
+      state.shadowX = lerp(state.shadowX, target.shadowX, LERP_BODY);
+      state.shadowY = lerp(state.shadowY, target.shadowY, LERP_BODY);
+
+      // Direct snap when within minimal threshold to eliminate trailing latency completely
+      if (Math.abs(state.normX - target.normX) < 0.0015) state.normX = target.normX;
+      if (Math.abs(state.normY - target.normY) < 0.0015) state.normY = target.normY;
+      if (Math.abs(state.specX - target.specX) < 0.05)   state.specX = target.specX;
+      if (Math.abs(state.specY - target.specY) < 0.05)   state.specY = target.specY;
+      if (Math.abs(state.shadowX - target.shadowX) < 0.05) state.shadowX = target.shadowX;
+      if (Math.abs(state.shadowY - target.shadowY) < 0.05) state.shadowY = target.shadowY;
+
+      // Pupils: set position directly in animation frame so gaze snaps synchronously without delay
+      state.pupilX  = target.pupilX;
+      state.pupilY  = target.pupilY;
+    }
+
+    // Decay pointer speed frame-by-frame
     pointerSpeed *= 0.88;
 
     const nx = state.normX;
     const ny = state.normY;
 
-    // 1. Root group tilt — unified rig rotation (capped to 6° for brand dignity)
+    // 1. Root group tilt — unified rig rotation base
     if (owlRoot) {
       owlRoot.style.transform =
-        `rotateY(${(nx * 6).toFixed(2)}deg) rotateX(${(-ny * 5).toFixed(2)}deg)`;
+        `rotateY(${(nx * 2).toFixed(2)}deg) rotateX(${(-ny * 2).toFixed(2)}deg)`;
     }
 
-    // 2. Head — subtle parallax rotation + translate toward cursor (capped to 6° for brand dignity)
+    // 2. Head (#owl-head or #owl-layer-head)
+    // rotateY: normX * 14deg, rotateX: -normY * 10deg, translateX: normX * 8px, translateY: normY * 6px
     if (owlHead) {
+      const headTx = (nx * 8).toFixed(1);
+      const headTy = (ny * 6 + (breatheActive ? breatheY * 0.5 : 0)).toFixed(2);
+      const headRy = (nx * 14).toFixed(2);
+      const headRx = (-ny * 10).toFixed(2);
       owlHead.style.transform =
-        `translateZ(36px)` +
-        ` translateX(${(nx * 6).toFixed(1)}px)` +
-        ` translateY(${(ny * 4 + breatheY * 0.5).toFixed(2)}px)` +
-        ` rotateY(${(nx * 6).toFixed(2)}deg)` +
-        ` rotateX(${(-ny * 5).toFixed(2)}deg)`;
+        `translateZ(36px) translateX(${headTx}px) translateY(${headTy}px) rotateY(${headRy}deg) rotateX(${headRx}deg)`;
     }
 
-    // 3. Collar & Tie — deliberate lag behind head
+    // 3. Collar & Tie — tracks behind head
     if (owlCollarTie) {
+      const collarBreatheY = breatheActive ? breatheY * 0.8 : 0;
       owlCollarTie.style.transform =
-        `translateZ(24px)` +
-        ` translateX(${(nx * 3).toFixed(1)}px)` +
-        ` translateY(${(breatheY * 0.8).toFixed(2)}px)` +
-        ` rotateY(${(nx * 4).toFixed(2)}deg)`;
+        `translateZ(24px) translateX(${(nx * 5).toFixed(1)}px) translateY(${collarBreatheY.toFixed(2)}px) rotateY(${(nx * 8).toFixed(2)}deg)`;
     }
 
-    // 4. Torso — subtle base sway + breathing + dynamic shadow
+    // 4. Torso (#owl-torso)
+    // rotateY: normX * 6deg, translateX: normX * 4px
     if (owlTorso) {
+      const torsoTx = (nx * 4).toFixed(1);
+      const torsoTy = (breatheActive ? breatheY : 0).toFixed(2);
+      const torsoRy = (nx * 6).toFixed(2);
       owlTorso.style.transform =
-        `translateZ(10px)` +
-        ` translateX(${(nx * 2).toFixed(1)}px)` +
-        ` translateY(${breatheY.toFixed(2)}px)` +
-        ` rotateY(${(nx * 2.5).toFixed(2)}deg)`;
+        `translateZ(10px) translateX(${torsoTx}px) translateY(${torsoTy}px) rotateY(${torsoRy}deg)`;
       owlTorso.style.filter =
         `drop-shadow(${(-nx * 8).toFixed(1)}px ${(12 + ny * 4).toFixed(1)}px 20px rgba(0,0,0,0.35))`;
     }
 
-    // 5. Background plumage — near-static depth anchor
+    // 5. Background plumage — subtle depth anchor
     if (owlBg) {
       owlBg.style.transform =
-        `translateZ(0px)` +
-        ` translateX(${(nx * 1).toFixed(1)}px)` +
-        ` rotateY(${(nx * 1.2).toFixed(2)}deg)`;
+        `translateZ(0px) translateX(${(nx * 1.5).toFixed(1)}px) rotateY(${(nx * 2).toFixed(2)}deg)`;
     }
 
-    // 6. Eyes layer — depth pop + subtle follow
+    // 6. Eyes layer — depth pop + follow
     if (owlEyes) {
+      const eyesBreatheY = breatheActive ? breatheY * 0.3 : 0;
       owlEyes.style.transform =
-        `translateZ(50px)` +
-        ` translateX(${(nx * 2).toFixed(1)}px)` +
-        ` translateY(${(ny * 1.5 + breatheY * 0.3).toFixed(2)}px)`;
+        `translateZ(50px) translateX(${(nx * 2.5).toFixed(1)}px) translateY(${(ny * 2 + eyesBreatheY).toFixed(2)}px)`;
     }
 
-    // 7. Pupils — radial clamped translation
+    // 7. Pupils — set directly in animation frame synchronously without waiting on transitions
     leftPupil.style.transform  =
       `translateX(${state.pupilX.toFixed(2)}px) translateY(${state.pupilY.toFixed(2)}px)`;
     rightPupil.style.transform =
@@ -419,17 +502,21 @@ function initOwlTracking() {
         `translateX(${state.specX.toFixed(1)}px) translateY(${state.specY.toFixed(1)}px)`;
     }
 
-    // Self-pause when returning to rest, fully settled, and not breathing
-    const atRest  = target.normX === 0 && target.normY === 0;
+    // Stop redundant RAF ticks when settled; continue only while interpolating, returning, or breathing
     const settled =
-      isSettled(state.normX)  && isSettled(state.normY)  &&
-      isSettled(state.pupilX) && isSettled(state.pupilY) &&
-      isSettled(state.specX)  && isSettled(state.specY);
+      !isReturningToRest &&
+      state.normX === target.normX &&
+      state.normY === target.normY &&
+      state.specX === target.specX &&
+      state.specY === target.specY &&
+      state.shadowX === target.shadowX &&
+      state.shadowY === target.shadowY;
 
-    // Keep loop alive while breathing is active (breatheY is non-zero)
-    const keepForBreath = breatheActive && Math.abs(breatheY) > 0.001;
-
-    rafId = (atRest && settled && !isRunning && !keepForBreath) ? null : requestAnimationFrame(tick);
+    if (!settled) {
+      rafId = requestAnimationFrame(tick);
+    } else if (breatheActive) {
+      rafId = requestAnimationFrame(tick);
+    }
   }
 
   // ── Shared helper: update all targets from a viewport delta (px from owl centre) ──
@@ -462,59 +549,97 @@ function initOwlTracking() {
 
   // ── Mouse move handler ───────────────────────────────────────────────────────
   const onMouseMove = (e) => {
-    isRunning     = true;
-    lastMoveTime  = performance.now();
-    breatheActive = false;
-    setTargetFromDelta(e.clientX - owlCenterX, e.clientY - owlCenterY);
-    startLoop();
+    isTouchActive     = false;
+    isReturningToRest = false;
+    lastMoveTime      = performance.now();
+    resetBreatheTimer();
+    latestClientX = e.clientX;
+    latestClientY = e.clientY;
+    hasNewCoords  = true;
+    scheduleFrame();
   };
 
   // ── Touch event handler (touchstart + touchmove, mobile finger tracking) ──────────
-  //  Both touchstart and touchmove feed the same target pipeline so the owl
-  //  reacts immediately on first touch without waiting for a drag.
   function handleTouch(e) {
     if (!e.touches || e.touches.length === 0) return;
-    isRunning     = true;
-    lastMoveTime  = performance.now();
-    breatheActive = false;
+    lastMoveTime      = performance.now();
+    resetBreatheTimer();
+    isTouchActive     = true;
+    isReturningToRest = false;
+
     const t = e.touches[0];
+    latestClientX = t.clientX;
+    latestClientY = t.clientY;
+
+    // Apply coordinates immediately into target vector
     setTargetFromDelta(t.clientX - owlCenterX, t.clientY - owlCenterY);
-    startLoop();
+
+    // Bypass heavy smoothing immediately for instant finger reaction
+    state.normX   = target.normX;
+    state.normY   = target.normY;
+    state.pupilX  = target.pupilX;
+    state.pupilY  = target.pupilY;
+    state.specX   = target.specX;
+    state.specY   = target.specY;
+    state.shadowX = target.shadowX;
+    state.shadowY = target.shadowY;
+
+    scheduleFrame();
   }
 
-  // On touchend / touchcancel: smoothly return targets to centre (0, 0)
+  // On touchend / touchcancel: briskly return to origin over ~200ms
   function handleTouchEnd() {
-    isRunning      = false;
+    isTouchActive     = false;
+    isReturningToRest = true;
+    returnStartTime   = performance.now();
+    returnStartNormX  = state.normX;
+    returnStartNormY  = state.normY;
+    returnStartPupilX = state.pupilX;
+    returnStartPupilY = state.pupilY;
+    returnStartSpecX  = state.specX;
+    returnStartSpecY  = state.specY;
+    returnStartShadowX = state.shadowX;
+    returnStartShadowY = state.shadowY;
+
+    target.normX   = 0;
+    target.normY   = 0;
+    target.pupilX  = 0;
+    target.pupilY  = 0;
+    target.specX   = 0;
+    target.specY   = 0;
+    target.shadowX = -3;
+    target.shadowY = 6;
     pointerSpeed   = 0;
-    target.normX   = 0;  target.normY   = 0;
-    target.pupilX  = 0;  target.pupilY  = 0;
-    target.specX   = 0;  target.specY   = 0;
-    target.shadowX = -3; target.shadowY = 6;
-    startLoop(); // let LERP ease back to rest
+    hasNewCoords   = false;
+
+    resetBreatheTimer();
+    scheduleFrame();
   }
 
   // ── Device orientation handler (gyroscope tilt on mobile) ────────────────────
-  //  gamma : left / right tilt  — clamped to [−30°, +30°]   → mapped to [−1, +1]
-  //  beta  : front / back tilt  — clamped to [ 15°,  65°]   → mapped to [−1, +1]
-  //          (natural phone-hold range; centre = 40°)
   let orientationActive = false;
 
   function handleOrientation(e) {
-    // Ignore if sensor returns null (device doesn’t support it)
     if (e.gamma === null || e.beta === null) return;
+    if (isTouchActive) return; // Touch interaction takes precedence
 
-    lastMoveTime  = performance.now();
-    breatheActive = false;
+    lastMoveTime = performance.now();
+    resetBreatheTimer();
 
-    // Horizontal axis: gamma — clamp −30 → +30, normalise to −1 → +1
-    const GAMMA_MIN = -30, GAMMA_MAX = 30;
-    const gammaClamped = Math.max(GAMMA_MIN, Math.min(GAMMA_MAX, e.gamma));
-    const gNorm = gammaClamped / 30;                        // −1 → +1
+    // Fast Gyroscope Response:
+    // Tightened clamp range & sensitivity multiplier for dynamic reaction to subtle phone tilts
+    const GAMMA_CLAMP = 15;        // degrees (tightened from ±30°)
+    const GAMMA_SENSITIVITY = 1.5; // multiplier for fast, responsive left/right reaction
+    const clampedGamma = Math.max(-GAMMA_CLAMP, Math.min(GAMMA_CLAMP, e.gamma));
+    const gNorm = Math.max(-1, Math.min(1, (clampedGamma / GAMMA_CLAMP) * GAMMA_SENSITIVITY));
 
-    // Vertical axis: beta — clamp 15 → 65, centre at 40°, normalise to −1 → +1
-    const BETA_MIN = 15, BETA_MAX = 65, BETA_CENTER = 40;
-    const betaClamped = Math.max(BETA_MIN, Math.min(BETA_MAX, e.beta));
-    const bNorm = (betaClamped - BETA_CENTER) / 25;         // −1 → +1
+    // Vertical axis: beta — natural phone hold angle ~40°
+    const BETA_CENTER = 40;       // degrees
+    const BETA_CLAMP = 12;        // degrees delta (tightened from ±25°)
+    const BETA_SENSITIVITY = 1.5; // multiplier for fast, responsive up/down reaction
+    const betaDelta = e.beta - BETA_CENTER;
+    const clampedBetaDelta = Math.max(-BETA_CLAMP, Math.min(BETA_CLAMP, betaDelta));
+    const bNorm = Math.max(-1, Math.min(1, (clampedBetaDelta / BETA_CLAMP) * BETA_SENSITIVITY));
 
     target.normX   = gNorm;
     target.normY   = bNorm;
@@ -527,50 +652,49 @@ function initOwlTracking() {
 
     if (!orientationActive) {
       orientationActive = true;
-      isRunning         = true;
-      // Suppress CSS idle-breathe animation — JS rAF loop is now the sole driver
       owlSvg.style.animation = 'none';
     }
-    startLoop(); // Safe: startLoop() is idempotent — never spawns duplicate loops
+    hasNewCoords = false;
+    scheduleFrame();
   }
 
   // ── iOS 13+ permission + orientation listener registration ───────────────────
-  //  DeviceOrientationEvent.requestPermission() must be called inside a
-  //  user-gesture handler (touchstart) on iOS 13+. On Android and older
-  //  iOS the API does not exist, so we attach the listener directly.
   function enableOrientationTracking() {
     if (typeof DeviceOrientationEvent !== 'undefined' &&
         typeof DeviceOrientationEvent.requestPermission === 'function') {
-      // iOS 13+ — requires explicit user permission
       DeviceOrientationEvent.requestPermission()
         .then(result => {
           if (result === 'granted') {
             window.addEventListener('deviceorientation', handleOrientation, { passive: true });
           }
-          // If denied: touch tracking still provides full eye/body movement
         })
         .catch(() => { /* sensor unavailable — graceful fallback to touch-only */ });
     } else {
-      // Android / older iOS — no permission gate needed
       window.addEventListener('deviceorientation', handleOrientation, { passive: true });
     }
   }
 
   // ── Pointer leaves viewport ──────────────────────────────────────────────────
   const onMouseLeave = () => {
-    isRunning     = false;
-    pointerSpeed  = 0;
-    target.normX  = 0;  target.normY  = 0;
-    target.pupilX = 0;  target.pupilY = 0;
-    target.specX  = 0;  target.specY  = 0;
-    target.shadowX = -3; target.shadowY = 6;
-    startLoop();
+    isTouchActive     = false;
+    isReturningToRest = false;
+    pointerSpeed      = 0;
+    target.normX      = 0;  target.normY      = 0;
+    target.pupilX     = 0;  target.pupilY     = 0;
+    target.specX      = 0;  target.specY      = 0;
+    target.shadowX    = -3; target.shadowY    = 6;
+    hasNewCoords      = false;
+    resetBreatheTimer();
+    scheduleFrame();
   };
 
   // ── Hard reset (reduced-motion or unmount) ───────────────────────────────────
   function resetToRest() {
     stopLoop();
-    breatheActive = false;
+    breatheActive     = false;
+    isTouchActive     = false;
+    isReturningToRest = false;
+    if (breatheTimer) { clearTimeout(breatheTimer); breatheTimer = null; }
 
     // Cancel blink in-flight
     if (blinkRafId)       { cancelAnimationFrame(blinkRafId); blinkRafId = null; }
@@ -597,31 +721,22 @@ function initOwlTracking() {
     if (owlSpecular)  owlSpecular.style.transform    = '';
   }
 
-  // ── Passive event listener registration ──────────────────────────────────
-  const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-  const hasTouchAPI     = 'ontouchstart' in window;
+  // Initialize breathing idle timer
+  resetBreatheTimer();
 
-  if (!isCoarsePointer) {
-    // Desktop (fine pointer) — mouse tracking
-    window.addEventListener('mousemove',    onMouseMove,  { passive: true });
-    document.addEventListener('mouseleave', onMouseLeave, { passive: true });
-  }
+  // ── Event listener registration (desktop & touch) ──────────────────────────
+  window.addEventListener('mousemove',    onMouseMove,    { passive: true });
+  document.addEventListener('mouseleave', onMouseLeave,   { passive: true });
+  window.addEventListener('touchstart',   handleTouch,    { passive: true });
+  window.addEventListener('touchmove',    handleTouch,    { passive: true });
+  window.addEventListener('touchend',     handleTouchEnd, { passive: true });
+  window.addEventListener('touchcancel',  handleTouchEnd, { passive: true });
 
-  if (isCoarsePointer || hasTouchAPI) {
-    // Mobile / tablet — touchstart fires immediately on tap;
-    // touchmove continues tracking as the finger drags
-    window.addEventListener('touchstart',  handleTouch,   { passive: true });
-    window.addEventListener('touchmove',   handleTouch,   { passive: true });
-    window.addEventListener('touchend',    handleTouchEnd, { passive: true });
-    window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
-
-    // Gyroscope: request permission on the very first touchstart gesture
-    // (iOS 13+ requires this to be inside a user-initiated event)
-    window.addEventListener('touchstart', function grantOnce() {
-      enableOrientationTracking();
-      window.removeEventListener('touchstart', grantOnce);
-    }, { once: true, passive: true });
-  }
+  // Gyroscope: request permission on first touchstart gesture (iOS 13+)
+  window.addEventListener('touchstart', function grantOnce() {
+    enableOrientationTracking();
+    window.removeEventListener('touchstart', grantOnce);
+  }, { once: true, passive: true });
 
   // Recalculate owl centre whenever the layout shifts
   window.addEventListener('resize', updateBounds, { passive: true });

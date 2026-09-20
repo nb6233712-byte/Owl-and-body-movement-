@@ -95,7 +95,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 20px;
-  perspective: 1000px;
+  perspective: 650px;
   perspective-origin: 50% 50%;
   transform-style: preserve-3d;
 
@@ -115,6 +115,7 @@
   max-width: 220px;
   flex: none;
   transform-style: preserve-3d;
+  will-change: transform;
   /* Base ambient shadow for the whole character */
   filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.50));
   overflow: visible;
@@ -166,12 +167,12 @@
   }
 }
 
-/* Subtle idle float for hero owl */
+/* Subtle idle float for hero owl — zero transition delay to avoid fighting JS tracking */
 .hero-owl svg, .hero-owl img {
-  transition: transform 0.3s ease;
+  transition: none;
 }
 .hero-owl:hover svg, .hero-owl:hover img {
-  transform: translateY(-2px);
+  transform: none;
 }
 
 /* ─── Uncle Pat Interactive SVG Layer Rigging & 3D Parallax ──────────────── */
@@ -183,8 +184,9 @@
 #owl-root {
   transform-box: fill-box;
   transform-origin: 50% 100%;
+  transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.15s ease-out;
+  transition: none;
 }
 
 /*
@@ -199,27 +201,30 @@
 #owl-layer-bg {
   transform-box: fill-box;
   transform-origin: 50% 100%;
+  transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(0px);
-  transition: transform 0.15s ease-out;
+  transition: none;
 }
 
 /* Layer 2 — torso body */
 #owl-layer-torso {
   transform-box: fill-box;
   transform-origin: 50% 100%;
+  transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(10px);
-  transition: transform 0.15s ease-out;
+  transition: none;
 }
 
 /* Layer 3 — collar flaps + gold tie */
 #owl-layer-collar-tie {
   transform-box: fill-box;
   transform-origin: 50% 100%;
+  transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(24px);
-  transition: transform 0.15s ease-out;
+  transition: none;
   /*
     Dynamic depth shadow: a tighter, crisper shadow than the ambient one
     on the SVG root. JS will nudge the x/y offset via CSS custom properties
@@ -238,9 +243,10 @@
 #owl-layer-head {
   transform-box: fill-box;
   transform-origin: 50% 60%;
+  transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(36px);
-  transition: transform 0.15s ease-out;
+  transition: none;
   /*
     Slightly stronger shadow on the head — it sits highest in 3D space
     and should cast the most visible depth shadow.
@@ -258,9 +264,10 @@
 #owl-layer-eyes {
   transform-box: fill-box;
   transform-origin: 50% 60%;
+  transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(50px);
-  transition: transform 0.15s ease-out;
+  transition: none;
 }
 
 /* Pupils — sub-layer inside eyes, only translate for tracking */
@@ -269,7 +276,7 @@
   transform-box: fill-box;
   transform-origin: 50% 50%;
   will-change: transform;
-  transition: transform 0.08s ease-out;
+  transition: none;
 }
 
 /* ─── Specular / Key-Light Overlay ───────────────────────────────────────── */
@@ -284,7 +291,7 @@
   pointer-events: none;
   mix-blend-mode: screen;
   opacity: 0.18;
-  transition: opacity 0.3s ease, transform 0.18s ease-out;
+  transition: opacity 0.3s ease;
   transform-box: fill-box;
   transform-origin: 50% 50%;
   will-change: transform, opacity;
@@ -300,8 +307,9 @@
 #owl-torso,
 #owl-pupils {
   transform-box: fill-box;
+  transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.15s ease-out;
+  transition: none;
 }
 
 /* Touch / coarse-pointer: gentle breathing shown until JS orientation tracking kicks in.
@@ -320,8 +328,7 @@
 /* ─── Responsive 3D Perspective — Mobile (≤ 768 px) ───────────────────────── */
 /*
   On narrow viewports:
-    • Reduce perspective to 700 px — flatter, so micro-rotations produce a
-      smaller on-screen pixel swing, preventing horizontal overflow.
+    • Reduce perspective to 650 px — punchy 3D parallax without overflow.
     • Anchor transform-origin to 50% 50% so rotateY/rotateX pivot at the
       visual centre of the owl, not a corner that would shift it off-screen.
     • Set overflow-x: hidden on body and .hero so any residual sub-pixel
@@ -329,12 +336,13 @@
       causes side-scroll jank on iOS Safari.
 */
 @media (max-width: 768px) {
-  /* Keep perspective at 700px on the owl wrapper */
+  /* Keep perspective at 650px on the owl wrapper */
   .hero-owl,
   .hero-owl-wrap,
   #owl-container {
-    perspective: 700px;
+    perspective: 650px;
     perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
   }
