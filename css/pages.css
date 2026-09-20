@@ -79,19 +79,45 @@
   font-weight: 500;
 }
 
-.hero-owl {
+/* ─── Uncle Pat 3D Stage ──────────────────────────────────────────────────── */
+
+/*
+  1. STAGE WRAPPER
+  perspective + perspective-origin establish the vanishing point for all
+  translateZ offsets on child layers. 1000 px gives a natural depth field
+  without excessive fish-eye distortion at the layer offsets we use (0–50 px).
+*/
+.hero-owl,
+.hero-owl-wrap,
+#owl-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 20px;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+
+  /* ── Mobile gesture & highlight fixes ────────────────────────────────────
+     pan-y: let vertical scroll pass through freely while touch tracking runs.
+     tap-highlight: suppress the gray flash iOS shows on tapped elements.    */
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.hero-owl svg, .hero-owl img {
+/*
+  2. ROOT SVG — preserve-3d so translateZ on child <g> elements propagates
+  through the browser's compositing layer stack correctly.
+*/
+#hero-owl-svg {
   width: 100%;
   max-width: 220px;
   flex: none;
-  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45));
+  transform-style: preserve-3d;
+  /* Base ambient shadow for the whole character */
+  filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.50));
+  overflow: visible;
 }
 
 .owlmeet {
@@ -146,6 +172,226 @@
 }
 .hero-owl:hover svg, .hero-owl:hover img {
   transform: translateY(-2px);
+}
+
+/* ─── Uncle Pat Interactive SVG Layer Rigging & 3D Parallax ──────────────── */
+
+/*
+  ROOT GROUP — outermost transform anchor.
+  JS will apply rotateX / rotateY / translateX / translateY here.
+*/
+#owl-root {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+
+/*
+  3. TRANSLATEZ DEPTH OFFSETS
+  Each layer gets a static translateZ that the browser renderer compounds
+  with JS-driven rotateX/rotateY on #owl-root to produce genuine parallax.
+  Inline style="transform" from JS will be composed on top via
+  transform-box: fill-box so the layer's own fill bbox is the pivot.
+*/
+
+/* Layer 1 — back feathers (deepest) */
+#owl-layer-bg {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  transform: translateZ(0px);
+  transition: transform 0.15s ease-out;
+}
+
+/* Layer 2 — torso body */
+#owl-layer-torso {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  transform: translateZ(10px);
+  transition: transform 0.15s ease-out;
+}
+
+/* Layer 3 — collar flaps + gold tie */
+#owl-layer-collar-tie {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  transform: translateZ(24px);
+  transition: transform 0.15s ease-out;
+  /*
+    Dynamic depth shadow: a tighter, crisper shadow than the ambient one
+    on the SVG root. JS will nudge the x/y offset via CSS custom properties
+    to simulate a key light that follows the cursor direction.
+  */
+  filter:
+    drop-shadow(
+      var(--owl-shadow-x, -3px)
+      var(--owl-shadow-y, 6px)
+      8px
+      rgba(0, 0, 0, 0.35)
+    );
+}
+
+/* Layer 4 — head plate, disc, tufts, beak */
+#owl-layer-head {
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+  will-change: transform;
+  transform: translateZ(36px);
+  transition: transform 0.15s ease-out;
+  /*
+    Slightly stronger shadow on the head — it sits highest in 3D space
+    and should cast the most visible depth shadow.
+  */
+  filter:
+    drop-shadow(
+      var(--owl-shadow-x, -3px)
+      var(--owl-shadow-y, 6px)
+      12px
+      rgba(0, 0, 0, 0.40)
+    );
+}
+
+/* Layer 5 — sclera, irises, pupils (closest to viewer) */
+#owl-layer-eyes {
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+  will-change: transform;
+  transform: translateZ(50px);
+  transition: transform 0.15s ease-out;
+}
+
+/* Pupils — sub-layer inside eyes, only translate for tracking */
+#owl-pupil-left,
+#owl-pupil-right {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  transition: transform 0.08s ease-out;
+}
+
+/* ─── Specular / Key-Light Overlay ───────────────────────────────────────── */
+/*
+  #owl-specular is an SVG <radialGradient>-backed <ellipse> placed at the top
+  of #owl-root. JS shifts its cx/cy opposite the cursor to simulate a
+  hemisphere key light rotating around Uncle Pat.
+  The element itself is pointer-events: none so it never interferes with
+  the mousemove bounding rect used for tracking.
+*/
+#owl-specular {
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.18;
+  transition: opacity 0.3s ease, transform 0.18s ease-out;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+
+/* Increase specular intensity slightly when the pointer is inside the owl */
+#owl-container:hover #owl-specular {
+  opacity: 0.26;
+}
+
+/* ─── Legacy selectors — kept for backwards compat ───────────────────────── */
+#owl-head,
+#owl-torso,
+#owl-pupils {
+  transform-box: fill-box;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+}
+
+/* Touch / coarse-pointer: gentle breathing shown until JS orientation tracking kicks in.
+   JS suppresses this by setting owlSvg.style.animation = 'none' once gyro/touch is active. */
+@media (pointer: coarse) {
+  #hero-owl-svg {
+    animation: owlMobileBreathe 4s ease-in-out infinite;
+  }
+}
+
+@keyframes owlMobileBreathe {
+  0%, 100% { transform: translateY(0);      }
+  50%       { transform: translateY(-2px);   }
+}
+
+/* ─── Responsive 3D Perspective — Mobile (≤ 768 px) ───────────────────────── */
+/*
+  On narrow viewports:
+    • Reduce perspective to 700 px — flatter, so micro-rotations produce a
+      smaller on-screen pixel swing, preventing horizontal overflow.
+    • Anchor transform-origin to 50% 50% so rotateY/rotateX pivot at the
+      visual centre of the owl, not a corner that would shift it off-screen.
+    • Set overflow-x: hidden on body and .hero so any residual sub-pixel
+      horizontal shift from 3D transforms never creates a scrollbar or
+      causes side-scroll jank on iOS Safari.
+*/
+@media (max-width: 768px) {
+  /* Keep perspective at 700px on the owl wrapper */
+  .hero-owl,
+  .hero-owl-wrap,
+  #owl-container {
+    perspective: 700px;
+    perspective-origin: 50% 50%;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* SVG pivot must stay centred so rotateX/rotateY don't shift the owl sideways */
+  #hero-owl-svg,
+  #owl-root,
+  .hero-owl,
+  .hero-owl-wrap {
+    transform-origin: center center;
+  }
+
+  /* Prevent micro-rotation pixel fringe from creating horizontal scrollbars */
+  body,
+  .hero,
+  section.night {
+    overflow-x: hidden;
+  }
+
+  /* ── Very narrow phones (≤ 420 px) ───────────────────────────────────────
+     Ensure transform-origin remains anchored at center so 3D rotation
+     does not cause horizontal overflow or side-scrolling.                 */
+  @media (max-width: 420px) {
+    #hero-owl-svg,
+    #owl-root,
+    .hero-owl,
+    .hero-owl-wrap {
+      transform-origin: center center;
+    }
+  }
+}
+
+/* ─── Reduced-Motion Fallback ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #hero-owl-svg,
+  #owl-root,
+  #owl-layer-bg,
+  #owl-layer-torso,
+  #owl-layer-collar-tie,
+  #owl-layer-head,
+  #owl-layer-eyes,
+  #owl-head,
+  #owl-torso,
+  #owl-pupils,
+  #owl-pupil-left,
+  #owl-pupil-right,
+  #owl-eyelid-left,
+  #owl-eyelid-right,
+  #owl-specular,
+  .hero-owl svg,
+  .hero-owl img {
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    filter: none !important;
+    animation: none !important;
+  }
 }
 
 /* ---------- Thesis: Pat vs. Sam ---------- */

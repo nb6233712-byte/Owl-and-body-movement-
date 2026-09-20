@@ -1746,7 +1746,7 @@ ul.ticks.lime li:before {
 
 /* Full-bleed photo band — image sits behind a colour overlay
    so it stays inside the palette rather than fighting it.
-   Usage: <div class="imgband" style="--img:url('../Pics/...')"> */
+   Usage: <div class="imgband" style="--img:url('Pics/...')"> */
 .imgband {
   position: relative;
   overflow: hidden;

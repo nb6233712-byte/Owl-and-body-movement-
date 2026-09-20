@@ -7,11 +7,6 @@
   <meta name="description" content="Year-round tax strategy and advisory for business owners and high earners. The Standing File: dedicated advisor, quarterly sessions, mid-year projections, S-Corp elections.">
   <link rel="canonical" href="https://pivotaidetax.com/tax-strategy.html">
 
-    <!-- Preload Critical Self-Hosted Fonts -->
-  <link rel="preload" href="assets/fonts/fraunces-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/poppins-500-latin.woff2" as="font" type="font/woff2" crossorigin>
-
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/variables.css">
@@ -113,8 +108,97 @@
             <a class="btn btn-w" href="tel:+15714703754">1 (571) 470-3754</a>
           </div>
         </div>
-        <div style="text-align:center">
-          <img src="assets/brand/uncle-pat-colour.svg" alt="Uncle Pat" width="200" height="220" style="max-width:100%;height:auto">
+        <div class="hero-owl" id="owl-container">
+          <svg id="hero-owl-svg" viewBox="0 0 200 220" role="img" aria-label="Uncle Pat, the Pivot Aide Tax owl"
+            width="220" height="242">
+            <!-- Root interactive group -->
+            <defs>
+              <!-- Specular / key-light radial gradient -->
+              <radialGradient id="owlSpecularGrad" cx="50%" cy="40%" r="55%" fx="50%" fy="30%">
+                <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.90"/>
+                <stop offset="55%"  stop-color="#9DDFFF" stop-opacity="0.30"/>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+              </radialGradient>
+              <!-- Eyelid clip masks — keep eyelid overlays inside each sclera circle -->
+              <clipPath id="eye-clip-left">
+                <circle cx="73" cy="90" r="25.5"/>
+              </clipPath>
+              <clipPath id="eye-clip-right">
+                <circle cx="127" cy="90" r="25.5"/>
+              </clipPath>
+            </defs>
+            <g id="owl-root" style="transform-box: fill-box; transform-origin: 50% 100%;">
+              <!-- 1. Outer back feathers and background plumage shadow -->
+              <g id="owl-layer-bg" data-depth="0.02" style="transform-box: fill-box; transform-origin: 50% 100%;">
+                <path d="M46 170 C32 184 21 200 16 220 L10 220 C10 209 12 198 16 186 C22 168 33 152 47 141 Z"
+                  fill="#163344" />
+                <path d="M154 170 C168 184 179 200 184 220 L190 220 C190 209 188 198 184 186 C178 168 167 152 153 141 Z"
+                  fill="#163344" />
+              </g>
+
+              <!-- 2. Deep slate torso and shoulder base -->
+              <g id="owl-layer-torso" data-depth="0.05" style="transform-box: fill-box; transform-origin: 50% 100%;">
+                <path
+                  d="M100 128 C140 128 172 150 184 186 C188 198 190 209 190 220 L10 220 C10 209 12 198 16 186 C28 150 60 128 100 128 Z"
+                  fill="#1D3D51" />
+                <path d="M66 128 L134 128 L100 184 Z" fill="#FFFFFF" />
+              </g>
+
+              <!-- 3. Pure white collar flaps and brand gold tie (knot + blade) -->
+              <g id="owl-layer-collar-tie" data-depth="0.09"
+                style="transform-box: fill-box; transform-origin: 50% 100%;">
+                <path d="M63 141 L100 170 L79 199 L43 161 Z" fill="#FFFFFF" />
+                <path d="M137 141 L100 170 L121 199 L157 161 Z" fill="#FFFFFF" />
+                <path d="M137 141 L100 170 L121 199 L157 161 Z" fill="#E3ECF3" opacity=".3" />
+                <path d="M89 150 L111 150 L116 178 L84 178 Z" fill="#CFC922" />
+                <path d="M84 178 L116 178 L110 202 L100 214 L90 202 Z" fill="#EAE42F" />
+                <path d="M84 178 L116 178 L100 188 Z" fill="#B4AE18" opacity=".5" />
+              </g>
+
+              <!-- 4. Head plate, facial disc, ear tufts, and beak -->
+              <g id="owl-layer-head" data-depth="0.14" style="transform-box: fill-box; transform-origin: 50% 60%;">
+                <path d="M52 46 L46 10 L88 34 Z" fill="#16303F" />
+                <path d="M148 46 L154 10 L112 34 Z" fill="#16303F" />
+                <ellipse cx="100" cy="88" rx="69" ry="67" fill="#1D3D51" />
+                <ellipse cx="100" cy="90" rx="59" ry="55" fill="#2C5169" />
+                <path d="M100 44 C132 44 152 60 156 82 C146 66 126 57 100 57 C74 57 54 66 44 82 C48 60 68 44 100 44 Z"
+                  fill="#24455B" />
+                <path d="M100 103 L110 121 L100 131 L90 121 Z" fill="#EAE42F" />
+                <path d="M100 121 L110 121 L100 131 Z" fill="#B4AE18" opacity=".45" />
+              </g>
+
+              <!-- 5. Sclera, irises, and pupils (#owl-pupil-left, #owl-pupil-right) -->
+              <g id="owl-layer-eyes" data-depth="0.20" style="transform-box: fill-box; transform-origin: 50% 60%;">
+                <circle cx="73" cy="90" r="26" fill="#F2F8FC" />
+                <circle cx="127" cy="90" r="26" fill="#F2F8FC" />
+                <g id="owl-pupil-left"
+                  style="transform-box: fill-box; transform-origin: 50% 50%; transition: transform .08s ease-out">
+                  <circle cx="73" cy="90" r="16" fill="#019FFF" />
+                  <circle cx="73" cy="90" r="7.5" fill="#06202D" />
+                  <circle cx="67" cy="83" r="3.4" fill="#FFFFFF" opacity=".92" />
+                </g>
+                <g id="owl-pupil-right"
+                  style="transform-box: fill-box; transform-origin: 50% 50%; transition: transform .08s ease-out">
+                  <circle cx="127" cy="90" r="16" fill="#019FFF" />
+                  <circle cx="127" cy="90" r="7.5" fill="#06202D" />
+                  <circle cx="121" cy="83" r="3.4" fill="#FFFFFF" opacity=".92" />
+                </g>
+                <!-- Eyelid overlays: scaleY 0→1 during blink, pivot from top of sclera -->
+                <ellipse id="owl-eyelid-left"  cx="73"  cy="90" rx="26" ry="26" fill="#2C5169"
+                  clip-path="url(#eye-clip-left)"
+                  style="transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); pointer-events: none;" aria-hidden="true"/>
+                <ellipse id="owl-eyelid-right" cx="127" cy="90" rx="26" ry="26" fill="#2C5169"
+                  clip-path="url(#eye-clip-right)"
+                  style="transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); pointer-events: none;" aria-hidden="true"/>
+              </g>
+              <!-- Specular key-light overlay — JS shifts translateX/Y opposite cursor -->
+              <ellipse id="owl-specular" cx="100" cy="72" rx="68" ry="58"
+                fill="url(#owlSpecularGrad)" aria-hidden="true"/>
+            </g>
+          </svg>
+          <div class="owlmeet">
+            <a class="meet" href="meet-uncle-pat.html">Meet Uncle&nbsp;Pat <i>&rarr;</i></a>
+          </div>
         </div>
       </div>
     </div></section>
@@ -263,7 +347,7 @@
   <!-- Photo Split: Strategic Advisory Roundtable -->
   <div class="img-split img-right night-side">
     <div class="img-col">
-      <img src="Pics/People Sitting at Table.jpg" alt="Pivot Aide advisors in strategic roundtable planning session" loading="lazy">
+      <img src="Pics/People Sitting at Table.jpg" alt="Pivot Aide advisors in strategic roundtable planning session" width="1200" height="800" decoding="async">
     </div>
     <div class="text-col">
       <span class="eyebrow night" style="margin-bottom:14px">Proactive Advisory</span>
@@ -557,7 +641,7 @@
   </div></section>
 
   <!-- Image Band: Strategic Precision & Execution -->
-  <div class="imgband slim gold-tint" style="--img:url('Pics/AdobeStock_480131145.jpeg')">
+  <div class="imgband slim gold-tint" style="--img:url('../Pics/AdobeStock_480131145.jpeg')">
     <div class="imgband-inner" style="padding:48px 24px;text-align:center">
       <p style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">Precision Modeling &middot; Year-Round Advisory</p>
       <h2 style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">Decisions made in July change the number in April.<br><em style="color:var(--gold);font-style:normal">Every scenario modeled before anything is signed.</em></h2>
