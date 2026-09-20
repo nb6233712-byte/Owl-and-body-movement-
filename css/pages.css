@@ -95,9 +95,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: 20px;
-  perspective: 650px;
-  perspective-origin: 50% 50%;
+  perspective: 550px;
   transform-style: preserve-3d;
+  perspective-origin: 50% 45%;
 
   /* ── Mobile gesture & highlight fixes ────────────────────────────────────
      pan-y: let vertical scroll pass through freely while touch tracking runs.
@@ -115,7 +115,6 @@
   max-width: 220px;
   flex: none;
   transform-style: preserve-3d;
-  will-change: transform;
   /* Base ambient shadow for the whole character */
   filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.50));
   overflow: visible;
@@ -168,8 +167,11 @@
 }
 
 /* Subtle idle float for hero owl — zero transition delay to avoid fighting JS tracking */
-.hero-owl svg, .hero-owl img {
-  transition: none;
+.hero-owl svg,
+.hero-owl img,
+#hero-owl-svg,
+#hero-owl-svg * {
+  transition: none !important;
 }
 .hero-owl:hover svg, .hero-owl:hover img {
   transform: none;
@@ -186,7 +188,7 @@
   transform-origin: 50% 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: none;
+  transition: none !important;
 }
 
 /*
@@ -197,34 +199,37 @@
   transform-box: fill-box so the layer's own fill bbox is the pivot.
 */
 
-/* Layer 1 — back feathers (deepest) */
-#owl-layer-bg {
+/* Layer 1 — back feathers / base ambient drop shadow (deepest) */
+#owl-layer-bg,
+#owl-3d-shadow {
   transform-box: fill-box;
-  transform-origin: 50% 100%;
+  transform-origin: 50% 50%;
   transform-style: preserve-3d;
   will-change: transform;
   transform: translateZ(0px);
-  transition: none;
+  transition: none !important;
 }
 
 /* Layer 2 — torso body */
-#owl-layer-torso {
+#owl-layer-torso,
+#owl-3d-torso {
   transform-box: fill-box;
   transform-origin: 50% 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  transform: translateZ(10px);
-  transition: none;
+  transform: translateZ(5px);
+  transition: none !important;
 }
 
 /* Layer 3 — collar flaps + gold tie */
-#owl-layer-collar-tie {
+#owl-layer-collar-tie,
+#owl-3d-collar-tie {
   transform-box: fill-box;
   transform-origin: 50% 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  transform: translateZ(24px);
-  transition: none;
+  transform: translateZ(22px);
+  transition: none !important;
   /*
     Dynamic depth shadow: a tighter, crisper shadow than the ambient one
     on the SVG root. JS will nudge the x/y offset via CSS custom properties
@@ -240,13 +245,14 @@
 }
 
 /* Layer 4 — head plate, disc, tufts, beak */
-#owl-layer-head {
+#owl-layer-head,
+#owl-3d-head {
   transform-box: fill-box;
-  transform-origin: 50% 60%;
+  transform-origin: 50% 70%;
   transform-style: preserve-3d;
   will-change: transform;
-  transform: translateZ(36px);
-  transition: none;
+  transform: translateZ(42px);
+  transition: none !important;
   /*
     Slightly stronger shadow on the head — it sits highest in 3D space
     and should cast the most visible depth shadow.
@@ -261,13 +267,14 @@
 }
 
 /* Layer 5 — sclera, irises, pupils (closest to viewer) */
-#owl-layer-eyes {
+#owl-layer-eyes,
+#owl-3d-eyes {
   transform-box: fill-box;
   transform-origin: 50% 60%;
   transform-style: preserve-3d;
   will-change: transform;
-  transform: translateZ(50px);
-  transition: none;
+  transform: translateZ(58px);
+  transition: none !important;
 }
 
 /* Pupils — sub-layer inside eyes, only translate for tracking */
@@ -276,7 +283,7 @@
   transform-box: fill-box;
   transform-origin: 50% 50%;
   will-change: transform;
-  transition: none;
+  transition: none !important;
 }
 
 /* ─── Specular / Key-Light Overlay ───────────────────────────────────────── */
@@ -336,12 +343,12 @@
       causes side-scroll jank on iOS Safari.
 */
 @media (max-width: 768px) {
-  /* Keep perspective at 650px on the owl wrapper */
+  /* Keep perspective at 550px on the owl wrapper */
   .hero-owl,
   .hero-owl-wrap,
   #owl-container {
-    perspective: 650px;
-    perspective-origin: 50% 50%;
+    perspective: 550px;
+    perspective-origin: 50% 45%;
     transform-style: preserve-3d;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
@@ -379,6 +386,11 @@
 @media (prefers-reduced-motion: reduce) {
   #hero-owl-svg,
   #owl-root,
+  #owl-3d-shadow,
+  #owl-3d-torso,
+  #owl-3d-collar-tie,
+  #owl-3d-head,
+  #owl-3d-eyes,
   #owl-layer-bg,
   #owl-layer-torso,
   #owl-layer-collar-tie,

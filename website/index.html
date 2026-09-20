@@ -114,15 +114,139 @@
         </div>
 
         <div class="hero-owl" id="owl-container">
-          <svg id="hero-owl-svg" viewBox="0 0 200 220" role="img" aria-label="Uncle Pat, the Pivot Aide Tax owl" width="220" height="242">
+          <svg id="hero-owl-svg" viewBox="0 0 200 220" role="img" aria-label="Uncle Pat, the Pivot Aide Tax owl"
+            width="220" height="242">
             <defs>
+              <!-- 1. Ambient ground shadow gradient -->
+              <radialGradient id="owlGroundShadow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#07141C" stop-opacity="0.65"/>
+                <stop offset="65%" stop-color="#0B1C26" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#0B1C26" stop-opacity="0"/>
+              </radialGradient>
+
+              <!-- 2. Torso 3D volumetric curved gradient -->
+              <radialGradient id="torsoSphereGrad" cx="45%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#285068"/>
+                <stop offset="50%" stop-color="#1D3D51"/>
+                <stop offset="90%" stop-color="#142C3B"/>
+                <stop offset="100%" stop-color="#0D1D27"/>
+              </radialGradient>
+
+              <!-- 3. White chest bib lighting gradient -->
+              <linearGradient id="chestBibGrad" x1="45%" y1="0%" x2="55%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="65%" stop-color="#F2F7FA"/>
+                <stop offset="100%" stop-color="#D4E3EE"/>
+              </linearGradient>
+
+              <!-- 4. White collar flap lighting and chin drop shadow (#D8E2EC) -->
+              <linearGradient id="collarLeftGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="40%" stop-color="#FFFFFF"/>
+                <stop offset="85%" stop-color="#E5EFF6"/>
+                <stop offset="100%" stop-color="#D8E2EC"/>
+              </linearGradient>
+              <linearGradient id="collarRightGrad" x1="80%" y1="0%" x2="20%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="40%" stop-color="#FFFFFF"/>
+                <stop offset="85%" stop-color="#E5EFF6"/>
+                <stop offset="100%" stop-color="#D8E2EC"/>
+              </linearGradient>
+              <!-- Ambient drop shadow cast under chin onto collar flaps (#D8E2EC) -->
+              <linearGradient id="chinDropShadow" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#122735" stop-opacity="0.45"/>
+                <stop offset="60%" stop-color="#2C5169" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#D8E2EC" stop-opacity="0"/>
+              </linearGradient>
+
+              <!-- 5. Tie & knot 3D lighting, bevels, and knot cast shadow -->
+              <linearGradient id="tieKnotGrad" x1="30%" y1="0%" x2="80%" y2="100%">
+                <stop offset="0%" stop-color="#F8F35C"/>
+                <stop offset="45%" stop-color="#EAE42F"/>
+                <stop offset="85%" stop-color="#C5BF1C"/>
+                <stop offset="100%" stop-color="#A59F12"/>
+              </linearGradient>
+              <linearGradient id="tieBladeLeft" x1="20%" y1="0%" x2="80%" y2="100%">
+                <stop offset="0%" stop-color="#F5F050"/>
+                <stop offset="50%" stop-color="#EAE42F"/>
+                <stop offset="100%" stop-color="#C8C21C"/>
+              </linearGradient>
+              <linearGradient id="tieBladeRight" x1="30%" y1="0%" x2="90%" y2="100%">
+                <stop offset="0%" stop-color="#D6CF22"/>
+                <stop offset="50%" stop-color="#BEB817"/>
+                <stop offset="100%" stop-color="#9E9810"/>
+              </linearGradient>
+              <linearGradient id="knotCastShadow" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#4F4A04" stop-opacity="0.60"/>
+                <stop offset="65%" stop-color="#6E6706" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#EAE42F" stop-opacity="0"/>
+              </linearGradient>
+
+              <!-- 6. Head & facial disc 3D spherical radial gradients (cx=40%, cy=35%) -->
+              <radialGradient id="headSphereGrad" cx="40%" cy="35%" r="65%" fx="38%" fy="32%">
+                <stop offset="0%" stop-color="#3A637C"/>
+                <stop offset="40%" stop-color="#2C5169"/>
+                <stop offset="80%" stop-color="#1D3D51"/>
+                <stop offset="100%" stop-color="#16303F"/>
+              </radialGradient>
+              <radialGradient id="facialDiscGrad" cx="40%" cy="35%" r="62%" fx="38%" fy="32%">
+                <stop offset="0%" stop-color="#3E6B87"/>
+                <stop offset="35%" stop-color="#2C5169"/>
+                <stop offset="75%" stop-color="#1E3E53"/>
+                <stop offset="100%" stop-color="#16303F"/>
+              </radialGradient>
+              <linearGradient id="earTuftLeftGrad" x1="35%" y1="0%" x2="65%" y2="100%">
+                <stop offset="0%" stop-color="#254A60"/>
+                <stop offset="100%" stop-color="#16303F"/>
+              </linearGradient>
+              <linearGradient id="earTuftRightGrad" x1="65%" y1="0%" x2="35%" y2="100%">
+                <stop offset="0%" stop-color="#254A60"/>
+                <stop offset="100%" stop-color="#16303F"/>
+              </linearGradient>
+              <linearGradient id="browArchGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#315B75"/>
+                <stop offset="100%" stop-color="#1A384C"/>
+              </linearGradient>
+
+              <!-- 7. Faceted 3D Beak gradients (left facet #F3EE44, right facet #C2BC1E) -->
+              <linearGradient id="beakFacetLeft" x1="10%" y1="20%" x2="80%" y2="80%">
+                <stop offset="0%" stop-color="#FFF866"/>
+                <stop offset="35%" stop-color="#F3EE44"/>
+                <stop offset="100%" stop-color="#DFD929"/>
+              </linearGradient>
+              <linearGradient id="beakFacetRight" x1="20%" y1="20%" x2="90%" y2="80%">
+                <stop offset="0%" stop-color="#D7D122"/>
+                <stop offset="50%" stop-color="#C2BC1E"/>
+                <stop offset="100%" stop-color="#9C9612"/>
+              </linearGradient>
+
+              <!-- 8. Eyeball spherical gradients & glossy corneal reflection -->
+              <radialGradient id="scleraSphereGrad" cx="38%" cy="32%" r="68%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="65%" stop-color="#F0F6FA"/>
+                <stop offset="90%" stop-color="#DCE9F2"/>
+                <stop offset="100%" stop-color="#C7DAE7"/>
+              </radialGradient>
+              <radialGradient id="irisVolumetricGrad" cx="40%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#38BAFF"/>
+                <stop offset="55%" stop-color="#019FFF"/>
+                <stop offset="90%" stop-color="#007ECC"/>
+                <stop offset="100%" stop-color="#005B94"/>
+              </radialGradient>
+              <linearGradient id="corneaGlintGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/>
+                <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+              </linearGradient>
+
               <!-- Specular / key-light radial gradient -->
               <radialGradient id="owlSpecularGrad" cx="50%" cy="40%" r="55%" fx="50%" fy="30%">
-                <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.90"/>
-                <stop offset="55%"  stop-color="#9DDFFF" stop-opacity="0.30"/>
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.90"/>
+                <stop offset="55%" stop-color="#9DDFFF" stop-opacity="0.30"/>
                 <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
               </radialGradient>
-              <!-- Eyelid clip masks — keep eyelid overlays inside each sclera circle -->
+
+              <!-- Eyelid clip masks -->
               <clipPath id="eye-clip-left">
                 <circle cx="73" cy="90" r="25.5"/>
               </clipPath>
@@ -130,63 +254,124 @@
                 <circle cx="127" cy="90" r="25.5"/>
               </clipPath>
             </defs>
-            <!-- Root interactive group -->
+
+            <!-- Interactive Root Rig -->
             <g id="owl-root" style="transform-box: fill-box; transform-origin: 50% 100%;">
-              <!-- 1. Outer back feathers and background plumage shadow -->
-              <g id="owl-layer-bg" data-depth="0.02" style="transform-box: fill-box; transform-origin: 50% 100%;">
-                <path d="M46 170 C32 184 21 200 16 220 L10 220 C10 209 12 198 16 186 C22 168 33 152 47 141 Z" fill="#163344"/>
-                <path d="M154 170 C168 184 179 200 184 220 L190 220 C190 209 188 198 184 186 C178 168 167 152 153 141 Z" fill="#163344"/>
+
+              <!-- 1. <g id="owl-3d-shadow">: Base ambient drop shadow ellipse under the bird -->
+              <g id="owl-3d-shadow" data-depth="0.01" style="transform-box: fill-box; transform-origin: 50% 50%;">
+                <ellipse cx="100" cy="221" rx="92" ry="8" fill="url(#owlGroundShadow)"/>
+                <!-- Outer back feathers / background plumage anchor -->
+                <path d="M46 170 C32 184 21 200 16 220 L10 220 C10 209 12 198 16 186 C22 168 33 152 47 141 Z"
+                  fill="#142C3B"/>
+                <path d="M154 170 C168 184 179 200 184 220 L190 220 C190 209 188 198 184 186 C178 168 167 152 153 141 Z"
+                  fill="#142C3B"/>
               </g>
 
-              <!-- 2. Deep slate torso and shoulder base -->
-              <g id="owl-layer-torso" data-depth="0.05" style="transform-box: fill-box; transform-origin: 50% 100%;">
-                <path d="M100 128 C140 128 172 150 184 186 C188 198 190 209 190 220 L10 220 C10 209 12 198 16 186 C28 150 60 128 100 128 Z" fill="#1D3D51"/>
-                <path d="M66 128 L134 128 L100 184 Z" fill="#FFFFFF"/>
+              <!-- 2. <g id="owl-3d-torso">: Torso, shoulders, and chest -->
+              <g id="owl-3d-torso" data-depth="0.05" style="transform-box: fill-box; transform-origin: 50% 100%;">
+                <!-- Torso body with 3D volumetric curved lighting -->
+                <path
+                  d="M100 128 C140 128 172 150 184 186 C188 198 190 209 190 220 L10 220 C10 209 12 198 16 186 C28 150 60 128 100 128 Z"
+                  fill="url(#torsoSphereGrad)"/>
+                <!-- White chest bib with light gradient -->
+                <path d="M66 128 L134 128 L100 184 Z" fill="url(#chestBibGrad)"/>
               </g>
 
-              <!-- 3. Pure white collar flaps and brand gold tie (knot + blade) -->
-              <g id="owl-layer-collar-tie" data-depth="0.09" style="transform-box: fill-box; transform-origin: 50% 100%;">
-                <path d="M63 141 L100 170 L79 199 L43 161 Z" fill="#FFFFFF"/>
-                <path d="M137 141 L100 170 L121 199 L157 161 Z" fill="#FFFFFF"/>
-                <path d="M137 141 L100 170 L121 199 L157 161 Z" fill="#E3ECF3" opacity=".3"/>
-                <path d="M89 150 L111 150 L116 178 L84 178 Z" fill="#CFC922"/>
-                <path d="M84 178 L116 178 L110 202 L100 214 L90 202 Z" fill="#EAE42F"/>
-                <path d="M84 178 L116 178 L100 188 Z" fill="#B4AE18" opacity=".5"/>
+              <!-- 3. <g id="owl-3d-collar-tie">: White collar wings and gold tie -->
+              <g id="owl-3d-collar-tie" data-depth="0.09" style="transform-box: fill-box; transform-origin: 50% 100%;">
+                <!-- Left collar wing with ambient drop shadow under chin -->
+                <path d="M63 141 L100 170 L79 199 L43 161 Z" fill="url(#collarLeftGrad)"/>
+                <!-- Right collar wing with subtle depth shading -->
+                <path d="M137 141 L100 170 L121 199 L157 161 Z" fill="url(#collarRightGrad)"/>
+                <!-- Soft chin drop shadow under head onto collar flaps (#D8E2EC) -->
+                <path d="M63 141 C76 153 100 156 100 156 C100 156 124 153 137 141 L124 158 C112 165 100 166 100 166 C100 166 88 165 76 158 Z"
+                  fill="url(#chinDropShadow)"/>
+
+                <!-- Gold Tie Blade (left lit facet + right shadow facet) -->
+                <path d="M84 178 L100 178 L100 214 L90 202 Z" fill="url(#tieBladeLeft)"/>
+                <path d="M100 178 L116 178 L110 202 L100 214 Z" fill="url(#tieBladeRight)"/>
+                <!-- Tie Blade central ridge specular highlight -->
+                <line x1="100" y1="178" x2="100" y2="214" stroke="#FFF777" stroke-width="0.8" opacity="0.65"/>
+
+                <!-- Knot drop shadow cast onto blade -->
+                <path d="M84 178 L116 178 L113 186 L87 186 Z" fill="url(#knotCastShadow)"/>
+
+                <!-- Gold Tie Knot with 3D bevel and lighting -->
+                <polygon points="89,150 111,150 116,178 84,178" fill="url(#tieKnotGrad)"/>
+                <!-- Knot Edge Bevels: top & left light edge, right shadow edge -->
+                <line x1="89" y1="150" x2="111" y2="150" stroke="#FFFCA8" stroke-width="1.2" stroke-linecap="round" opacity="0.9"/>
+                <line x1="89" y1="150" x2="84" y2="178" stroke="#FFF982" stroke-width="1.0" opacity="0.7"/>
+                <line x1="111" y1="150" x2="116" y2="178" stroke="#827C08" stroke-width="1.1" opacity="0.75"/>
               </g>
 
-              <!-- 4. Head plate, facial disc, ear tufts, and beak -->
-              <g id="owl-layer-head" data-depth="0.14" style="transform-box: fill-box; transform-origin: 50% 60%;">
-                <path d="M52 46 L46 10 L88 34 Z" fill="#16303F"/>
-                <path d="M148 46 L154 10 L112 34 Z" fill="#16303F"/>
-                <ellipse cx="100" cy="88" rx="69" ry="67" fill="#1D3D51"/>
-                <ellipse cx="100" cy="90" rx="59" ry="55" fill="#2C5169"/>
-                <path d="M100 44 C132 44 152 60 156 82 C146 66 126 57 100 57 C74 57 54 66 44 82 C48 60 68 44 100 44 Z" fill="#24455B"/>
-                <path d="M100 103 L110 121 L100 131 L90 121 Z" fill="#EAE42F"/>
-                <path d="M100 121 L110 121 L100 131 Z" fill="#B4AE18" opacity=".45"/>
+              <!-- 4. <g id="owl-3d-head">: Head sphere, ear tufts, and beak -->
+              <g id="owl-3d-head" data-depth="0.14" style="transform-box: fill-box; transform-origin: 50% 70%;">
+                <!-- 3D Ear tufts with lighting -->
+                <path d="M52 46 L46 10 L88 34 Z" fill="url(#earTuftLeftGrad)"/>
+                <path d="M148 46 L154 10 L112 34 Z" fill="url(#earTuftRightGrad)"/>
+                <!-- Outer head plate with spherical radial gradient -->
+                <ellipse cx="100" cy="88" rx="69" ry="67" fill="url(#headSphereGrad)"/>
+                <!-- Inner facial disc with off-center spherical gradient (cx="40%", cy="35%") -->
+                <ellipse cx="100" cy="90" rx="59" ry="55" fill="url(#facialDiscGrad)"/>
+                <!-- Forehead / brow crest plate -->
+                <path d="M100 44 C132 44 152 60 156 82 C146 66 126 57 100 57 C74 57 54 66 44 82 C48 60 68 44 100 44 Z"
+                  fill="url(#browArchGrad)"/>
+
+                <!-- Protruding 3D Pyramid Beak with Faceted Gradients -->
+                <!-- Left facet (light gold #F3EE44) -->
+                <polygon points="100,103 90,121 100,131" fill="url(#beakFacetLeft)"/>
+                <!-- Right facet (darker shadow gold #C2BC1E) -->
+                <polygon points="100,103 100,131 110,121" fill="url(#beakFacetRight)"/>
+                <!-- Beak central ridge specular bevel highlight -->
+                <line x1="100" y1="103" x2="100" y2="131" stroke="#FFFFFF" stroke-width="0.8" stroke-linecap="round" opacity="0.75"/>
+                <!-- Beak apex highlight dot -->
+                <circle cx="100" cy="103" r="1.1" fill="#FFFFFF" opacity="0.9"/>
               </g>
 
-              <!-- 5. Sclera, irises, and pupils (#owl-pupil-left, #owl-pupil-right) -->
-              <g id="owl-layer-eyes" data-depth="0.20" style="transform-box: fill-box; transform-origin: 50% 60%;">
-                <circle cx="73" cy="90" r="26" fill="#F2F8FC"/>
-                <circle cx="127" cy="90" r="26" fill="#F2F8FC"/>
+              <!-- 5. <g id="owl-3d-eyes">: Eye sockets, sclera, irises, and pupils (#owl-pupil-left, #owl-pupil-right) -->
+              <g id="owl-3d-eyes" data-depth="0.20" style="transform-box: fill-box; transform-origin: 50% 60%;">
+                <!-- Spherical 3D Sclera (Eyeballs) -->
+                <circle cx="73" cy="90" r="26" fill="url(#scleraSphereGrad)"/>
+                <circle cx="127" cy="90" r="26" fill="url(#scleraSphereGrad)"/>
+
+                <!-- Left Pupil & Iris Group -->
                 <g id="owl-pupil-left" style="transform-box: fill-box; transform-origin: 50% 50%;">
-                  <circle cx="73" cy="90" r="16" fill="#019FFF"/>
+                  <circle cx="73" cy="90" r="16" fill="url(#irisVolumetricGrad)"/>
+                  <!-- Subtle inner iris ring -->
+                  <circle cx="73" cy="90" r="11" fill="none" stroke="#008FE6" stroke-width="1" opacity="0.45"/>
                   <circle cx="73" cy="90" r="7.5" fill="#06202D"/>
-                  <circle cx="67" cy="83" r="3.4" fill="#FFFFFF" opacity=".92"/>
+                  <circle cx="67" cy="83" r="3.4" fill="#FFFFFF" opacity=".95"/>
+                  <!-- Secondary micro catchlight -->
+                  <circle cx="76" cy="94" r="1.2" fill="#FFFFFF" opacity=".65"/>
                 </g>
+
+                <!-- Right Pupil & Iris Group -->
                 <g id="owl-pupil-right" style="transform-box: fill-box; transform-origin: 50% 50%;">
-                  <circle cx="127" cy="90" r="16" fill="#019FFF"/>
+                  <circle cx="127" cy="90" r="16" fill="url(#irisVolumetricGrad)"/>
+                  <!-- Subtle inner iris ring -->
+                  <circle cx="127" cy="90" r="11" fill="none" stroke="#008FE6" stroke-width="1" opacity="0.45"/>
                   <circle cx="127" cy="90" r="7.5" fill="#06202D"/>
-                  <circle cx="121" cy="83" r="3.4" fill="#FFFFFF" opacity=".92"/>
+                  <circle cx="121" cy="83" r="3.4" fill="#FFFFFF" opacity=".95"/>
+                  <!-- Secondary micro catchlight -->
+                  <circle cx="130" cy="94" r="1.2" fill="#FFFFFF" opacity=".65"/>
                 </g>
-                <!-- Eyelid overlays: scaleY 0->1 during blink, pivot from top of sclera -->
-                <ellipse id="owl-eyelid-left"  cx="73"  cy="90" rx="26" ry="26" fill="#2C5169"
+
+                <!-- Glossy Corneal Reflection (curved highlight arc over irises and sclera) -->
+                <path d="M54 84 C56 73 66 67 79 67 C86 67 91 69 94 72 C91 70 85 69 78 69 C67 69 58 75 56 84 Z"
+                  fill="url(#corneaGlintGrad)" pointer-events="none"/>
+                <path d="M108 84 C110 73 120 67 133 67 C140 67 145 69 148 72 C145 70 139 69 132 69 C121 69 112 75 110 84 Z"
+                  fill="url(#corneaGlintGrad)" pointer-events="none"/>
+
+                <!-- Eyelid overlays: scaleY 0→1 during organic blink -->
+                <ellipse id="owl-eyelid-left" cx="73" cy="90" rx="26" ry="26" fill="#2C5169"
                   clip-path="url(#eye-clip-left)"
                   style="transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); pointer-events: none;" aria-hidden="true"/>
                 <ellipse id="owl-eyelid-right" cx="127" cy="90" rx="26" ry="26" fill="#2C5169"
                   clip-path="url(#eye-clip-right)"
                   style="transform-box: fill-box; transform-origin: 50% 0%; transform: scaleY(0); pointer-events: none;" aria-hidden="true"/>
               </g>
+
               <!-- Specular key-light overlay — JS shifts translateX/Y opposite cursor -->
               <ellipse id="owl-specular" cx="100" cy="72" rx="68" ry="58"
                 fill="url(#owlSpecularGrad)" aria-hidden="true"/>

@@ -159,14 +159,18 @@ function initOwlTracking() {
   const leftPupil    = document.getElementById('owl-pupil-left');
   const rightPupil   = document.getElementById('owl-pupil-right');
   const owlRoot      = document.getElementById('owl-root');
-  const owlHead      = document.getElementById('owl-layer-head') || document.getElementById('owl-head');
-  const owlTorso     = document.getElementById('owl-layer-torso') || document.getElementById('owl-torso');
-  const owlCollarTie = document.getElementById('owl-layer-collar-tie');
-  const owlBg        = document.getElementById('owl-layer-bg');
-  const owlEyes      = document.getElementById('owl-layer-eyes');
+  const owlHead      = document.getElementById('owl-3d-head') || document.getElementById('owl-layer-head') || document.getElementById('owl-head');
+  const owlTorso     = document.getElementById('owl-3d-torso') || document.getElementById('owl-layer-torso') || document.getElementById('owl-torso');
+  const owlCollarTie = document.getElementById('owl-3d-collar-tie') || document.getElementById('owl-layer-collar-tie');
+  const owlBg        = document.getElementById('owl-3d-shadow') || document.getElementById('owl-layer-bg');
+  const owlEyes      = document.getElementById('owl-3d-eyes') || document.getElementById('owl-layer-eyes');
   const owlSpecular  = document.getElementById('owl-specular');
-  const eyelidLeft   = document.getElementById('owl-eyelid-left');
-  const eyelidRight  = document.getElementById('owl-eyelid-right');
+  const eyelidLeft      = document.getElementById('owl-eyelid-left');
+  const eyelidRight     = document.getElementById('owl-eyelid-right');
+  const headSphereGrad  = document.getElementById('headSphereGrad');
+  const facialDiscGrad  = document.getElementById('facialDiscGrad');
+  const torsoSphereGrad = document.getElementById('torsoSphereGrad');
+  const owlSpecularGrad = document.getElementById('owlSpecularGrad');
 
   if (!owlSvg || !leftPupil || !rightPupil) return;
 
@@ -196,16 +200,13 @@ function initOwlTracking() {
   };
 
   // LERP factor (accelerated to eliminate tracking lag)
-  const LERP_BODY = 0.25;  // 0.22 - 0.28 range — fast, responsive body/head tracking
+  const LERP_BODY = 0.25;  // 0.25 aggressive interpolation speed — immediate, crisp, and snappy
   const MAX_PUPIL = 5.5;   // px — guaranteed inside sclera (r26 - iris r16 = 10px buffer)
 
   // ── Bounds cache & frame scheduling state ───────────────────────────────────
   let owlCenterX        = 0;
   let owlCenterY        = 0;
   let rafId             = null;
-  let latestClientX     = 0;
-  let latestClientY     = 0;
-  let hasNewCoords      = false;
   let isTouchActive     = false;
   let isReturningToRest = false;
   let returnStartTime   = 0;
@@ -360,12 +361,6 @@ function initOwlTracking() {
       return;
     }
 
-    // Run calculations only when new coordinates arrive via mousemove or touchmove
-    if (hasNewCoords) {
-      hasNewCoords = false;
-      setTargetFromDelta(latestClientX - owlCenterX, latestClientY - owlCenterY);
-    }
-
     const now = performance.now();
 
     // Breathing offset: smooth sinusoid, only when idle breathing is active
@@ -373,7 +368,7 @@ function initOwlTracking() {
       ? -BREATHE_AMPLITUDE * Math.sin((now - breatheStart) * 2 * Math.PI / BREATHE_CYCLE_MS)
       : 0;
 
-    // ── Coordinate update: brisk 200ms ease-out return, instant touch reaction, or accelerated LERP ──
+    // ── Coordinate update: brisk 200ms ease-out return, or accelerated unified LERP (0.25) ──
     if (isReturningToRest) {
       const elapsed  = now - returnStartTime;
       const progress = Math.min(elapsed / RETURN_DURATION_MS, 1.0);
@@ -399,18 +394,8 @@ function initOwlTracking() {
         state.shadowX = -3;
         state.shadowY = 6;
       }
-    } else if (isTouchActive) {
-      // Immediate Touch Reaction: bypass heavy smoothing so finger swipes track instantly
-      state.normX   = target.normX;
-      state.normY   = target.normY;
-      state.pupilX  = target.pupilX;
-      state.pupilY  = target.pupilY;
-      state.specX   = target.specX;
-      state.specY   = target.specY;
-      state.shadowX = target.shadowX;
-      state.shadowY = target.shadowY;
     } else {
-      // Desktop mouse or gyro tracking — accelerated LERP factor
+      // Aggressive interpolation speed (LERP factor: 0.25) so response is immediate, crisp, and snappy with zero lag
       state.normX   = lerp(state.normX,   target.normX,   LERP_BODY);
       state.normY   = lerp(state.normY,   target.normY,   LERP_BODY);
       state.specX   = lerp(state.specX,   target.specX,   LERP_BODY);
@@ -418,7 +403,7 @@ function initOwlTracking() {
       state.shadowX = lerp(state.shadowX, target.shadowX, LERP_BODY);
       state.shadowY = lerp(state.shadowY, target.shadowY, LERP_BODY);
 
-      // Direct snap when within minimal threshold to eliminate trailing latency completely
+      // Direct snap when within minimal threshold (< 0.0015) for zero trailing latency
       if (Math.abs(state.normX - target.normX) < 0.0015) state.normX = target.normX;
       if (Math.abs(state.normY - target.normY) < 0.0015) state.normY = target.normY;
       if (Math.abs(state.specX - target.specX) < 0.05)   state.specX = target.specX;
@@ -426,9 +411,16 @@ function initOwlTracking() {
       if (Math.abs(state.shadowX - target.shadowX) < 0.05) state.shadowX = target.shadowX;
       if (Math.abs(state.shadowY - target.shadowY) < 0.05) state.shadowY = target.shadowY;
 
-      // Pupils: set position directly in animation frame so gaze snaps synchronously without delay
+      // Synchronized Eye Gaze: apply instantaneous translation directly so gaze snaps in real time
       state.pupilX  = target.pupilX;
       state.pupilY  = target.pupilY;
+    }
+
+    // Clamp pupil displacement strictly to maximum 5.5px radius
+    const pupilR = Math.hypot(state.pupilX, state.pupilY);
+    if (pupilR > MAX_PUPIL) {
+      state.pupilX = (state.pupilX / pupilR) * MAX_PUPIL;
+      state.pupilY = (state.pupilY / pupilR) * MAX_PUPIL;
     }
 
     // Decay pointer speed frame-by-frame
@@ -443,32 +435,36 @@ function initOwlTracking() {
         `rotateY(${(nx * 2).toFixed(2)}deg) rotateX(${(-ny * 2).toFixed(2)}deg)`;
     }
 
-    // 2. Head (#owl-head or #owl-layer-head)
-    // rotateY: normX * 14deg, rotateX: -normY * 10deg, translateX: normX * 8px, translateY: normY * 6px
+    // 2. Head (#owl-3d-head):
+    // transform: rotateY(${normX * 16}deg) rotateX(${-normY * 12}deg) translateX(${normX * 10}px) translateY(${normY * 6}px) translateZ(42px);
     if (owlHead) {
-      const headTx = (nx * 8).toFixed(1);
+      const headTx = (nx * 10).toFixed(2);
       const headTy = (ny * 6 + (breatheActive ? breatheY * 0.5 : 0)).toFixed(2);
-      const headRy = (nx * 14).toFixed(2);
-      const headRx = (-ny * 10).toFixed(2);
+      const headRy = (nx * 16).toFixed(2);
+      const headRx = (-ny * 12).toFixed(2);
       owlHead.style.transform =
-        `translateZ(36px) translateX(${headTx}px) translateY(${headTy}px) rotateY(${headRy}deg) rotateX(${headRx}deg)`;
+        `rotateY(${headRy}deg) rotateX(${headRx}deg) translateX(${headTx}px) translateY(${headTy}px) translateZ(42px)`;
     }
 
-    // 3. Collar & Tie — tracks behind head
+    // 3. Collar & Tie (#owl-3d-collar-tie):
+    // transform: rotateY(${normX * 7}deg) rotateX(${-normY * 5}deg) translateX(${normX * 4}px) translateZ(22px);
     if (owlCollarTie) {
-      const collarBreatheY = breatheActive ? breatheY * 0.8 : 0;
+      const collarTx = (nx * 4).toFixed(2);
+      const collarRy = (nx * 7).toFixed(2);
+      const collarRx = (-ny * 5).toFixed(2);
+      const collarTy = breatheActive && breatheY !== 0 ? ` translateY(${(breatheY * 0.8).toFixed(2)}px)` : '';
       owlCollarTie.style.transform =
-        `translateZ(24px) translateX(${(nx * 5).toFixed(1)}px) translateY(${collarBreatheY.toFixed(2)}px) rotateY(${(nx * 8).toFixed(2)}deg)`;
+        `rotateY(${collarRy}deg) rotateX(${collarRx}deg) translateX(${collarTx}px)${collarTy} translateZ(22px)`;
     }
 
-    // 4. Torso (#owl-torso)
-    // rotateY: normX * 6deg, translateX: normX * 4px
+    // 4. Torso (#owl-3d-torso):
+    // transform: rotateY(${normX * 4}deg) translateX(${normX * 2}px) translateZ(5px);
     if (owlTorso) {
-      const torsoTx = (nx * 4).toFixed(1);
-      const torsoTy = (breatheActive ? breatheY : 0).toFixed(2);
-      const torsoRy = (nx * 6).toFixed(2);
+      const torsoTx = (nx * 2).toFixed(2);
+      const torsoRy = (nx * 4).toFixed(2);
+      const torsoTy = breatheActive && breatheY !== 0 ? ` translateY(${breatheY.toFixed(2)}px)` : '';
       owlTorso.style.transform =
-        `translateZ(10px) translateX(${torsoTx}px) translateY(${torsoTy}px) rotateY(${torsoRy}deg)`;
+        `rotateY(${torsoRy}deg) translateX(${torsoTx}px)${torsoTy} translateZ(5px)`;
       owlTorso.style.filter =
         `drop-shadow(${(-nx * 8).toFixed(1)}px ${(12 + ny * 4).toFixed(1)}px 20px rgba(0,0,0,0.35))`;
     }
@@ -479,24 +475,46 @@ function initOwlTracking() {
         `translateZ(0px) translateX(${(nx * 1.5).toFixed(1)}px) rotateY(${(nx * 2).toFixed(2)}deg)`;
     }
 
-    // 6. Eyes layer — depth pop + follow
+    // 6. Eyes layer — depth pop + follow (rotates with head in 3D space)
     if (owlEyes) {
-      const eyesBreatheY = breatheActive ? breatheY * 0.3 : 0;
+      const eyesTy = (ny * 6 + (breatheActive ? breatheY * 0.3 : 0)).toFixed(2);
       owlEyes.style.transform =
-        `translateZ(50px) translateX(${(nx * 2.5).toFixed(1)}px) translateY(${(ny * 2 + eyesBreatheY).toFixed(2)}px)`;
+        `rotateY(${(nx * 16).toFixed(2)}deg) rotateX(${(-ny * 12).toFixed(2)}deg) translateX(${(nx * 10).toFixed(2)}px) translateY(${eyesTy}px) translateZ(58px)`;
     }
 
-    // 7. Pupils — set directly in animation frame synchronously without waiting on transitions
+    // 7. Synchronized Eye Gaze: instantaneous translation to #owl-pupil-left and #owl-pupil-right
     leftPupil.style.transform  =
       `translateX(${state.pupilX.toFixed(2)}px) translateY(${state.pupilY.toFixed(2)}px)`;
     rightPupil.style.transform =
       `translateX(${state.pupilX.toFixed(2)}px) translateY(${state.pupilY.toFixed(2)}px)`;
 
-    // 8. CSS custom props → head & collar drop-shadow filters
+    // 8. CSS custom props → drop-shadow filters
     owlSvg.style.setProperty('--owl-shadow-x', `${state.shadowX.toFixed(1)}px`);
     owlSvg.style.setProperty('--owl-shadow-y', `${state.shadowY.toFixed(1)}px`);
 
-    // 9. Specular highlight — moves opposite cursor
+    // 9. Dynamic Specular Light Shift: shift radial gradient focal point slightly opposite to rotation
+    if (headSphereGrad) {
+      headSphereGrad.setAttribute('cx', `${(40 - nx * 8).toFixed(1)}%`);
+      headSphereGrad.setAttribute('cy', `${(35 - ny * 6).toFixed(1)}%`);
+      headSphereGrad.setAttribute('fx', `${(38 - nx * 8).toFixed(1)}%`);
+      headSphereGrad.setAttribute('fy', `${(32 - ny * 6).toFixed(1)}%`);
+    }
+    if (facialDiscGrad) {
+      facialDiscGrad.setAttribute('cx', `${(40 - nx * 7).toFixed(1)}%`);
+      facialDiscGrad.setAttribute('cy', `${(35 - ny * 5).toFixed(1)}%`);
+      facialDiscGrad.setAttribute('fx', `${(38 - nx * 7).toFixed(1)}%`);
+      facialDiscGrad.setAttribute('fy', `${(32 - ny * 5).toFixed(1)}%`);
+    }
+    if (torsoSphereGrad) {
+      torsoSphereGrad.setAttribute('cx', `${(45 - nx * 5).toFixed(1)}%`);
+      torsoSphereGrad.setAttribute('cy', `${(35 - ny * 4).toFixed(1)}%`);
+    }
+    if (owlSpecularGrad) {
+      owlSpecularGrad.setAttribute('cx', `${(50 - nx * 10).toFixed(1)}%`);
+      owlSpecularGrad.setAttribute('cy', `${(40 - ny * 8).toFixed(1)}%`);
+      owlSpecularGrad.setAttribute('fx', `${(50 - nx * 10).toFixed(1)}%`);
+      owlSpecularGrad.setAttribute('fy', `${(30 - ny * 8).toFixed(1)}%`);
+    }
     if (owlSpecular) {
       owlSpecular.style.transform =
         `translateX(${state.specX.toFixed(1)}px) translateY(${state.specY.toFixed(1)}px)`;
@@ -505,12 +523,12 @@ function initOwlTracking() {
     // Stop redundant RAF ticks when settled; continue only while interpolating, returning, or breathing
     const settled =
       !isReturningToRest &&
-      state.normX === target.normX &&
-      state.normY === target.normY &&
-      state.specX === target.specX &&
-      state.specY === target.specY &&
-      state.shadowX === target.shadowX &&
-      state.shadowY === target.shadowY;
+      Math.abs(state.normX - target.normX) < 0.0015 &&
+      Math.abs(state.normY - target.normY) < 0.0015 &&
+      Math.abs(state.specX - target.specX) < 0.05 &&
+      Math.abs(state.specY - target.specY) < 0.05 &&
+      Math.abs(state.shadowX - target.shadowX) < 0.05 &&
+      Math.abs(state.shadowY - target.shadowY) < 0.05;
 
     if (!settled) {
       rafId = requestAnimationFrame(tick);
@@ -519,15 +537,22 @@ function initOwlTracking() {
     }
   }
 
-  // ── Shared helper: update all targets from a viewport delta (px from owl centre) ──
+  // ── Unified Fast Input Handler ─────────────────────────────────────────────
+  // Track pointer position via mousemove and touchmove ({ passive: true })
+  // Normalize target offsets to -1.0 to 1.0 based on viewport center
   let prevNormX = 0;
   let prevNormY = 0;
 
-  function setTargetFromDelta(dX, dY) {
-    const maxX = Math.max(window.innerWidth  * 0.5, 300);
-    const maxY = Math.max(window.innerHeight * 0.5, 300);
-    const newNormX = Math.max(-1, Math.min(1, dX / maxX));
-    const newNormY = Math.max(-1, Math.min(1, dY / maxY));
+  function updatePointer(clientX, clientY) {
+    lastMoveTime = performance.now();
+    resetBreatheTimer();
+
+    const vpCenterX = window.innerWidth * 0.5;
+    const vpCenterY = window.innerHeight * 0.5;
+
+    // Normalize target offsets to -1.0 to 1.0 based on viewport center
+    const newNormX = Math.max(-1.0, Math.min(1.0, (clientX - vpCenterX) / (vpCenterX || 1)));
+    const newNormY = Math.max(-1.0, Math.min(1.0, (clientY - vpCenterY) / (vpCenterY || 1)));
 
     pointerSpeed = Math.hypot(newNormX - prevNormX, newNormY - prevNormY);
     prevNormX = newNormX;
@@ -536,58 +561,40 @@ function initOwlTracking() {
     target.normX = newNormX;
     target.normY = newNormY;
 
-    const angle  = Math.atan2(dY, dX);
-    const factor = Math.min(Math.hypot(dX, dY) / 420, 1.0);
-    target.pupilX = Math.cos(angle) * MAX_PUPIL * factor;
-    target.pupilY = Math.sin(angle) * MAX_PUPIL * factor;
+    // Synchronized Eye Gaze:
+    // Calculate pupil displacement clamped to a maximum 5.5px radius
+    const dX = clientX - owlCenterX;
+    const dY = clientY - owlCenterY;
+    const dist = Math.hypot(dX, dY);
+    const angle = Math.atan2(dY, dX);
+    const factor = Math.min(dist / 380, 1.0);
+    const pupilDist = Math.min(MAX_PUPIL, MAX_PUPIL * factor);
+    target.pupilX = Math.cos(angle) * pupilDist;
+    target.pupilY = Math.sin(angle) * pupilDist;
 
     target.specX   = -newNormX * 18;
     target.specY   = -newNormY * 12;
     target.shadowX = -newNormX * 6;
     target.shadowY =  6 + newNormY * 4;
+
+    scheduleFrame();
   }
 
-  // ── Mouse move handler ───────────────────────────────────────────────────────
+  // ── Pointer & Touch event handlers ─────────────────────────────────────────
   const onMouseMove = (e) => {
     isTouchActive     = false;
     isReturningToRest = false;
-    lastMoveTime      = performance.now();
-    resetBreatheTimer();
-    latestClientX = e.clientX;
-    latestClientY = e.clientY;
-    hasNewCoords  = true;
-    scheduleFrame();
+    updatePointer(e.clientX, e.clientY);
   };
 
-  // ── Touch event handler (touchstart + touchmove, mobile finger tracking) ──────────
   function handleTouch(e) {
     if (!e.touches || e.touches.length === 0) return;
-    lastMoveTime      = performance.now();
-    resetBreatheTimer();
     isTouchActive     = true;
     isReturningToRest = false;
-
     const t = e.touches[0];
-    latestClientX = t.clientX;
-    latestClientY = t.clientY;
-
-    // Apply coordinates immediately into target vector
-    setTargetFromDelta(t.clientX - owlCenterX, t.clientY - owlCenterY);
-
-    // Bypass heavy smoothing immediately for instant finger reaction
-    state.normX   = target.normX;
-    state.normY   = target.normY;
-    state.pupilX  = target.pupilX;
-    state.pupilY  = target.pupilY;
-    state.specX   = target.specX;
-    state.specY   = target.specY;
-    state.shadowX = target.shadowX;
-    state.shadowY = target.shadowY;
-
-    scheduleFrame();
+    updatePointer(t.clientX, t.clientY);
   }
 
-  // On touchend / touchcancel: briskly return to origin over ~200ms
   function handleTouchEnd() {
     isTouchActive     = false;
     isReturningToRest = true;
@@ -610,13 +617,14 @@ function initOwlTracking() {
     target.shadowX = -3;
     target.shadowY = 6;
     pointerSpeed   = 0;
-    hasNewCoords   = false;
 
     resetBreatheTimer();
     scheduleFrame();
   }
 
-  // ── Device orientation handler (gyroscope tilt on mobile) ────────────────────
+  // ── Mobile Gyroscope ────────────────────────────────────────────────────────
+  // Map window.ondeviceorientation (gamma: -30 to 30, beta: 15 to 65) directly
+  // into normalized inputs [-1.0, 1.0] so tilting phone drives high-speed 3D tilt
   let orientationActive = false;
 
   function handleOrientation(e) {
@@ -626,35 +634,35 @@ function initOwlTracking() {
     lastMoveTime = performance.now();
     resetBreatheTimer();
 
-    // Fast Gyroscope Response:
-    // Tightened clamp range & sensitivity multiplier for dynamic reaction to subtle phone tilts
-    const GAMMA_CLAMP = 15;        // degrees (tightened from ±30°)
-    const GAMMA_SENSITIVITY = 1.5; // multiplier for fast, responsive left/right reaction
-    const clampedGamma = Math.max(-GAMMA_CLAMP, Math.min(GAMMA_CLAMP, e.gamma));
-    const gNorm = Math.max(-1, Math.min(1, (clampedGamma / GAMMA_CLAMP) * GAMMA_SENSITIVITY));
+    // Map gamma: -30 to 30 directly into normalized input [-1.0, 1.0]
+    const clampedGamma = Math.max(-30, Math.min(30, e.gamma));
+    const normX = clampedGamma / 30;
 
-    // Vertical axis: beta — natural phone hold angle ~40°
-    const BETA_CENTER = 40;       // degrees
-    const BETA_CLAMP = 12;        // degrees delta (tightened from ±25°)
-    const BETA_SENSITIVITY = 1.5; // multiplier for fast, responsive up/down reaction
-    const betaDelta = e.beta - BETA_CENTER;
-    const clampedBetaDelta = Math.max(-BETA_CLAMP, Math.min(BETA_CLAMP, betaDelta));
-    const bNorm = Math.max(-1, Math.min(1, (clampedBetaDelta / BETA_CLAMP) * BETA_SENSITIVITY));
+    // Map beta: 15 to 65 directly into normalized input [-1.0, 1.0] (center 40, span +/-25)
+    const clampedBeta = Math.max(15, Math.min(65, e.beta));
+    const normY = (clampedBeta - 40) / 25;
 
-    target.normX   = gNorm;
-    target.normY   = bNorm;
-    target.pupilX  = gNorm * MAX_PUPIL;
-    target.pupilY  = bNorm * MAX_PUPIL;
-    target.specX   = -gNorm * 18;
-    target.specY   = -bNorm * 12;
-    target.shadowX = -gNorm * 6;
-    target.shadowY =  6 + bNorm * 4;
+    target.normX = Math.max(-1.0, Math.min(1.0, normX));
+    target.normY = Math.max(-1.0, Math.min(1.0, normY));
+
+    // Calculate pupil displacement clamped to maximum 5.5px radius
+    target.pupilX = target.normX * MAX_PUPIL;
+    target.pupilY = target.normY * MAX_PUPIL;
+    const gyroPupilR = Math.hypot(target.pupilX, target.pupilY);
+    if (gyroPupilR > MAX_PUPIL) {
+      target.pupilX = (target.pupilX / gyroPupilR) * MAX_PUPIL;
+      target.pupilY = (target.pupilY / gyroPupilR) * MAX_PUPIL;
+    }
+
+    target.specX   = -target.normX * 18;
+    target.specY   = -target.normY * 12;
+    target.shadowX = -target.normX * 6;
+    target.shadowY =  6 + target.normY * 4;
 
     if (!orientationActive) {
       orientationActive = true;
       owlSvg.style.animation = 'none';
     }
-    hasNewCoords = false;
     scheduleFrame();
   }
 
@@ -683,7 +691,6 @@ function initOwlTracking() {
     target.pupilX     = 0;  target.pupilY     = 0;
     target.specX      = 0;  target.specY      = 0;
     target.shadowX    = -3; target.shadowY    = 6;
-    hasNewCoords      = false;
     resetBreatheTimer();
     scheduleFrame();
   };
@@ -708,23 +715,45 @@ function initOwlTracking() {
                             specX: 0, specY: 0, shadowX: -3, shadowY: 6 });
 
     if (owlRoot)      owlRoot.style.transform       = '';
-    if (owlHead)      owlHead.style.transform        = 'translateZ(36px)';
-    if (owlCollarTie) owlCollarTie.style.transform   = 'translateZ(24px)';
-    if (owlTorso)   { owlTorso.style.transform       = 'translateZ(10px)';
+    if (owlHead)      owlHead.style.transform        = 'translateZ(42px)';
+    if (owlCollarTie) owlCollarTie.style.transform   = 'translateZ(22px)';
+    if (owlTorso)   { owlTorso.style.transform       = 'translateZ(5px)';
                       owlTorso.style.filter           = ''; }
     if (owlBg)        owlBg.style.transform          = 'translateZ(0px)';
-    if (owlEyes)      owlEyes.style.transform        = 'translateZ(50px)';
+    if (owlEyes)      owlEyes.style.transform        = 'translateZ(58px)';
     leftPupil.style.transform  = '';
     rightPupil.style.transform = '';
     owlSvg.style.setProperty('--owl-shadow-x', '-3px');
     owlSvg.style.setProperty('--owl-shadow-y',  '6px');
     if (owlSpecular)  owlSpecular.style.transform    = '';
+    if (headSphereGrad) {
+      headSphereGrad.setAttribute('cx', '40%');
+      headSphereGrad.setAttribute('cy', '35%');
+      headSphereGrad.setAttribute('fx', '38%');
+      headSphereGrad.setAttribute('fy', '32%');
+    }
+    if (facialDiscGrad) {
+      facialDiscGrad.setAttribute('cx', '40%');
+      facialDiscGrad.setAttribute('cy', '35%');
+      facialDiscGrad.setAttribute('fx', '38%');
+      facialDiscGrad.setAttribute('fy', '32%');
+    }
+    if (torsoSphereGrad) {
+      torsoSphereGrad.setAttribute('cx', '45%');
+      torsoSphereGrad.setAttribute('cy', '35%');
+    }
+    if (owlSpecularGrad) {
+      owlSpecularGrad.setAttribute('cx', '50%');
+      owlSpecularGrad.setAttribute('cy', '40%');
+      owlSpecularGrad.setAttribute('fx', '50%');
+      owlSpecularGrad.setAttribute('fy', '30%');
+    }
   }
 
   // Initialize breathing idle timer
   resetBreatheTimer();
 
-  // ── Event listener registration (desktop & touch) ──────────────────────────
+  // ── Unified event listener registration (mousemove & touchmove with { passive: true }) ──
   window.addEventListener('mousemove',    onMouseMove,    { passive: true });
   document.addEventListener('mouseleave', onMouseLeave,   { passive: true });
   window.addEventListener('touchstart',   handleTouch,    { passive: true });
@@ -732,13 +761,19 @@ function initOwlTracking() {
   window.addEventListener('touchend',     handleTouchEnd, { passive: true });
   window.addEventListener('touchcancel',  handleTouchEnd, { passive: true });
 
+  // Mobile Gyroscope registration
+  if ('ondeviceorientation' in window) {
+    window.ondeviceorientation = handleOrientation;
+  }
+  window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+
   // Gyroscope: request permission on first touchstart gesture (iOS 13+)
   window.addEventListener('touchstart', function grantOnce() {
     enableOrientationTracking();
     window.removeEventListener('touchstart', grantOnce);
   }, { once: true, passive: true });
 
-  // Recalculate owl centre whenever the layout shifts
+  // Recalculate owl centre whenever layout shifts
   window.addEventListener('resize', updateBounds, { passive: true });
   window.addEventListener('scroll', updateBounds, { passive: true });
 }
