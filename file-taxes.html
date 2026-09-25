@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/pages.css?v=4.9">
   <link rel="icon" type="image/svg+xml" href="assets/brand/uncle-pat-favicon.svg">
 </head>
 <body>
@@ -90,10 +90,10 @@
   </div>
 
   <main id="main">
-    <!-- Header Banner -->
-    <section class="night tight">
+    <!-- Dark Hero Section & Overlapping Callout Banner -->
+    <section class="night tight tax-hero-section" id="tax-hero-section">
       <div class="shell">
-        <div class="sechead" style="margin-bottom:0">
+        <div class="sechead tax-hero-content" id="tax-hero-content" style="margin-bottom:0">
           <span class="eyebrow night">Layer 1 · The Storefront</span>
           <h1 style="color:#fff">Upfront pricing, zero surprises,<br>monitored to IRS acceptance.</h1>
           <p class="lede">
@@ -101,213 +101,252 @@
           </p>
         </div>
       </div>
-    </section>
 
-    <!-- QuickPrepare Box -->
-    <section class="tight" style="background:var(--surface-2);border-bottom:1px solid var(--line)">
-      <div class="shell">
-        <div class="bridge" style="background:var(--surface);border-color:var(--brand);box-shadow:0 6px 24px rgba(1,159,255,.08)">
-          <div>
-            <span class="eyebrow" style="color:var(--brand)">Recommended If You Are Unsure</span>
-            <h3 style="margin-top:6px">Start with QuickPrepare · $200 Deposit</h3>
-            <p>
-              Upload your documents into our secure vault. We review your forms, match you to the exact tier below, and credit your $200 in full against the final balance. If your return is Simple, you owe nothing more.
-            </p>
-          </div>
-          <div>
-            <button class="btn btn-p" onclick="openBookingModal('quickprepare')">Start QuickPrepare &rarr;</button>
+      <!-- Overlapping Callout Banner / Dock -->
+      <div class="tax-quickprepare-dock-section" id="tax-quickprepare-dock">
+        <div class="shell">
+          <div class="bridge tax-frosted-card" id="tax-quickprepare-card">
+            <div>
+              <span class="eyebrow" style="color:var(--brand)">Recommended If You Are Unsure</span>
+              <h3 style="margin-top:6px">Start with QuickPrepare · $295 Deposit</h3>
+              <p>
+                Upload your documents into our secure vault. We review your forms, match you to the exact tier below, and credit your $295 in full against the final balance. If your return is Essential, you owe nothing more.
+              </p>
+            </div>
+            <div>
+              <button class="btn btn-p tax-quickprepare-btn" id="tax-quickprepare-cta" onclick="openBookingModal('quickprepare')" aria-label="Start QuickPrepare">
+                <span>Start QuickPrepare</span>
+                <span class="tax-cta-arrow" aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Image Band: 1040 Tax Filing -->
-    <div class="imgband slim gold-tint" style="--img:url('../Pics/AdobeStock_47747648.jpeg')">
-      <div class="imgband-inner" style="padding:48px 24px;text-align:center">
-        <p style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">Transparent Pricing &middot; All 50 States</p>
-        <h2 style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">Pick the tier that matches your documents.<br><em style="color:var(--gold);font-style:normal">Every boundary defined. Every price published.</em></h2>
+    <!-- Lower Document Section: IRS Forms 1040 / 1120 Parallax Band -->
+    <div class="imgband slim gold-tint tax-document-band" id="tax-document-section" style="--img:url('Pics/AdobeStock_47747648.jpeg')">
+      <div class="tax-document-bg" id="tax-document-bg" aria-hidden="true"></div>
+      <div class="imgband-inner tax-document-inner" style="padding:48px 24px;text-align:center">
+        <p class="tax-document-eyebrow" style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">Transparent Pricing &middot; All 50 States</p>
+        <h2 class="tax-document-headline" id="tax-document-headline" style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">Pick the tier that matches your documents.<br><em style="color:var(--gold);font-style:normal">Every boundary defined. Every price published.</em></h2>
       </div>
     </div>
 
-    <!-- Pricing Tables -->
-    <section>
+    <!-- Pricing Tables & Fintech Interactive Ledger -->
+    <section class="pricing-tables-section" id="tax-pricing-section" style="background:var(--ground);color:var(--ink);">
       <div class="shell">
-        <div class="sechead">
+        <div class="sechead tax-ledger-header" id="tax-ledger-header">
           <span class="eyebrow">Individual Returns · Form 1040</span>
           <h2>Every tier covers federal filing and one resident state</h2>
           <p class="lede">All returns include secure document intake, e-signature Form 8879, and IRS e-file acceptance tracking.</p>
         </div>
 
-        <div class="twrap">
-          <table class="ptab">
+        <div class="twrap tax-ledger-twrap" id="tax-ledger-twrap">
+          <table class="ptab tax-ledger-table" id="tax-1040-ledger">
             <caption>Individual 1040 Filings</caption>
             <tbody>
-              <tr>
-                <td class="n">Simple</td>
-                <td class="d">Up to two W-2s, standard deduction, one state. Refund tracking to IRS acceptance.</td>
-                <td class="p">$200</td>
+              <tr class="ledger-row" data-price="295">
+                <td class="n"><span class="tier-name">Essential</span></td>
+                <td class="d">Up to two W-2s, unemployment (1099-G), standard deduction, one state included. E-file + e-signature portal. No Schedule C or E.</td>
+                <td class="p"><span class="price-val" data-val="295">$295</span></td>
               </tr>
-              <tr>
-                <td class="n">Standard</td>
-                <td class="d">Multiple W-2s, itemized deductions (Schedule A), dependants and child tax credits, one state.</td>
-                <td class="p">$350</td>
+              <tr class="ledger-row" data-price="425">
+                <td class="n"><span class="tier-name">Standard</span></td>
+                <td class="d">Multiple W-2s, itemized deductions (Schedule A), HSA (Form 8889), retirement distributions (1099-R), live expert Q&amp;A, document review checklist, one state.</td>
+                <td class="p"><span class="price-val" data-val="425">$425</span></td>
               </tr>
-              <tr>
-                <td class="n">Premium</td>
-                <td class="d">1099 and investment income, Schedule B &amp; D, one rental property (Schedule E), HSA, education credits.</td>
-                <td class="p">$450</td>
+              <tr class="ledger-row ledger-row-highlight" data-price="595">
+                <td class="n">
+                  <span class="tier-name">Premium</span>
+                  <span class="badge most-chosen-tag" id="most-chosen-tag">Most Chosen</span>
+                </td>
+                <td class="d">1099 and investment income, Schedules B and D (capital gains), 1099-B statements, one rental property (Schedule E), priority support, one state.</td>
+                <td class="p"><span class="price-val" data-val="595">$595</span></td>
               </tr>
-              <tr>
-                <td class="n">Self-Employed</td>
-                <td class="d">Schedule C, home office deduction, vehicle expenses, depreciation, self-employment tax — and next year’s quarterly estimates prepared.</td>
-                <td class="p">$550</td>
+              <tr class="ledger-row" data-price="750">
+                <td class="n"><span class="tier-name">Self-Employed</span></td>
+                <td class="d">Schedule C (sole proprietor), home office &amp; vehicle expenses, depreciation and asset schedule, self-employment tax, and next year’s quarterly estimates set up.</td>
+                <td class="p"><span class="price-val" data-val="750">$750</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="sechead" style="margin-top:54px">
+        <div class="sechead tax-business-header" id="tax-business-header" style="margin-top:54px">
           <span class="eyebrow">Business Returns · 1065 / 1120-S / 1120</span>
           <h2>Partnership and corporate filings</h2>
           <p class="lede">Delivered with clean Schedule K-1s for all partners and shareholders.</p>
         </div>
 
-        <div class="twrap">
-          <table class="ptab">
+        <div class="twrap tax-business-twrap" id="tax-business-twrap">
+          <table class="ptab tax-ledger-table" id="tax-business-ledger">
             <caption>Business Entity Returns</caption>
             <tbody>
-              <tr>
-                <td class="n">Business</td>
-                <td class="d">Single owner or up to three K-1s, one state, books delivered reconciled.</td>
-                <td class="p">$750</td>
+              <tr class="ledger-row" data-price="1150">
+                <td class="n"><span class="tier-name">Business</span></td>
+                <td class="d">1065, 1120, or 1120-S return, owner / officer W-2 support, Schedule C or E as applicable, up to 3 basic K-1s included, year-end entity compliance checklist, one state included.</td>
+                <td class="p"><span class="price-val" data-val="1150">$1,150</span></td>
               </tr>
-              <tr>
-                <td class="n">Business Pro</td>
-                <td class="d">Multi-member, multi-state apportionment, foreign income and FBAR, virtual currency, fixed-asset depreciation schedules, more than three K-1s.</td>
-                <td class="p">$1,250</td>
+              <tr class="ledger-row" data-price="1950">
+                <td class="n"><span class="tier-name">Business Pro</span></td>
+                <td class="d">Multi-member, multi-state apportionment, more than 3 K-1s, complex allocations, Schedule D (covered, non-covered, PTP), FBAR and foreign form reporting, virtual currency, hedge fund / complex HNI returns.</td>
+                <td class="p"><span class="price-val" data-val="1950">$1,950</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout" style="margin:24px 0 54px">
-          <span class="h">The Bookkeeping Advantage</span>
+        <div class="callout tax-bookkeeping-callout" id="tax-bookkeeping-banner" style="margin:24px 0 54px">
+          <div class="callout-accent-bar" id="bookkeeping-accent-bar" aria-hidden="true"></div>
+          <span class="h">The Bookkeeping Advantage · 50% Off Annual Return</span>
           <p>
-            Any small business subscribed to a Pivot Aide monthly bookkeeping plan receives their annual entity return at <strong>50% off</strong> ($375 for Business, $625 for Business Pro).
+            Any small business subscribed to a Pivot Aide monthly bookkeeping plan receives their annual entity return at <strong>50% off, up to $600</strong> ($575 discount for Business, $600 maximum discount for Business Pro).
           </p>
         </div>
 
-        <div class="sechead">
+        <div class="sechead tax-addons-header" id="tax-addons-header">
           <span class="eyebrow">Add-Ons &amp; Special Scopes</span>
           <h2>Clear rates for additional filing requirements</h2>
         </div>
 
-        <div class="twrap">
-          <table class="ptab">
+        <div class="twrap tax-addons-twrap" id="tax-addons-twrap">
+          <table class="ptab tax-ledger-table" id="tax-addons-ledger">
             <caption>Add-On Services</caption>
             <tbody>
-              <tr>
-                <td class="n">Extension</td>
-                <td class="d">Filed the same day. Credited in full against your return when you file with us.</td>
-                <td class="p">$100</td>
+              <tr class="ledger-row" data-price="100">
+                <td class="n"><span class="tier-name">Extension</span></td>
+                <td class="d">Filed the same day. Credited in full toward your return when you file with us.</td>
+                <td class="p"><span class="price-val" data-val="100">$100</span></td>
               </tr>
-              <tr>
-                <td class="n">Additional State</td>
-                <td class="d">Per state, per year. Resident, non-resident, or part-year in any of the 50 states.</td>
-                <td class="p">$75</td>
+              <tr class="ledger-row" data-price="95">
+                <td class="n"><span class="tier-name">Additional State</span></td>
+                <td class="d">Per state, beyond the one included. Resident, non-resident, or part-year in any of the 50 states.</td>
+                <td class="p"><span class="price-val" data-val="95">$95</span><small style="display:block;color:var(--ink-3);font-weight:400">per state</small></td>
               </tr>
-              <tr>
-                <td class="n">Prior-Year Return</td>
-                <td class="d">Priced at its regular tier, per year. Behind on multiple years? See Audit &amp; Resolution.</td>
-                <td class="p">Tier Rate</td>
+              <tr class="ledger-row" data-price="0">
+                <td class="n"><span class="tier-name">Prior-Year Return</span></td>
+                <td class="d">Per tax year, priced at the matching tier rate. Behind on multiple years? See Audit &amp; Resolution.</td>
+                <td class="p"><span class="price-val">Tier Rate</span></td>
               </tr>
-              <tr>
-                <td class="n">Amended · 1040-X</td>
-                <td class="d">Correcting errors from self-prepared or third-party returns. (Waived if error was ours).</td>
-                <td class="p">$250</td>
+              <tr class="ledger-row" data-price="395">
+                <td class="n"><span class="tier-name">Amended · 1040-X</span></td>
+                <td class="d">Correcting a return already filed from self-prepared or third-party filings. (Waived if error was ours).</td>
+                <td class="p"><span class="price-val" data-val="395">$395</span></td>
               </tr>
-              <tr>
-                <td class="n">In-Season Rush</td>
-                <td class="d">Guaranteed completed within 72 hours, February through April.</td>
-                <td class="p">$150</td>
+              <tr class="ledger-row" data-price="250">
+                <td class="n"><span class="tier-name">In-Season Rush</span></td>
+                <td class="d">Guaranteed completed within 72 hours, February through April, subject to capacity.</td>
+                <td class="p"><span class="price-val" data-val="250">$250</span></td>
+              </tr>
+              <tr class="ledger-row" data-price="95">
+                <td class="n"><span class="tier-name">Audit Shield</span></td>
+                <td class="d">Year-round notice response and audit defense representation on the return you file with us.</td>
+                <td class="p"><span class="price-val" data-val="95">$95</span><small style="display:block;color:var(--ink-3);font-weight:400">per year</small></td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <p class="small" style="margin-top:16px;color:var(--ink-2)">
+          All prices are flat fees quoted before work begins. One state return is included in every tier. Scope is confirmed at document review &mdash; if your return needs a different tier, we tell you before we start, not after.
+        </p>
       </div>
     </section>
 
-    <!-- Photo Split: Named Preparer Review -->
-    <div class="img-split night-side">
-      <div class="img-col">
-        <img src="Pics/AdobeStock_480131145.jpeg" alt="Tax specialist reviewing documents and tax forms" width="1024" height="576" decoding="async">
+    <!-- Photo Split: Named Preparer Review & Interactive 3D Tax Knob Dial -->
+    <div class="img-split night-side" id="tax-dial-section">
+      <div class="img-col tax-dial-col" id="tax-dial-col">
+        <div class="tax-dial-frame" id="tax-dial-frame">
+          <img src="Pics/AdobeStock_480131145.jpeg" id="tax-dial-img" alt="Tax knob dial adjusting from min to max" width="1024" height="576" decoding="async">
+          <div class="tax-dial-glow" id="tax-dial-glow" aria-hidden="true"></div>
+        </div>
       </div>
-      <div class="text-col">
-        <span class="eyebrow night" style="margin-bottom:14px">Professional Oversight</span>
-        <h2 style="color:#fff;margin-bottom:16px">Every return reviewed by a named human preparer.</h2>
-        <p style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:20px">
+      <div class="text-col tax-dial-text-col" id="tax-dial-text-col">
+        <span class="eyebrow night tax-dial-eyebrow" id="tax-dial-eyebrow" style="margin-bottom:14px">Professional Oversight</span>
+        <h2 class="tax-dial-headline" id="tax-dial-headline" style="color:#fff;margin-bottom:16px">Every return reviewed by a named human preparer.</h2>
+        <p class="tax-dial-lede" id="tax-dial-lede" style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:20px">
           Software algorithms guess and overlook state-level nuances. At Pivot Aide, every Form 1040 and business return is assigned to a designated professional who reviews your documents line by line before filing.
         </p>
-        <ul class="ticks" style="margin-bottom:24px">
-          <li>Thorough review for missed deductions &amp; eligible credits</li>
-          <li>Direct communication via portal, phone, or secure email</li>
-          <li>IRS &amp; state e-file tracking until official confirmation</li>
-        </ul>
-        <div>
-          <a class="btn btn-g" href="file-room.html" style="align-self:flex-start">Upload documents in The File Room</a>
+        <div class="tax-dial-checklist-wrap" id="tax-dial-checklist-wrap">
+          <div class="checklist-top-divider" id="tax-dial-top-divider" aria-hidden="true"></div>
+          <ul class="ticks tax-dial-checklist" id="tax-dial-checklist" style="margin-bottom:24px">
+            <li class="tax-dial-item">
+              <span class="item-text">Thorough review for missed deductions &amp; eligible credits</span>
+              <span class="item-divider" aria-hidden="true"></span>
+            </li>
+            <li class="tax-dial-item">
+              <span class="item-text">Direct communication via portal, phone, or secure email</span>
+              <span class="item-divider" aria-hidden="true"></span>
+            </li>
+            <li class="tax-dial-item">
+              <span class="item-text">IRS &amp; state e-file tracking until official confirmation</span>
+              <span class="item-divider" aria-hidden="true"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="tax-dial-cta-wrap" id="tax-dial-cta-wrap">
+          <a class="btn btn-g tax-dial-cta-btn" id="tax-dial-cta-btn" href="file-room.html" style="align-self:flex-start">Upload documents in The File Room</a>
         </div>
       </div>
     </div>
 
     <!-- How Filing Works (5 Steps) -->
-    <section style="background:var(--surface-2);border-top:1px solid var(--line)">
+    <section class="tax-steps-section" id="tax-steps-section" style="background:var(--surface-2);border-top:1px solid var(--line)">
       <div class="shell">
-        <div class="sechead">
+        <div class="sechead tax-steps-header" id="tax-steps-header">
           <span class="eyebrow">The 5-Step Process</span>
           <h2>How your return moves from documents to accepted</h2>
         </div>
 
-        <div class="steps">
-          <div>
-            <span class="k">01</span>
-            <h3>Intake &amp; Vault</h3>
-            <p>Upload your tax documents to our secure encrypted client portal from your phone or computer.</p>
-          </div>
-          <div>
-            <span class="k">02</span>
-            <h3>Review &amp; Scope</h3>
-            <p>A tax specialist reviews your files, confirms your tier, and locks in your exact fee before drafting.</p>
-          </div>
-          <div>
-            <span class="k">03</span>
-            <h3>Preparation</h3>
-            <p>Your return is built, reviewed for unclaimed credits, deductions, and cross-checked against tax law.</p>
-          </div>
-          <div>
-            <span class="k">04</span>
-            <h3>E-Signature</h3>
-            <p>Review your return summary and electronically sign IRS Form 8879 in seconds.</p>
-          </div>
-          <div>
-            <span class="k">05</span>
-            <h3>IRS Accepted</h3>
-            <p>We e-file with the IRS and state authorities, tracking acceptance until official confirmation.</p>
+        <div class="steps-pipeline-track" id="steps-pipeline-track">
+          <!-- Active horizontal SVG guide line running across the top of cards 01 to 05 -->
+          <svg class="pipeline-guide-svg" id="pipeline-guide-svg" viewBox="0 0 1000 4" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="0" y1="2" x2="1000" y2="2" class="pipeline-bg-line" />
+            <line x1="0" y1="2" x2="1000" y2="2" class="pipeline-laser-line" id="pipeline-laser-line" />
+          </svg>
+          <div class="steps tax-steps-grid" id="tax-steps-grid">
+            <div class="step-card" id="step-card-1">
+              <span class="k step-k">01</span>
+              <h3>Intake &amp; Vault</h3>
+              <p>Upload your tax documents to our secure encrypted client portal from your phone or computer.</p>
+            </div>
+            <div class="step-card" id="step-card-2">
+              <span class="k step-k">02</span>
+              <h3>Review &amp; Scope</h3>
+              <p>A tax specialist reviews your files, confirms your tier, and locks in your exact fee before drafting.</p>
+            </div>
+            <div class="step-card" id="step-card-3">
+              <span class="k step-k">03</span>
+              <h3>Preparation</h3>
+              <p>Your return is built, reviewed for unclaimed credits, deductions, and cross-checked against tax law.</p>
+            </div>
+            <div class="step-card" id="step-card-4">
+              <span class="k step-k">04</span>
+              <h3>E-Signature</h3>
+              <p>Review your return summary and electronically sign IRS Form 8879 in seconds.</p>
+            </div>
+            <div class="step-card" id="step-card-5">
+              <span class="k step-k">05</span>
+              <h3>IRS Accepted</h3>
+              <p>We e-file with the IRS and state authorities, tracking acceptance until official confirmation.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- What to Bring Checklist -->
-    <section>
+    <section class="tax-checklist-section" id="tax-checklist-section" style="background:var(--ground);color:var(--ink);">
       <div class="shell">
-        <div class="sechead">
+        <div class="sechead tax-checklist-header" id="tax-checklist-header">
           <span class="eyebrow">Checklist</span>
           <h2>What to gather before you start</h2>
           <p class="lede">Having these ready ensures your return is filed without delays.</p>
         </div>
 
-        <div class="grid g3">
-          <div class="card">
+        <div class="grid g3 tax-checklist-grid" id="tax-checklist-grid">
+          <div class="card tax-check-card" id="tax-check-card-1">
             <span class="tag"><b>Identity</b></span>
             <h3>Identification</h3>
             <ul class="ticks tight" style="margin-top:8px">
@@ -318,7 +357,7 @@
             </ul>
           </div>
 
-          <div class="card">
+          <div class="card tax-check-card" id="tax-check-card-2">
             <span class="tag"><b>Income</b></span>
             <h3>Income Documents</h3>
             <ul class="ticks tight" style="margin-top:8px">
@@ -329,7 +368,7 @@
             </ul>
           </div>
 
-          <div class="card">
+          <div class="card tax-check-card" id="tax-check-card-3">
             <span class="tag"><b>Deductions</b></span>
             <h3>Deductions &amp; Credits</h3>
             <ul class="ticks tight" style="margin-top:8px">
@@ -341,18 +380,18 @@
           </div>
         </div>
 
-        <div style="margin-top:36px;text-align:center">
-          <button class="btn btn-g" onclick="openBookingModal('quickprepare')">Ready to File? Start QuickPrepare Now</button>
+        <div class="tax-cta-dock-wrap" id="tax-cta-dock-wrap" style="margin-top:36px;margin-bottom:30px;text-align:center">
+          <button class="btn btn-g tax-docking-cta" id="tax-docking-cta" onclick="openBookingModal('quickprepare')">Ready to File? Start QuickPrepare Now</button>
         </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer id="site-footer" class="site-footer">
     <div class="shell">
       <div class="cols">
-        <div>
+        <div class="footer-brand-col">
           <div class="brand" style="margin-bottom:14px">
             <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat icon" width="32" height="32" style="filter:brightness(1.2)">
             <span class="wm">Pivot Aide Tax</span>
@@ -365,7 +404,7 @@
           </p>
         </div>
 
-                <div>
+        <div class="footer-nav-col">
           <h4>File &amp; Strategy</h4>
           <ul>
             <li><a href="file-taxes.html">Individual Returns (1040)</a></li>
@@ -376,7 +415,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Resources &amp; Resolution</h4>
           <ul>
             <li><a href="resources.html">Tax Resources &amp; Deadlines</a></li>
@@ -387,7 +426,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Policies &amp; Legal</h4>
           <ul>
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -400,13 +439,19 @@
         </div>
       </div>
 
-      <p class="fine">
+      <p class="fine footer-legal">
         Prices shown are for the scopes described and are confirmed in writing before work begins. Representation before the Internal Revenue Service is provided only by practitioners authorised under Circular 230. Nothing on this site is a guarantee of any particular outcome; resolution results depend on individual financial circumstances and on agency determination. &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="payment-policy.html">Payment Policy</a> &middot; <a href="security-policy.html">Security</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="service-expectations.html">Service Expectations</a>
       </p>
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+
+  <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/hero-transition.js?v=4.9"></script>
   <script src="js/booking.js"></script>
 </body>
 </html>

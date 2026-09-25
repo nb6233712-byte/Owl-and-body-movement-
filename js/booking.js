@@ -47,7 +47,7 @@ function createBookingModalDOM() {
               <option value="second-look">Second Look — 3-Year Prior Return Review (Free)</option>
               <option value="triage">Notice Triage — IRS / State Letter Review ($0 Review)</option>
               <option value="consultation">General Tax Consultation (1 Hour, Free)</option>
-              <option value="quickprepare">QuickPrepare Filing ($200 Deposit)</option>
+              <option value="quickprepare">QuickPrepare Filing ($295 Deposit)</option>
               <option value="business">Business & Bookkeeping Onboarding</option>
             </select>
           </div>

@@ -12,9 +12,9 @@ Official repository for **Pivot Aide Tax** (Hyattsville, MD), providing year-rou
 .
 ├── website/                            # Production Multi-Page Website Build
 │   ├── index.html                      # Home (The Thesis, 12-Month Timeline, 4 Doors)
-│   ├── file-taxes.html                 # Storefront: 1040, Business ($750/$1,250), QuickPrepare ($200)
+│   ├── file-taxes.html                 # Storefront: 1040, Business ($1,150/$1,950), QuickPrepare ($295)
 │   ├── tax-strategy.html               # Flagship: The Standing File, S-Corp ($1,500), S-Corp Calculator
-│   ├── audit-resolution.html           # Resolution: 4 Tiers, 50-State Desk, Audit Shield ($75), Notice Triage
+│   ├── audit-resolution.html           # Resolution: 4 Tiers, 50-State Desk, Audit Shield ($95), Notice Triage
 │   ├── business.html                   # Recurring: Bookkeeping (Ledger $350-$1,200), Payroll, 50% Return Discount
 │   ├── free-help.html                  # Complimentary: Second Look (3 Returns), Notice Triage, 6 Trade Checklists
 │   ├── resources.html                  # Reference: Official 2026 IRS figures, Mileage (67¢), Deadlines

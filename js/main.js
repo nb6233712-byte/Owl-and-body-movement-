@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initModals();
   initOwlTracking();
+  initHeroEntrance();
+  initScrollReveal();
+  initLegalNavSpy();
 });
 
 function initNavigation() {
@@ -777,3 +780,99 @@ function initOwlTracking() {
   window.addEventListener('resize', updateBounds, { passive: true });
   window.addEventListener('scroll', updateBounds, { passive: true });
 }
+
+/* ─────────────────────────────────────────────────────────────
+   GLOBAL SCROLL REVEAL & MICRO-ANIMATION CONTROLLERS
+   ───────────────────────────────────────────────────────────── */
+
+function initHeroEntrance() {
+  const heroHead = document.querySelector('main > section:first-child .sechead, main > section:first-child .hero-intro-col, main > .night.tight .sechead, .legal-page-header .sechead, .app-toolbar');
+  if (heroHead) {
+    heroHead.classList.add('hero-fade-in');
+  }
+}
+
+function initScrollReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('[data-reveal], .reveal-on-scroll, .sechead, .card, .pkg, .bridge, .ptab tr, .legal-category-card, .legal-card, .img-split').forEach(el => {
+      el.classList.add('is-revealed');
+    });
+    return;
+  }
+
+  const targets = document.querySelectorAll(
+    'main section .sechead, main section .card, main section .pkg, main section .bridge, main .img-split, main section .twrap, main section .callout, main .legal-category-card, main .legal-card, main #business-scorp-calc, main .app-device-wrapper, [data-reveal]'
+  );
+
+  if (!targets.length) return;
+
+  // Stagger delays for card groups
+  document.querySelectorAll('.pkgs, .grid, .svcs, .cols, .g4, .g3').forEach(container => {
+    const children = container.querySelectorAll('.pkg, .card, .svc');
+    children.forEach((child, index) => {
+      child.style.transitionDelay = `${(index % 4) * 0.08}s`;
+    });
+  });
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.08
+  });
+
+  targets.forEach(el => {
+    if (!el.classList.contains('reveal-on-scroll')) {
+      el.classList.add('reveal-on-scroll');
+    }
+    observer.observe(el);
+  });
+}
+
+function initLegalNavSpy() {
+  const navLinks = document.querySelectorAll('.legal-nav a, .legal-toc-link');
+  if (!navLinks.length) return;
+
+  const sections = Array.from(navLinks).map(link => {
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return null;
+    const targetId = href.replace('#', '');
+    return targetId ? document.getElementById(targetId) : null;
+  }).filter(Boolean);
+
+  if (!sections.length) return;
+
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY + 140;
+    let currentId = '';
+
+    sections.forEach(section => {
+      if (section.offsetTop <= scrollPos) {
+        currentId = section.id;
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${currentId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }, { passive: true });
+}
+
+

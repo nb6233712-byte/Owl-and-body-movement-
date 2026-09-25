@@ -90,189 +90,242 @@
   </div>
 
   <main id="main">
-    <!-- Hero Banner -->
-    <section class="night tight">
-      <div class="shell">
-        <div class="sechead" style="margin-bottom:0">
-          <span class="eyebrow night">Layer 0 · Complimentary</span>
-          <h1 style="color:#fff">You don&rsquo;t have to buy anything<br>to find out where you stand.</h1>
-          <p class="lede">
-            Whether you suspect your prior accountant missed deductions, received an intimidating notice in the mail, or wonder if you should form an S-Corp, start with our complimentary reviews.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The 2 Lead Services (Second Look & Notice Triage) -->
-    <section>
-      <div class="shell">
-        <div class="split wide">
-          <!-- Second Look -->
-          <div class="card" style="border:1px solid var(--blue);box-shadow:0 8px 30px rgba(1,159,255,.08);padding:34px 28px">
-            <span class="tag"><b>Free Offer · Up to 3 Years</b></span>
-            <h2 style="font-size:1.8rem;margin-top:6px">The Second Look</h2>
-            <p style="margin-top:8px;font-size:.95rem">
-              Send us your filed federal and state returns for the last three years. A senior tax advisor reviews them end-to-end to identify missed depreciation, omitted deductions, wrong filing statuses, or unapplied credits.
-            </p>
-            <ul class="ticks" style="margin:20px 0">
-              <li><b>If we find nothing:</b> You get complete peace of mind that your returns were done correctly.</li>
-              <li><b>If we find money:</b> We tell you exactly what it will cost to file Form 1040-X amendments and how much refund you stand to recover.</li>
-            </ul>
-            <div class="callout" style="margin-bottom:20px">
-              <span class="h">Scope Limit</span>
-              <p class="small">Limited to three returns, once per household. No high-pressure sales pitch.</p>
+    <!-- Pinned Hero Stage & Complimentary Triage Grid -->
+    <div class="free-help-pinned-wrapper" id="free-help-pinned-wrapper">
+      <section class="night free-help-hero-stage" id="free-help-hero-stage">
+        <div class="shell">
+          <div class="sechead free-help-sechead" id="free-help-sechead">
+            <span class="eyebrow night free-help-eyebrow" id="free-help-eyebrow">Layer 0 &middot; Complimentary</span>
+            <div class="free-help-h1-mask" id="free-help-h1-mask">
+              <h1 class="free-help-h1" id="free-help-h1">You don&rsquo;t have to buy anything<br>to find out where you stand.</h1>
             </div>
-            <button class="btn btn-p" onclick="openBookingModal('second-look')">Request Free Second Look &rarr;</button>
+            <p class="lede free-help-lede" id="free-help-lede">
+              Whether you suspect your prior accountant missed deductions, received an intimidating notice in the mail, or wonder if you should form an S-Corp, start with our complimentary reviews.
+            </p>
           </div>
 
-          <!-- Notice Triage -->
-          <div class="card" style="border:1px solid var(--gold-dp);box-shadow:0 8px 30px rgba(234,228,47,.08);padding:34px 28px">
-            <span class="tag" style="color:var(--gold-dp)"><b>Free Offer · 2-Day Turnaround</b></span>
-            <h2 style="font-size:1.8rem;margin-top:6px">Notice Triage</h2>
-            <p style="margin-top:8px;font-size:.95rem">
-              Upload any IRS or state department of revenue letter into our secure vault. Uncle Pat’s desk reads it and delivers a clear, plain-English summary within two business days:
-            </p>
-            <ul class="ticks" style="margin:20px 0">
-              <li><b>What the agency is actually claiming</b> (in plain English)</li>
-              <li><b>Whether their arithmetic is typically flawed</b></li>
-              <li><b>The exact deadline</b> you cannot afford to miss</li>
-              <li><b>What it will cost</b> to have us resolve it under Tier 1–4</li>
-            </ul>
-            <div class="callout" style="margin-bottom:20px;border-left-color:var(--gold)">
-              <span class="h">Scope Limit</span>
-              <p class="small">Limited to one notice per household. Delivered in writing.</p>
+          <!-- Dual Complimentary Triage Grid -->
+          <div class="split wide triage-cards-grid" id="triage-cards-grid">
+            <!-- Card 1: Second Look -->
+            <div class="card triage-card" id="triage-card-second-look">
+              <span class="tag triage-tag" id="triage-tag-second-look"><b>Free Offer &middot; Up to 3 Years</b></span>
+              <h2>The Second Look</h2>
+              <p>
+                Send us your filed federal and state returns for the last three years. A senior tax advisor reviews them end-to-end to identify missed depreciation, omitted deductions, wrong filing statuses, or unapplied credits.
+              </p>
+              <ul class="ticks">
+                <li><b>If we find nothing:</b> You get complete peace of mind that your returns were done correctly.</li>
+                <li><b>If we find money:</b> We tell you exactly what it will cost to file Form 1040-X amendments and how much refund you stand to recover.</li>
+              </ul>
+              <div class="callout">
+                <span class="h">Scope Limit</span>
+                <p class="small">Limited to three returns, once per household. No high-pressure sales pitch.</p>
+              </div>
+              <button class="btn btn-p" onclick="openBookingModal('second-look')">Request Free Second Look &rarr;</button>
             </div>
-            <button class="btn btn-g" onclick="openBookingModal('triage')">Upload Notice for Triage &rarr;</button>
+
+            <!-- Card 2: Notice Triage -->
+            <div class="card triage-card" id="triage-card-notice-triage">
+              <span class="tag triage-tag" id="triage-tag-notice-triage"><b>Free Offer &middot; 2-Day Turnaround</b></span>
+              <h2>Notice Triage</h2>
+              <p>
+                Upload any IRS or state department of revenue letter into our secure vault. Uncle Pat&rsquo;s desk reads it and delivers a clear, plain-English summary within two business days:
+              </p>
+              <ul class="ticks">
+                <li><b>What the agency is actually claiming</b> (in plain English)</li>
+                <li><b>Whether their arithmetic is typically flawed</b></li>
+                <li><b>The exact deadline</b> you cannot afford to miss</li>
+                <li><b>What it will cost</b> to have us resolve it under Tier 1&ndash;4</li>
+              </ul>
+              <div class="callout gold-callout">
+                <span class="h">Scope Limit</span>
+                <p class="small">Limited to one notice per household. Delivered in writing.</p>
+              </div>
+              <button class="btn btn-g" onclick="openBookingModal('triage')">Upload Notice for Triage &rarr;</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <!-- Additional Free Tools & Services -->
-    <section style="background:var(--surface-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <section class="diagnostic-tools-section" id="diagnostic-tools-section">
       <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow">Self-Service Diagnostic Tools</span>
-          <h2>Four more ways to get clarity today</h2>
+        <div class="sechead diagnostic-sechead" id="diagnostic-sechead">
+          <div class="diagnostic-eyebrow-wrap" id="diagnostic-eyebrow-wrap">
+            <span class="eyebrow diagnostic-eyebrow" id="diagnostic-eyebrow">Self-Service Diagnostic Tools</span>
+          </div>
+          <div class="diagnostic-h2-mask" id="diagnostic-h2-mask">
+            <h2 class="diagnostic-h2" id="diagnostic-h2">Four more ways to get clarity today</h2>
+          </div>
         </div>
 
-        <div class="grid g4">
-          <div class="card">
-            <span class="tag"><b>Diagnostic</b></span>
+        <div class="grid g4 diagnostic-grid" id="diagnostic-grid">
+          <!-- Card 1: Entity Fit Check -->
+          <div class="card diagnostic-card" id="diag-card-entity">
+            <span class="tag diagnostic-tag" id="diag-tag-entity"><b>Diagnostic</b></span>
             <h3>Entity Fit Check</h3>
             <p>Are you earning enough to justify an S-Corporation? Use our interactive calculator or get a 1-page breakdown showing your exact FICA tax breakeven point.</p>
-            <a href="business.html#business-scorp-calc" class="btn btn-o" style="margin-top:auto">Check S-Corp Fit</a>
+            <a href="business.html#business-scorp-calc" class="btn btn-o diagnostic-btn" style="margin-top:auto">Check S-Corp Fit</a>
           </div>
 
-          <div class="card">
-            <span class="tag"><b>Withholding</b></span>
+          <!-- Card 2: W-4 Checkup -->
+          <div class="card diagnostic-card" id="diag-card-w4">
+            <span class="tag diagnostic-tag" id="diag-tag-w4"><b>Withholding</b></span>
             <h3>W-4 Checkup</h3>
             <p>Tired of lending the government an interest-free loan every year — or getting hit with an unexpected penalty in April? We tune your Form W-4 allowances to within $100.</p>
-            <button class="btn btn-o" style="margin-top:auto" onclick="openBookingModal('consultation')">Book Checkup</button>
+            <button type="button" class="btn btn-o diagnostic-btn" style="margin-top:auto" onclick="openBookingModal('consultation')">Book Checkup</button>
           </div>
 
-          <div class="card">
-            <span class="tag"><b>Consultation</b></span>
+          <!-- Card 3: Free 1-Hour Consultation -->
+          <div class="card diagnostic-card" id="diag-card-consultation">
+            <span class="tag diagnostic-tag" id="diag-tag-consultation"><b>Consultation</b></span>
             <h3>Free 1-Hour Consultation</h3>
             <p>Speak directly with a tax strategist about your current filing situation, business growth plans, or overdue returns. No obligation, no sales scripts.</p>
-            <button class="btn btn-o" style="margin-top:auto" onclick="openBookingModal('consultation')">Book Consultation</button>
+            <button type="button" class="btn btn-o diagnostic-btn" style="margin-top:auto" onclick="openBookingModal('consultation')">Book Consultation</button>
           </div>
 
-          <div class="card">
-            <span class="tag"><b>Security</b></span>
+          <!-- Card 4: Permanent Document Vault -->
+          <div class="card diagnostic-card" id="diag-card-vault">
+            <span class="tag diagnostic-tag" id="diag-tag-vault"><b>Security</b></span>
             <h3>Permanent Document Vault</h3>
             <p>Every client gets free, encrypted access to The File Room. Your returns, W-2s, and agency receipts stay accessible 24/7 even if your engagement ends.</p>
-            <a href="file-room.html" class="btn btn-o" style="margin-top:auto">Open The File Room &rarr;</a>
+            <a href="file-room.html" class="btn btn-o diagnostic-btn" style="margin-top:auto">Open The File Room &rarr;</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Photo Split: Complimentary Second Look -->
-    <div class="img-split night-side">
-      <div class="img-col">
-        <img src="Pics/AdobeStock_1797374371.jpeg" alt="Tax advisor reviewing prior returns during a complimentary Second Look review" width="1024" height="576" decoding="async">
+    <div class="img-split night-side editorial-bridge" id="editorial-bridge">
+      <div class="img-col editorial-img-col" id="editorial-img-col">
+        <div class="editorial-img-frame" id="editorial-img-frame">
+          <img src="Pics/AdobeStock_1797374371.jpeg" class="editorial-photo" id="editorial-photo" alt="Tax advisor reviewing prior returns during a complimentary Second Look review" width="1024" height="576" decoding="async">
+        </div>
       </div>
-      <div class="text-col">
-        <span class="eyebrow night" style="margin-bottom:14px">Complimentary Review</span>
-        <h2 style="color:#fff;margin-bottom:16px">A second pair of eyes costs nothing.<br>Missing deductions cost thousands.</h2>
-        <p style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:20px">
+      <div class="text-col editorial-text-col" id="editorial-text-col">
+        <span class="eyebrow night editorial-eyebrow" id="editorial-eyebrow" style="margin-bottom:14px">Complimentary Review</span>
+        <h2 class="editorial-h2" id="editorial-h2" style="color:#fff;margin-bottom:16px">A second pair of eyes costs nothing.<br>Missing deductions cost thousands.</h2>
+        <p class="editorial-p" id="editorial-p" style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:20px">
           You don&rsquo;t have to buy anything to find out where you stand. We examine your last three filed returns for overlooked credits, incorrect depreciation recovery periods, and missed election opportunities &mdash; with zero obligation.
         </p>
-        <ul class="ticks" style="margin-bottom:24px">
-          <li>Complete 3-year prior return forensic diagnostic</li>
-          <li>Written explanation of errors, omissions, or refund potential</li>
-          <li>Never any sales pressure or unsolicited outreach</li>
-        </ul>
+        <div class="complimentary-deliverables" id="complimentary-deliverables" style="margin-bottom:28px">
+          <div class="complimentary-item" id="comp-item-1">
+            <div class="complimentary-divider" id="comp-div-1"></div>
+            <div class="complimentary-row">
+              <span class="complimentary-dash">&mdash;</span>
+              <span class="complimentary-label">Complete 3-year prior return forensic diagnostic</span>
+            </div>
+          </div>
+          <div class="complimentary-item" id="comp-item-2">
+            <div class="complimentary-divider" id="comp-div-2"></div>
+            <div class="complimentary-row">
+              <span class="complimentary-dash">&mdash;</span>
+              <span class="complimentary-label">Written explanation of errors, omissions, or refund potential</span>
+            </div>
+          </div>
+          <div class="complimentary-item" id="comp-item-3">
+            <div class="complimentary-divider" id="comp-div-3"></div>
+            <div class="complimentary-row">
+              <span class="complimentary-dash">&mdash;</span>
+              <span class="complimentary-label">Never any sales pressure or unsolicited outreach</span>
+            </div>
+            <div class="complimentary-divider complimentary-divider-bottom" id="comp-div-4"></div>
+          </div>
+        </div>
         <div>
-          <button class="btn btn-g" onclick="openBookingModal('second-look')" style="align-self:flex-start">Request your free Second Look</button>
+          <button type="button" class="btn btn-g editorial-cta" id="editorial-cta" onclick="openBookingModal('second-look')" style="align-self:flex-start">Request your free Second Look</button>
         </div>
       </div>
     </div>
 
     <!-- Trade Deduction Checklists -->
-    <section>
+    <section class="industry-guides-section" id="industry-guides-section">
       <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow">Trade Checklists</span>
-          <h2>Deduction guides built for your specific industry</h2>
-          <p class="lede">
-            The IRS does not advertise legitimate deductions. We compiled comprehensive checklists for the professions we serve most across Maryland, Virginia, and Washington DC.
-          </p>
+        <div class="sechead industry-sechead" id="industry-sechead">
+          <div class="industry-eyebrow-wrap" id="industry-eyebrow-wrap">
+            <span class="eyebrow industry-eyebrow" id="industry-eyebrow">Trade Checklists</span>
+          </div>
+          <div class="industry-h2-mask" id="industry-h2-mask">
+            <h2 class="industry-h2" id="industry-h2">Deduction guides built for your specific industry</h2>
+          </div>
+          <div class="industry-lede-mask" id="industry-lede-mask">
+            <p class="lede industry-lede" id="industry-lede">
+              The IRS does not advertise legitimate deductions. We compiled comprehensive checklists for the professions we serve most across Maryland, Virginia, and Washington DC.
+            </p>
+          </div>
         </div>
 
-        <div class="grid g3">
-          <div class="card" style="display:flex;flex-direction:column">
-            <span class="tag"><b>Real Estate</b></span>
+        <div class="grid g3 industry-grid" id="industry-grid">
+          <!-- Card 1: Real Estate -->
+          <div class="card industry-card" id="industry-card-realestate" data-row="1">
+            <span class="tag industry-tag" id="industry-tag-realestate"><b>Real Estate</b></span>
             <h3>Realtors &amp; Brokers</h3>
-            <p style="flex:1">Desk fees, MLS dues, staging costs, vehicle mileage, open house expenses, continuing education, and client gifts under Section 274.</p>
-            <button type="button" class="btn btn-o sm" style="margin-top:14px" onclick="viewChecklist('Realtor')">View Realtor Checklist &rarr;</button>
+            <p>Desk fees, MLS dues, staging costs, vehicle mileage, open house expenses, continuing education, and client gifts under Section 274.</p>
+            <button type="button" class="btn btn-o sm industry-btn" onclick="viewChecklist('Realtor')">
+              <span>View Realtor Checklist</span> <span class="industry-arrow">&rarr;</span>
+            </button>
           </div>
 
-          <div class="card" style="display:flex;flex-direction:column">
-            <span class="tag"><b>Trades &amp; Construction</b></span>
+          <!-- Card 2: Trades & Construction -->
+          <div class="card industry-card" id="industry-card-trades" data-row="1">
+            <span class="tag industry-tag" id="industry-tag-trades"><b>Trades &amp; Construction</b></span>
             <h3>Contractors &amp; Builders</h3>
-            <p style="flex:1">Heavy equipment depreciation, tool write-offs, subcontractor 1099 compliance, job site fuel, uniforms, and builder’s risk insurance.</p>
-            <button type="button" class="btn btn-o sm" style="margin-top:14px" onclick="viewChecklist('Contractor')">View Contractor Checklist &rarr;</button>
+            <p>Heavy equipment depreciation, tool write-offs, subcontractor 1099 compliance, job site fuel, uniforms, and builder’s risk insurance.</p>
+            <button type="button" class="btn btn-o sm industry-btn" onclick="viewChecklist('Contractor')">
+              <span>View Contractor Checklist</span> <span class="industry-arrow">&rarr;</span>
+            </button>
           </div>
 
-          <div class="card" style="display:flex;flex-direction:column">
-            <span class="tag"><b>Transportation</b></span>
+          <!-- Card 3: Transportation -->
+          <div class="card industry-card" id="industry-card-transportation" data-row="1">
+            <span class="tag industry-tag" id="industry-tag-transportation"><b>Transportation</b></span>
             <h3>Truckers &amp; Owner-Operators</h3>
-            <p style="flex:1">Per diem meal deductions (80% rate), sleeper berth supplies, electronic logging devices (ELD), fuel tax (IFTA), and highway use tax (Form 2290).</p>
-            <button type="button" class="btn btn-o sm" style="margin-top:14px" onclick="viewChecklist('Trucker')">View Trucker Checklist &rarr;</button>
+            <p>Per diem meal deductions (80% rate), sleeper berth supplies, electronic logging devices (ELD), fuel tax (IFTA), and highway use tax (Form 2290).</p>
+            <button type="button" class="btn btn-o sm industry-btn" onclick="viewChecklist('Trucker')">
+              <span>View Trucker Checklist</span> <span class="industry-arrow">&rarr;</span>
+            </button>
           </div>
 
-          <div class="card" style="display:flex;flex-direction:column">
-            <span class="tag"><b>Healthcare</b></span>
+          <!-- Card 4: Healthcare -->
+          <div class="card industry-card" id="industry-card-healthcare" data-row="2">
+            <span class="tag industry-tag" id="industry-tag-healthcare"><b>Healthcare</b></span>
             <h3>Home Care &amp; Nursing Agencies</h3>
-            <p style="flex:1">Medical supplies, caregiver training, mileage reimbursement under an accountable plan, PPE, and licensing fees.</p>
-            <button type="button" class="btn btn-o sm" style="margin-top:14px" onclick="viewChecklist('Healthcare')">View Healthcare Checklist &rarr;</button>
+            <p>Medical supplies, caregiver training, mileage reimbursement under an accountable plan, PPE, and licensing fees.</p>
+            <button type="button" class="btn btn-o sm industry-btn" onclick="viewChecklist('Healthcare')">
+              <span>View Healthcare Checklist</span> <span class="industry-arrow">&rarr;</span>
+            </button>
           </div>
 
-          <div class="card" style="display:flex;flex-direction:column">
-            <span class="tag"><b>Personal Care</b></span>
+          <!-- Card 5: Personal Care -->
+          <div class="card industry-card" id="industry-card-personalcare" data-row="2">
+            <span class="tag industry-tag" id="industry-tag-personalcare"><b>Personal Care</b></span>
             <h3>Salons, Barbers &amp; Stylists</h3>
-            <p style="flex:1">Booth rental, scissors and styling shears, sanitation equipment, professional products, and booking software subscriptions.</p>
-            <button type="button" class="btn btn-o sm" style="margin-top:14px" onclick="viewChecklist('Salon')">View Salon Checklist &rarr;</button>
+            <p>Booth rental, scissors and styling shears, sanitation equipment, professional products, and booking software subscriptions.</p>
+            <button type="button" class="btn btn-o sm industry-btn" onclick="viewChecklist('Salon')">
+              <span>View Salon Checklist</span> <span class="industry-arrow">&rarr;</span>
+            </button>
           </div>
 
-          <div class="card" style="display:flex;flex-direction:column">
-            <span class="tag"><b>Gig Economy</b></span>
+          <!-- Card 6: Gig Economy -->
+          <div class="card industry-card" id="industry-card-gigeconomy" data-row="2">
+            <span class="tag industry-tag" id="industry-tag-gigeconomy"><b>Gig Economy</b></span>
             <h3>Rideshare &amp; Delivery Drivers</h3>
-            <p style="flex:1">Standard mileage vs. actual expense election, cell phone split, dashboard mounts, rider water/mints, and vehicle sanitation.</p>
-            <button type="button" class="btn btn-o sm" style="margin-top:14px" onclick="viewChecklist('Rideshare')">View Driver Checklist &rarr;</button>
+            <p>Standard mileage vs. actual expense election, cell phone split, dashboard mounts, rider water/mints, and vehicle sanitation.</p>
+            <button type="button" class="btn btn-o sm industry-btn" onclick="viewChecklist('Rideshare')">
+              <span>View Driver Checklist</span> <span class="industry-arrow">&rarr;</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
+  <!-- Universal Master Footer -->
+  <footer id="site-footer">
     <div class="shell">
       <div class="cols">
-        <div>
+        <div class="footer-brand-col">
           <div class="brand" style="margin-bottom:14px">
             <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat icon" width="32" height="32" style="filter:brightness(1.2)">
             <span class="wm">Pivot Aide Tax</span>
@@ -285,7 +338,7 @@
           </p>
         </div>
 
-                <div>
+        <div class="footer-nav-col">
           <h4>File &amp; Strategy</h4>
           <ul>
             <li><a href="file-taxes.html">Individual Returns (1040)</a></li>
@@ -296,7 +349,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Resources &amp; Resolution</h4>
           <ul>
             <li><a href="resources.html">Tax Resources &amp; Deadlines</a></li>
@@ -307,7 +360,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Policies &amp; Legal</h4>
           <ul>
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -315,18 +368,26 @@
             <li><a href="security-policy.html">Security Policy</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
             <li><a href="service-expectations.html">Service Expectations</a></li>
-            <li><a href="file-room.html">Client Portal Login</a></li>
+            <li><a href="file-room.html" class="portal-link">Client Portal Login</a></li>
           </ul>
         </div>
       </div>
 
-      <p class="fine">
+      <div class="footer-hairline" id="footer-hairline"></div>
+
+      <p class="fine footer-legal">
         Prices shown are for the scopes described and are confirmed in writing before work begins. Representation before the Internal Revenue Service is provided only by practitioners authorised under Circular 230. Nothing on this site is a guarantee of any particular outcome; resolution results depend on individual financial circumstances and on agency determination. &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="payment-policy.html">Payment Policy</a> &middot; <a href="security-policy.html">Security</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="service-expectations.html">Service Expectations</a>
       </p>
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+
+  <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/hero-transition.js?v=6.0"></script>
   <script src="js/booking.js"></script>
 </body>
 </html>

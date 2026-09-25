@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/components.css?v=6.1">
   <link rel="stylesheet" href="css/pages.css">
   <link rel="icon" type="image/svg+xml" href="assets/brand/uncle-pat-favicon.svg">
 </head>
@@ -90,24 +90,39 @@
   </div>
 
   <main id="main">
-    <!-- Night Hero Banner -->
-    <section class="night">
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow night">Uncle Pat’s Division · All 50 States</span>
-          <h1 style="color:#fff">That letter has a deadline on it.<br>Send it over. We&rsquo;ll read it today.</h1>
-          <p class="lede">
-            Most letters from the IRS or state departments of revenue are wrong about something. We check whether the agency is actually right, draft the defensible response, and stand between you and the examiner.
-          </p>
-          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-            <button class="btn btn-g" onclick="openBookingModal('triage')">Upload Notice for 2-Day Triage ($0)</button>
-            <a class="btn btn-w" href="#resolution-tiers">View Resolution Tiers &darr;</a>
+    <!-- Night Hero Banner: Pinned Stage Architecture -->
+    <section class="night audit-hero-stage" id="audit-hero-stage">
+      <div class="shell audit-hero-shell">
+        <div class="sechead audit-hero-sechead" id="audit-hero-sechead">
+          <div class="audit-eyebrow-wrap" id="audit-eyebrow-wrap">
+            <span class="eyebrow night audit-eyebrow" id="audit-eyebrow">Uncle Pat’s Division · All 50 States</span>
+          </div>
+          <div class="audit-h1-mask" id="audit-h1-mask">
+            <h1 class="audit-h1" id="audit-h1">
+              <span class="audit-h1-lead">That letter has a deadline on it.</span><br>
+              <span class="audit-h1-emphasis" id="audit-h1-emphasis">Send it over. We&rsquo;ll read it today.</span>
+            </h1>
+          </div>
+          <div class="audit-lede-mask" id="audit-lede-mask">
+            <p class="lede audit-lede" id="audit-lede">
+              Most letters from the IRS or state departments of revenue are wrong about something. We check whether the agency is actually right, draft the defensible response, and stand between you and the examiner.
+            </p>
+          </div>
+          <div class="audit-cta-row" id="audit-cta-row">
+            <button type="button" class="btn btn-g audit-cta-primary" id="audit-cta-primary" onclick="openBookingModal('triage')">
+              <span>Upload Notice for 2-Day Triage ($0)</span>
+            </button>
+            <a class="btn btn-w audit-cta-secondary" id="audit-cta-secondary" href="#resolution-tiers">
+              <span>View Resolution Tiers</span> <span class="audit-arrow-down">&darr;</span>
+            </a>
           </div>
         </div>
 
-        <div class="patsays" style="margin-top:28px">
-          <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat icon" width="64" height="64">
-          <div>
+        <div class="patsays audit-patsays" id="audit-patsays">
+          <div class="audit-owl-wrap" id="audit-owl-wrap">
+            <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat icon" width="64" height="64" class="audit-owl-mascot" id="audit-owl-mascot">
+          </div>
+          <div class="audit-patsays-text">
             <q>Uncle Sam isn’t the enemy. He’s just very organized. So are we.</q>
             <div class="who">Uncle Pat on Audit Defense</div>
           </div>
@@ -115,183 +130,238 @@
       </div>
     </section>
 
-    <!-- Image Band: Circular 230 Representation -->
-    <div class="imgband slim blue-tint" style="--img:url('../Pics/AdobeStock_821679592.jpeg')">
-      <div class="imgband-inner" style="padding:48px 24px;text-align:center">
-        <p style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">Circular 230 Qualified &middot; All 50 States</p>
-        <h2 style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">Most letters from the IRS are wrong about something.<br><em style="color:var(--gold);font-style:normal">We stand between you and the examiner.</em></h2>
+    <!-- Interactive Notice Diagnostic: Pinned Stage & Examiner Header -->
+    <section class="notice-diagnostic-stage night-2" id="notice-diagnostic-stage">
+      <div class="imgband slim blue-tint notice-examiner-band" id="notice-examiner-band" style="--img:url('../Pics/AdobeStock_821679592.jpeg')">
+        <div class="imgband-inner examiner-band-inner" id="examiner-band-inner">
+          <p class="examiner-eyebrow" id="examiner-eyebrow">Circular 230 Qualified &middot; All 50 States</p>
+          <h2 class="examiner-h2" id="examiner-h2">Most letters from the IRS are wrong about something.<br><em class="examiner-h2-em">We stand between you and the examiner.</em></h2>
+        </div>
       </div>
-    </div>
 
-    <!-- Interactive Notice Triage Widget -->
-    <section style="background:var(--night-2);border-top:1px solid var(--night-line);border-bottom:1px solid var(--night-line)">
-      <div class="shell">
-        <div class="sechead" style="margin-bottom:16px">
-          <span class="eyebrow night">Self-Service Notice Check</span>
-          <h2 style="color:#fff">What kind of letter did you receive?</h2>
-          <p class="lede">
+      <div class="shell notice-diagnostic-shell" id="notice-diagnostic-shell">
+        <div class="sechead notice-diagnostic-head" id="notice-diagnostic-head">
+          <span class="eyebrow night notice-eyebrow" id="notice-eyebrow">Self-Service Notice Check</span>
+          <h2 class="notice-h2" id="notice-h2">What kind of letter did you receive?</h2>
+          <p class="lede notice-lede" id="notice-lede">
             Select your notice type to get an immediate plain-English assessment and understand your deadline.
           </p>
         </div>
-        <div id="notice-triage-container"></div>
+        <div id="notice-triage-container" class="notice-triage-container"></div>
       </div>
     </section>
 
     <!-- The 4 Resolution Tiers -->
-    <section class="night" id="resolution-tiers">
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow night">The Four Tiers</span>
-          <h2 style="color:#fff">Clear scopes, fixed rates, no surprises</h2>
-          <p class="lede">
+    <!-- The 4 Resolution Tiers: Pinned Ledger Stage -->
+    <section class="night resolution-tiers-stage" id="resolution-tiers">
+      <div class="shell tiers-shell" id="tiers-shell">
+        <div class="sechead tiers-sechead" id="tiers-sechead">
+          <span class="eyebrow night tiers-eyebrow" id="tiers-eyebrow">The Four Tiers</span>
+          <h2 class="tiers-h2" id="tiers-h2" style="color:#fff">Clear scopes, fixed rates, no surprises</h2>
+          <p class="lede tiers-lede" id="tiers-lede">
             Every tier has a defined boundary. We handle communications directly with the agency under Form 2848 Power of Attorney so you never have to speak with an auditor.
           </p>
         </div>
 
-        <div class="tiers">
-          <div class="tier">
-            <span class="k">01</span>
-            <div>
-              <h3 style="color:#fff;font-size:1.24rem">Notice Response</h3>
-              <p>
+        <div class="tiers ledger-tiers" id="ledger-tiers">
+          <!-- Tier 01 -->
+          <div class="tier ledger-tier" data-tier-index="01" id="tier-row-01">
+            <span class="k tier-index">01</span>
+            <div class="tier-content">
+              <h3 class="tier-title" style="color:#fff;font-size:1.24rem">Notice Response</h3>
+              <p class="tier-desc">
                 For CP2000, CP14, CP501–504, LT11, and state assessment letters. We read the notice, verify if the agency is factually or legally correct, draft and file a substantiated response, and track it until closure. Most inquiries resolve right here.
               </p>
-              <div class="small" style="color:var(--night-ink-3);margin-top:8px">
+              <div class="small tier-subtext" style="color:var(--night-ink-3);margin-top:8px">
                 Response time: We read your letter within two business days.
               </div>
             </div>
-            <div class="pz">
-              $450
-              <i>Per notice · Fixed fee</i>
+            <div class="pz tier-pricing">
+              <span class="tier-amount">$450</span>
+              <i class="tier-sub">Per notice · Fixed fee</i>
             </div>
+            <div class="tier-laser-divider"></div>
           </div>
 
-          <div class="tier">
-            <span class="k">02</span>
-            <div>
-              <h3 style="color:#fff;font-size:1.24rem">Examination Representation</h3>
-              <p>
+          <!-- Tier 02 -->
+          <div class="tier ledger-tier" data-tier-index="02" id="tier-row-02">
+            <span class="k tier-index">02</span>
+            <div class="tier-content">
+              <h3 class="tier-title" style="color:#fff;font-size:1.24rem">Examination Representation</h3>
+              <p class="tier-desc">
                 Correspondence, office, or field examination defense under IRS Form 2848 Power of Attorney. We handle all meetings and communications with the examiner; you do not attend. Includes document production, information document request (IDR) responses, written legal position memos, and administrative appeals if required.
               </p>
-              <div class="small" style="color:var(--night-ink-3);margin-top:8px">
+              <div class="small tier-subtext" style="color:var(--night-ink-3);margin-top:8px">
                 Covers individual 1040, Schedule C, 1065, or 1120-S examinations.
               </div>
             </div>
-            <div class="pz">
-              From $2,500
-              <i>Quoted after case review</i>
+            <div class="pz tier-pricing">
+              <span class="tier-amount">From $2,500</span>
+              <i class="tier-sub">Quoted after case review</i>
             </div>
+            <div class="tier-laser-divider"></div>
           </div>
 
-          <div class="tier">
-            <span class="k">03</span>
-            <div>
-              <h3 style="color:#fff;font-size:1.24rem">Collections &amp; Relief</h3>
-              <p>
+          <!-- Tier 03 -->
+          <div class="tier ledger-tier" data-tier-index="03" id="tier-row-03">
+            <span class="k tier-index">03</span>
+            <div class="tier-content">
+              <h3 class="tier-title" style="color:#fff;font-size:1.24rem">Collections &amp; Relief</h3>
+              <p class="tier-desc">
                 For balances owed, federal tax liens, bank levies, or wage garnishments. We begin with a complete transcript analysis, secure an immediate collection hold, and establish the most advantageous statutory resolution: Installment Agreement, Currently Not Collectible (CNC) status, First-Time Penalty Abatement, or an Offer in Compromise (OIC) where qualification is met.
               </p>
-              <div class="small" style="color:var(--night-ink-3);margin-top:8px">
+              <div class="small tier-subtext" style="color:var(--night-ink-3);margin-top:8px">
                 No false promises. We tell you exactly what you qualify for before taking a fee.
               </div>
             </div>
-            <div class="pz">
-              From $1,500
-              <i>Based on balance &amp; complexity</i>
+            <div class="pz tier-pricing">
+              <span class="tier-amount">From $1,500</span>
+              <i class="tier-sub">Based on balance &amp; complexity</i>
             </div>
+            <div class="tier-laser-divider"></div>
           </div>
 
-          <div class="tier">
-            <span class="k">04</span>
-            <div>
-              <h3 style="color:#fff;font-size:1.24rem">Back Years &amp; Non-Filers</h3>
-              <p>
+          <!-- Tier 04 -->
+          <div class="tier ledger-tier" data-tier-index="04" id="tier-row-04">
+            <span class="k tier-index">04</span>
+            <div class="tier-content">
+              <h3 class="tier-title" style="color:#fff;font-size:1.24rem">Back Years &amp; Non-Filers</h3>
+              <p class="tier-desc">
                 Three to ten unfiled tax years. We pull IRS wage-and-income transcripts, reverse punitive Substitute for Return (SFR) assessments with actual deductible expenses, reconstruct clean accounting records, and restore you to full statutory compliance so you can borrow, bid, or sleep peacefully again.
               </p>
-              <div class="small" style="color:var(--night-ink-3);margin-top:8px">
+              <div class="small tier-subtext" style="color:var(--night-ink-3);margin-top:8px">
                 Restore compliance without judgment. We have seen this hundreds of times.
               </div>
             </div>
-            <div class="pz">
-              $350 / yr
-              <i>+ $500 record reconstruction</i>
+            <div class="pz tier-pricing">
+              <span class="tier-amount">$350 / yr</span>
+              <i class="tier-sub">+ $500 record reconstruction</i>
             </div>
+            <div class="tier-laser-divider"></div>
           </div>
         </div>
 
-        <!-- Audit Shield Callout -->
-        <div class="bridge" style="background:var(--night-2);border-color:var(--gold);margin-top:42px">
-          <div>
-            <span class="eyebrow night">Annual Defense Protection</span>
-            <h3 style="color:#fff;margin-top:4px">Audit Shield · $75 / Year</h3>
-            <p style="color:var(--night-ink-2)">
-              When you file your return with Pivot Aide Tax, add Audit Shield for $75. If that return is ever questioned or examined by the IRS or state authorities, Tier 1 notice response and Tier 2 examination defense are included at no additional fee.
+        <!-- Audit Shield Callout Card -->
+        <div class="bridge audit-shield-card" id="audit-shield-card">
+          <div class="shield-content">
+            <span class="eyebrow night shield-eyebrow">Annual Defense Protection</span>
+            <h3 class="shield-title">Audit Shield · $95 / Year</h3>
+            <p class="shield-desc">
+              When you file your return with Pivot Aide Tax, add Audit Shield for $95. If that return is ever questioned or examined by the IRS or state authorities, Tier 1 notice response and Tier 2 examination defense are included at no additional fee.
             </p>
           </div>
-          <div>
-            <span style="font-family:var(--f-mono);font-size:1.4rem;font-weight:600;color:var(--gold);display:block;margin-bottom:8px">$75 / return</span>
-            <button class="btn btn-g" onclick="openBookingModal('audit-shield')">Add Audit Shield</button>
+          <div class="shield-action">
+            <span class="shield-price">$95 / return</span>
+            <button class="btn btn-g shield-cta" id="btn-add-audit-shield" onclick="openBookingModal('audit-shield')">
+              <span>Add Audit Shield</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Photo Split: Circular 230 Representation -->
-    <div class="img-split night-side">
-      <div class="img-col">
-        <img src="Pics/AdobeStock_821679592.jpeg" alt="Tax resolution practitioner reviewing IRS notice files with client" width="1024" height="384" decoding="async">
-      </div>
-      <div class="text-col">
-        <span class="eyebrow night" style="margin-bottom:14px">Circular 230 Authority</span>
-        <h2 style="color:#fff;margin-bottom:16px">The IRS has 80,000 agents.<br>You have Uncle Pat.</h2>
-        <p style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:20px">
-          Never sit across from an auditor or revenue officer alone. Under IRS Circular 230, we hold formal power of attorney to speak for you, contest improper calculations, and resolve disputes without you ever having to dial the agency.
-        </p>
-        <ul class="ticks" style="margin-bottom:24px">
-          <li>Direct IRS transcript retrieval &amp; comprehensive notice triage</li>
-          <li>Reversal of Substitute for Return (SFR) phantom assessments</li>
-          <li>Installment agreements, Penalty Abatement &amp; Offer in Compromise</li>
-        </ul>
-        <div>
-          <button class="btn btn-g" onclick="openBookingModal('resolution')" style="align-self:flex-start">Schedule confidential notice review</button>
+    <!-- Photo Split: Circular 230 Representation (Authority Split Stage) -->
+    <section class="authority-split-stage" id="authority-split">
+      <div class="authority-deck-container" id="authority-deck">
+        <!-- Left Column: Portrait Parallax Frame -->
+        <div class="authority-portrait-col" id="authority-portrait-col">
+          <div class="authority-portrait-frame" id="authority-portrait-frame">
+            <img src="Pics/AdobeStock_821679592.jpeg" 
+                 alt="Tax resolution practitioner reviewing IRS notice files with client" 
+                 id="authority-portrait-img"
+                 class="authority-portrait-img" 
+                 width="1024" height="680" decoding="async">
+          </div>
+        </div>
+
+        <!-- Right Column: Authority Narrative & Deliverables -->
+        <div class="authority-content-col" id="authority-content-col">
+          <div class="authority-content-inner" id="authority-content-inner">
+            <span class="eyebrow night authority-eyebrow" id="authority-eyebrow">Circular 230 Authority</span>
+            <h2 class="authority-headline" id="authority-headline">The IRS has 80,000 agents.<br>You have Uncle Pat.</h2>
+            <p class="authority-narrative" id="authority-narrative">
+              Never sit across from an auditor or revenue officer alone. Under IRS Circular 230, we hold formal power of attorney to speak for you, contest improper calculations, and resolve disputes without you ever having to dial the agency.
+            </p>
+
+            <!-- 3 Representation Deliverables with Hairline Dividers -->
+            <div class="authority-deliverables" id="authority-deliverables">
+              <div class="authority-deliverable-item" id="auth-deliverable-01">
+                <div class="deliverable-text">
+                  <span class="deliverable-bullet">01</span>
+                  <span class="deliverable-label">Direct IRS transcript retrieval &amp; comprehensive notice triage</span>
+                </div>
+                <div class="deliverable-hairline" id="auth-divider-01"></div>
+              </div>
+
+              <div class="authority-deliverable-item" id="auth-deliverable-02">
+                <div class="deliverable-text">
+                  <span class="deliverable-bullet">02</span>
+                  <span class="deliverable-label">Reversal of Substitute for Return (SFR) phantom assessments</span>
+                </div>
+                <div class="deliverable-hairline" id="auth-divider-02"></div>
+              </div>
+
+              <div class="authority-deliverable-item" id="auth-deliverable-03">
+                <div class="deliverable-text">
+                  <span class="deliverable-bullet">03</span>
+                  <span class="deliverable-label">Installment agreements, Penalty Abatement &amp; Offer in Compromise</span>
+                </div>
+                <div class="deliverable-hairline" id="auth-divider-03"></div>
+              </div>
+            </div>
+
+            <!-- Primary Yellow CTA -->
+            <div class="authority-cta-wrap" id="authority-cta-wrap">
+              <button class="btn btn-g authority-cta-btn" id="btn-authority-review" onclick="openBookingModal('resolution')">
+                <span>Schedule confidential notice review</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- State Desk -->
-    <section>
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow">The 50-State Resolution Desk</span>
-          <h2>We represent taxpayers in all fifty state revenue departments</h2>
-          <p class="lede">
-            Most national tax-relief mills are federal-only and abandon you when state authorities take action. Pivot Aide represents clients before every state tax department, with our deepest administrative experience right here in the DMV.
-          </p>
-        </div>
+    <!-- State Desk Stage: 50-State Revenue Department Representation -->
+    <section class="state-desk-stage" id="state-desk">
+      <!-- Elevated White Rounded Deck Container -->
+      <div class="state-deck-container" id="state-deck-container">
+        <div class="shell state-desk-shell" id="state-desk-shell">
+          <div class="sechead state-desk-sechead" id="state-desk-sechead">
+            <span class="eyebrow state-desk-eyebrow" id="state-desk-eyebrow">The 50-State Resolution Desk</span>
+            <h2 class="state-desk-h2" id="state-desk-h2">We represent taxpayers in all fifty state revenue departments</h2>
+            <p class="lede state-desk-lede" id="state-desk-lede">
+              Most national tax-relief mills are federal-only and abandon you when state authorities take action. Pivot Aide represents clients before every state tax department, with our deepest administrative experience right here in the DMV.
+            </p>
+          </div>
 
-        <div class="grid g3">
-          <div class="card">
-            <span class="tag"><b>Maryland</b></span>
-            <h3>Comptroller of Maryland</h3>
-            <p>Pass-Through Entity (PTE) tax reconciliations, sales and use tax assessments, multi-state apportionment, and hold-harmless filings.</p>
+          <div class="grid g3 state-cards-grid" id="state-cards-grid">
+            <div class="card state-card" id="state-card-md" data-state="maryland">
+              <div class="state-card-top-beam"></div>
+              <span class="tag state-tag" id="state-tag-md"><b>Maryland</b></span>
+              <h3 class="state-card-title">Comptroller of Maryland</h3>
+              <p class="state-card-desc">Pass-Through Entity (PTE) tax reconciliations, sales and use tax assessments, multi-state apportionment, and hold-harmless filings.</p>
+            </div>
+            <div class="card state-card" id="state-card-va" data-state="virginia">
+              <div class="state-card-top-beam"></div>
+              <span class="tag state-tag" id="state-tag-va"><b>Virginia</b></span>
+              <h3 class="state-card-title">Virginia Dept. of Taxation</h3>
+              <p class="state-card-desc">Accelerated sales tax issues, worker classification audits (1099 vs W-2), corporate income tax adjustments, and administrative appeals.</p>
+            </div>
+            <div class="card state-card" id="state-card-dc" data-state="dc">
+              <div class="state-card-top-beam"></div>
+              <span class="tag state-tag" id="state-tag-dc"><b>District of Columbia</b></span>
+              <h3 class="state-card-title">DC Office of Tax &amp; Revenue</h3>
+              <p class="state-card-desc">Unincorporated Business Franchise Tax (Form D-30), combined reporting assessments, and DC sales tax nexus inquiries.</p>
+            </div>
           </div>
-          <div class="card">
-            <span class="tag"><b>Virginia</b></span>
-            <h3>Virginia Dept. of Taxation</h3>
-            <p>Accelerated sales tax issues, worker classification audits (1099 vs W-2), corporate income tax adjustments, and administrative appeals.</p>
-          </div>
-          <div class="card">
-            <span class="tag"><b>Washington DC</b></span>
-            <h3>DC Office of Tax &amp; Revenue</h3>
-            <p>Unincorporated Business Franchise Tax (Form D-30), combined reporting assessments, and DC sales tax nexus inquiries.</p>
-          </div>
-        </div>
 
-        <!-- Mandatory Regulatory Guardrail Callout -->
-        <div class="callout" style="margin-top:36px;border-left-color:var(--blue)">
-          <span class="h">Statutory Notice on Representation &amp; Outcomes</span>
-          <p>
-            Representation before the Internal Revenue Service is restricted under Circular 230 to Attorneys, Certified Public Accountants, and Enrolled Agents. Outcomes depend on each taxpayer’s specific financial circumstances and on the agency’s official determination. Pivot Aide Tax does not guarantee specific dollar or percentage debt reductions.
-          </p>
+          <!-- Mandatory Regulatory Guardrail Callout (Statutory Card) -->
+          <div class="callout statutory-callout-card" id="statutory-callout-card">
+            <span class="h statutory-eyebrow" id="statutory-eyebrow">STATUTORY NOTICE ON REPRESENTATION &amp; OUTCOMES</span>
+            <p class="statutory-text" id="statutory-text">
+              Representation before the Internal Revenue Service is restricted under Circular 230 to Attorneys, Certified Public Accountants, and Enrolled Agents. Outcomes depend on each taxpayer’s specific financial circumstances and on the agency’s official determination. Pivot Aide Tax does not guarantee specific dollar or percentage debt reductions.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -344,18 +414,26 @@
             <li><a href="security-policy.html">Security Policy</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
             <li><a href="service-expectations.html">Service Expectations</a></li>
-            <li><a href="file-room.html">Client Portal Login</a></li>
+            <li><a href="file-room.html" class="portal-link">Client Portal Login</a></li>
           </ul>
         </div>
       </div>
 
-      <p class="fine">
+      <div class="footer-hairline" id="footer-hairline"></div>
+
+      <p class="fine footer-legal">
         Prices shown are for the scopes described and are confirmed in writing before work begins. Representation before the Internal Revenue Service is provided only by practitioners authorised under Circular 230. Nothing on this site is a guarantee of any particular outcome; resolution results depend on individual financial circumstances and on agency determination. &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="payment-policy.html">Payment Policy</a> &middot; <a href="security-policy.html">Security</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="service-expectations.html">Service Expectations</a>
       </p>
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+
+  <!-- Core Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/hero-transition.js?v=6.1"></script>
   <script src="js/notice-triage.js"></script>
   <script src="js/booking.js"></script>
   <script>

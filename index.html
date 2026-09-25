@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/components.css?v=4.0">
+  <link rel="stylesheet" href="css/pages.css?v=4.0">
 
   <link rel="icon" type="image/svg+xml" href="assets/brand/uncle-pat-favicon.svg">
 </head>
@@ -101,8 +101,9 @@
   </div>
 
   <main id="main">
-    <!-- Hero Section -->
-    <div class="hero">
+    <div class="scroll-pin-wrapper">
+      <!-- Hero Section -->
+      <div class="hero">
       <div class="shell in">
         <div>
           <div class="eyebrow night">Tax strategy, year-round · All 50 states</div>
@@ -114,7 +115,7 @@
           </p>
           <div class="acts">
             <button class="btn btn-g" onclick="openBookingModal('consultation')">Schedule a consultation</button>
-            <a class="btn btn-w" href="file-taxes.html">Explore our services <span class="px">from $200</span></a>
+            <a class="btn btn-w" href="file-taxes.html">Explore our services <span class="px">from $295</span></a>
           </div>
           <div class="strip">
             <span><b>All 50 states</b> — multi-state filing</span>
@@ -394,10 +395,11 @@
           </div>
         </div>
       </div>
+      <div class="hero-dim-overlay" aria-hidden="true"></div>
     </div>
 
     <!-- Thesis Section (Pat vs Sam) -->
-    <section class="night">
+    <section class="night section-thesis" id="thesis-section">
       <div class="shell">
         <div class="sechead">
           <span class="eyebrow night">Two different jobs</span>
@@ -448,11 +450,14 @@
         </div>
       </div>
     </section>
+    </div>
 
     <!-- Photo Break: clients meeting advisor -->
-    <div class="img-split">
+    <div class="img-split" id="story-split-section">
       <div class="img-col">
-        <img src="Pics/AdobeStock_487242751.jpeg" alt="Couple meeting with their tax advisor" width="1024" height="675" decoding="async">
+        <div class="img-frame">
+          <img src="Pics/AdobeStock_487242751.jpeg" alt="Couple meeting with their tax advisor" width="1024" height="675" decoding="async">
+        </div>
       </div>
       <div class="text-col night-side" style="background:var(--night);color:var(--night-ink)">
         <span class="eyebrow night" style="margin-bottom:14px">A different kind of firm</span>
@@ -463,10 +468,11 @@
         <a class="btn btn-g" href="appointments.html" style="margin-top:24px;align-self:flex-start">Schedule a
           consultation</a>
       </div>
+      <div class="split-dim-overlay" aria-hidden="true"></div>
     </div>
 
     <!-- ---------- THE PIVOT AIDE YEAR ---------- -->
-    <section class="tight">
+    <section class="tight section-year" id="year-section">
       <div class="shell">
         <div class="sechead">
           <span class="eyebrow">The Pivot Aide year</span>
@@ -474,8 +480,12 @@
           <p class="lede">Here is what a year with us actually looks like. Note where filing sits — at
             the end, as the report on work already done.</p>
         </div>
+        <!-- Timeline Progress Bar -->
+        <div class="cal-progress-track" aria-hidden="true">
+          <div class="cal-progress-bar"></div>
+        </div>
         <div class="cal">
-          <div class="peak">
+          <div class="cal-card peak" data-quarter="1">
             <span class="mo">Jan – Apr</span>
             <h3>Filing season</h3>
             <p class="say">The year&rsquo;s decisions become a number. If we did the other nine months
@@ -487,7 +497,7 @@
               <li>K-1s chased before they hold you up</li>
             </ul>
           </div>
-          <div>
+          <div class="cal-card" data-quarter="2">
             <span class="mo">May – Jul</span>
             <h3>The reset</h3>
             <p class="say">The quietest quarter and the most valuable one. Everything structural is
@@ -499,7 +509,7 @@
               <li>Books cleaned and brought current</li>
             </ul>
           </div>
-          <div>
+          <div class="cal-card" data-quarter="3">
             <span class="mo">Aug – Oct</span>
             <h3>Projection</h3>
             <p class="say">We run your year forward and tell you the number before it is final, while
@@ -511,7 +521,7 @@
               <li>Multi-state nexus review</li>
             </ul>
           </div>
-          <div>
+          <div class="cal-card" data-quarter="4">
             <span class="mo">Nov – Dec</span>
             <h3>The closing window</h3>
             <p class="say">The last moves that still count. After 31 December almost every lever is
@@ -524,7 +534,7 @@
             </ul>
           </div>
         </div>
-        <div class="callout" style="margin-top:22px">
+        <div class="callout year-callout" style="margin-top:22px">
           <span class="h">Why this matters</span>
           <p>By January, most of your tax bill is already decided. A preparer who meets you in February
             can only report what happened. That is a real service, and we do it well — but it is the last
@@ -534,7 +544,7 @@
     </section>
 
     <!-- ---------- PROBLEMS ---------- -->
-    <section class="tight">
+    <section class="tight section-probs" id="problems-section">
       <div class="shell">
         <div class="sechead">
           <span class="eyebrow">Sound familiar?</span>
@@ -542,7 +552,7 @@
           <p class="lede">Most people don&rsquo;t arrive knowing whether they need cleanup, planning or
             representation. They arrive with a problem. Find yours.</p>
         </div>
-        <div class="probs">
+        <div class="probs diagnostic-grid">
           <div class="prob">
             <h3>Behind on your bookkeeping?</h3>
             <p>Months of unreconciled accounts, and a return you can&rsquo;t file until they&rsquo;re
@@ -587,130 +597,136 @@
       </div>
     </section>
 
-    <!-- Photo divider strip -->
-    <div class="imgband slim blue-tint" style="--img:url('../Pics/AdobeStock_480131145.jpeg')">
-      <div class="imgband-inner" style="text-align:center;padding:48px 24px">
-        <p
-          style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">
-          Five services · All fifty states · All year</p>
-        <h2 style="color:#fff;margin:0;font-size:clamp(1.5rem,3vw,2.4rem)">Tax is all we do.<br><em
-            style="color:var(--gold);font-style:normal">Which is why we do it right.</em></h2>
+    <!-- ---------- PINNED SERVICES & AUDIENCES SHEET WRAPPER ---------- -->
+    <div class="audiences-pinned-wrapper" id="audiences-pinned-wrapper">
+      <div class="services-pinned-stage section-dark-intro" id="services-stage">
+        <!-- Lens graphic background layer with 3D depth -->
+        <div class="stage-lens-bg" style="--img:url('../Pics/AdobeStock_480131145.jpeg')"></div>
+        <div class="stage-ambient-glow" aria-hidden="true"></div>
+
+        <!-- Phase 1: Section A Dark Intro Banner -->
+        <div class="stage-intro-layer">
+          <div class="stage-intro-inner">
+            <p class="eyebrow-mono">Five services · All fifty states · All year</p>
+            <h2 class="stage-intro-heading">Tax is all we do.<br><em style="color:var(--gold);font-style:normal">Which is why we do it right.</em></h2>
+          </div>
+        </div>
+
+        <!-- Phase 2: Section B Core Services Matrix -->
+        <div class="stage-services-layer">
+          <div class="shell">
+            <div class="sechead">
+              <span class="eyebrow night">What we do</span>
+              <h2 class="services-stage-heading">Know your numbers. Plan your taxes.<br>Grow with confidence.</h2>
+              <p class="lede">Five things, done properly, all year. Everything here is income tax and the
+                work immediately around it — that focus is the point.</p>
+            </div>
+            <div class="svcs equalizer-grid">
+              <div class="svc" data-col="1">
+                <span class="k">01</span>
+                <h3>Tax Preparation</h3>
+                <p>Individual and business returns in all fifty states, with accuracy, compliance and a
+                  filing process that tells you where you stand.</p>
+                <a href="file-taxes.html">Start your tax return <i>&rarr;</i></a>
+              </div>
+              <div class="svc" data-col="2">
+                <span class="k">02</span>
+                <h3>Tax Planning</h3>
+                <p>Proactive strategy through the year, so decisions are made before they harden into tax
+                  consequences. The Standing File sits at the top of it.</p>
+                <a href="tax-strategy.html">Schedule tax planning <i>&rarr;</i></a>
+              </div>
+              <div class="svc" data-col="3">
+                <span class="k">03</span>
+                <h3>Business Accounting</h3>
+                <p>Monthly bookkeeping, bank reconciliation, financial statements, payroll and sales tax —
+                  the ledger the return is built on.</p>
+                <a href="business.html">Improve your books <i>&rarr;</i></a>
+              </div>
+              <div class="svc" data-col="4">
+                <span class="k">04</span>
+                <h3>Accounting Cleanup</h3>
+                <p>For books that are months behind, unreconciled, or simply wrong. We reconstruct, reconcile
+                  and hand back something you can file and borrow against.</p>
+                <a href="business.html">Fix my books <i>&rarr;</i></a>
+              </div>
+              <div class="svc" data-col="5">
+                <span class="k">05</span>
+                <h3>Audit &amp; Resolution</h3>
+                <p>Notices, examinations, balances owed, liens and unfiled years — federal and all fifty
+                  state agencies.</p>
+                <a href="audit-resolution.html">Get help with a notice <i>&rarr;</i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- ---------- AUDIENCES SHEET (PHASE 3) ---------- -->
+      <section class="tight section-audiences-sheet" id="audiences-sheet">
+        <div class="shell">
+          <div class="sechead">
+            <span class="eyebrow">Who we help</span>
+            <h2>Four situations, four different jobs.</h2>
+            <p class="lede">The work is not the same for a household with three W-2s and a rental as it is
+              for a six-entity group. Find the one that reads like you.</p>
+          </div>
+          <div class="auds">
+            <div class="aud">
+              <span class="k">Individuals</span>
+              <h3>Households and employees</h3>
+              <ul>
+                <li>Federal and multi-state returns</li>
+                <li>Investment and rental income</li>
+                <li>Self-employment and 1099 work</li>
+                <li>Prior-year returns and amendments</li>
+                <li>IRS and state correspondence</li>
+                <li>Withholding and planning</li>
+              </ul>
+            </div>
+            <div class="aud">
+              <span class="k">Small business</span>
+              <h3>Owner-operated companies</h3>
+              <ul>
+                <li>Monthly bookkeeping and reconciliation</li>
+                <li>Financial statements you can use</li>
+                <li>Payroll and employment tax</li>
+                <li>AP and AR support</li>
+                <li>Business returns and K-1s</li>
+                <li>Catch-up and cleanup</li>
+              </ul>
+            </div>
+            <div class="aud flag">
+              <span class="k">Growing businesses</span>
+              <h3>Outgrowing basic filing</h3>
+              <ul>
+                <li>Entity structure and elections</li>
+                <li>Owner compensation and distributions</li>
+                <li>Multi-state nexus and apportionment</li>
+                <li>Retirement plan design</li>
+                <li>Succession and exit, planned early</li>
+                <li>Served by <b>The Standing File</b></li>
+              </ul>
+            </div>
+            <div class="aud">
+              <span class="k">Real estate</span>
+              <h3>Property investors</h3>
+              <ul>
+                <li>Rental bookkeeping, property by property</li>
+                <li>Schedule E and passive loss rules</li>
+                <li>Fixed assets and depreciation tracking</li>
+                <li>Entity and multi-property accounting</li>
+                <li>Cost segregation coordination</li>
+                <li>Basis tracking through to sale</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <!-- ---------- SERVICES ---------- -->
-    <section class="night tight">
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow night">What we do</span>
-          <h2>Know your numbers. Plan your taxes.<br>Grow with confidence.</h2>
-          <p class="lede">Five things, done properly, all year. Everything here is income tax and the
-            work immediately around it — that focus is the point.</p>
-        </div>
-        <div class="svcs">
-          <div class="svc">
-            <span class="k">01</span>
-            <h3>Tax Preparation</h3>
-            <p>Individual and business returns in all fifty states, with accuracy, compliance and a
-              filing process that tells you where you stand.</p>
-            <a href="file-taxes.html">Start your tax return <i>&rarr;</i></a>
-          </div>
-          <div class="svc">
-            <span class="k">02</span>
-            <h3>Tax Planning</h3>
-            <p>Proactive strategy through the year, so decisions are made before they harden into tax
-              consequences. The Standing File sits at the top of it.</p>
-            <a href="tax-strategy.html">Schedule tax planning <i>&rarr;</i></a>
-          </div>
-          <div class="svc">
-            <span class="k">03</span>
-            <h3>Business Accounting</h3>
-            <p>Monthly bookkeeping, bank reconciliation, financial statements, payroll and sales tax —
-              the ledger the return is built on.</p>
-            <a href="business.html">Improve your books <i>&rarr;</i></a>
-          </div>
-          <div class="svc">
-            <span class="k">04</span>
-            <h3>Accounting Cleanup</h3>
-            <p>For books that are months behind, unreconciled, or simply wrong. We reconstruct, reconcile
-              and hand back something you can file and borrow against.</p>
-            <a href="business.html">Fix my books <i>&rarr;</i></a>
-          </div>
-          <div class="svc">
-            <span class="k">05</span>
-            <h3>Audit &amp; Resolution</h3>
-            <p>Notices, examinations, balances owed, liens and unfiled years — federal and all fifty
-              state agencies.</p>
-            <a href="audit-resolution.html">Get help with a notice <i>&rarr;</i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---------- AUDIENCES ---------- -->
-    <section class="tight">
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow">Who we help</span>
-          <h2>Four situations, four different jobs.</h2>
-          <p class="lede">The work is not the same for a household with three W-2s and a rental as it is
-            for a six-entity group. Find the one that reads like you.</p>
-        </div>
-        <div class="auds">
-          <div class="aud">
-            <span class="k">Individuals</span>
-            <h3>Households and employees</h3>
-            <ul>
-              <li>Federal and multi-state returns</li>
-              <li>Investment and rental income</li>
-              <li>Self-employment and 1099 work</li>
-              <li>Prior-year returns and amendments</li>
-              <li>IRS and state correspondence</li>
-              <li>Withholding and planning</li>
-            </ul>
-          </div>
-          <div class="aud">
-            <span class="k">Small business</span>
-            <h3>Owner-operated companies</h3>
-            <ul>
-              <li>Monthly bookkeeping and reconciliation</li>
-              <li>Financial statements you can use</li>
-              <li>Payroll and employment tax</li>
-              <li>AP and AR support</li>
-              <li>Business returns and K-1s</li>
-              <li>Catch-up and cleanup</li>
-            </ul>
-          </div>
-          <div class="aud flag">
-            <span class="k">Growing businesses</span>
-            <h3>Outgrowing basic filing</h3>
-            <ul>
-              <li>Entity structure and elections</li>
-              <li>Owner compensation and distributions</li>
-              <li>Multi-state nexus and apportionment</li>
-              <li>Retirement plan design</li>
-              <li>Succession and exit, planned early</li>
-              <li>Served by <b>The Standing File</b></li>
-            </ul>
-          </div>
-          <div class="aud">
-            <span class="k">Real estate</span>
-            <h3>Property investors</h3>
-            <ul>
-              <li>Rental bookkeeping, property by property</li>
-              <li>Schedule E and passive loss rules</li>
-              <li>Fixed assets and depreciation tracking</li>
-              <li>Entity and multi-property accounting</li>
-              <li>Cost segregation coordination</li>
-              <li>Basis tracking through to sale</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ---------- PACKAGES ---------- -->
-    <section>
+    <section id="pricing-section">
       <div class="shell">
         <div class="sechead">
           <span class="eyebrow">Packages &amp; pricing</span>
@@ -722,9 +738,9 @@
         <div class="eyebrow dim" style="margin-bottom:14px">Individual tax filing · Form 1040</div>
         <div class="pkgs">
           <div class="pkg">
-            <span class="nm">Basic</span>
+            <span class="nm">Essential</span>
             <span class="for">For simple returns</span>
-            <span class="fig"><sup>$</sup>200</span>
+            <span class="fig"><sup>$</sup>295</span>
             <ul>
               <li>W-2 income</li>
               <li>Unemployment (1099-G)</li>
@@ -738,9 +754,9 @@
           <div class="pkg">
             <span class="nm">Standard</span>
             <span class="for">For most employees and families</span>
-            <span class="fig"><sup>$</sup>350</span>
+            <span class="fig"><sup>$</sup>425</span>
             <ul>
-              <li>Everything in Basic, plus:</li>
+              <li>Everything in Essential, plus:</li>
               <li>Multiple W-2s</li>
               <li>HSA (Form 8889)</li>
               <li>Schedule A — itemised deductions</li>
@@ -751,10 +767,10 @@
             <a class="btn btn-o" href="file-taxes.html">Select plan</a>
           </div>
           <div class="pkg flag">
-            <span class="badge">Best value</span>
+            <span class="badge">Most chosen</span>
             <span class="nm">Premium</span>
             <span class="for">For mixed income</span>
-            <span class="fig"><sup>$</sup>450</span>
+            <span class="fig"><sup>$</sup>595</span>
             <ul>
               <li>Everything in Standard, plus:</li>
               <li>Investments — 1099-DIV / INT / B</li>
@@ -769,7 +785,7 @@
           <div class="pkg">
             <span class="nm">Self-Employed</span>
             <span class="for">For 1099 and Schedule C filers</span>
-            <span class="fig"><sup>$</sup>550</span>
+            <span class="fig"><sup>$</sup>750</span>
             <ul>
               <li>Everything in Premium, plus:</li>
               <li>Schedule C — sole proprietor</li>
@@ -783,11 +799,11 @@
         </div>
 
         <div class="eyebrow dim" style="margin:34px 0 14px">Business tax filing · 1065 / 1120 / 1120-S</div>
-        <div class="pkgs biz">
+        <div class="pkgs biz" id="pkgs-biz">
           <div class="pkg">
             <span class="nm">Business</span>
             <span class="for">For entities and business owners</span>
-            <span class="fig"><sup>$</sup>750</span>
+            <span class="fig"><sup>$</sup>1,150</span>
             <ul>
               <li>1065, 1120, or 1120-S return</li>
               <li>Owner / officer W-2 support</li>
@@ -801,7 +817,7 @@
           <div class="pkg">
             <span class="nm">Business Pro</span>
             <span class="for">For complex and multi-state entities</span>
-            <span class="fig"><sup>$</sup>1,250</span>
+            <span class="fig"><sup>$</sup>1,950</span>
             <ul>
               <li>Everything in Business, plus:</li>
               <li>Multi-state apportionment</li>
@@ -815,20 +831,20 @@
           </div>
         </div>
 
-        <div class="split" style="margin-top:34px">
-          <div>
+        <div class="split" id="pricing-split" style="margin-top:34px">
+          <div id="addons-panel">
             <div class="eyebrow dim" style="margin-bottom:12px">Helpful add-ons</div>
             <p class="small" style="margin-bottom:10px">Priced after a quick scope check.</p>
             <ul class="ticks">
-              <li>Extra state returns &middot; multi-state filings &mdash; <b>$75 per state</b></li>
+              <li>Extra state returns &middot; multi-state filings &mdash; <b>$95 per state</b></li>
               <li>Additional or complex K-1s &middot; foreign income</li>
-              <li>Amended returns &mdash; <b>$250</b> &middot; prior-year catch-up</li>
+              <li>Amended returns &mdash; <b>$395</b> &middot; prior-year catch-up</li>
               <li>Bookkeeping cleanup &middot; payroll and 1099 filing</li>
-              <li>In-season rush, inside 72 hours &mdash; <b>$150</b></li>
-              <li>Audit Shield on the return you file &mdash; <b>$75 a year</b></li>
+              <li>In-season rush, inside 72 hours &mdash; <b>$250</b></li>
+              <li>Audit Shield on the return you file &mdash; <b>$95 a year</b></li>
             </ul>
           </div>
-          <div>
+          <div id="ext-panel">
             <div class="eyebrow dim" style="margin-bottom:12px">File an extension &mdash; $100</div>
             <p class="small" style="margin-bottom:10px">For anyone still waiting on a W-2, 1099 or K-1,
               or who simply needs more time.</p>
@@ -846,14 +862,12 @@
           </div>
         </div>
 
-        <p class="small" style="margin-top:26px">Prototype note — business return pricing above is the
-          proposed correction (the live site currently shows $550 for both Business and Business&nbsp;Pro).
-          Individual pricing is unchanged apart from the new Self-Employed tier.</p>
+        <p class="small" id="pricing-footnote" style="margin-top:26px">All prices are flat fees quoted before work begins. One state return is included in every tier. Scope is confirmed at document review &mdash; if your return needs a different tier, we tell you before we start, not after.</p>
       </div>
     </section>
 
     <!-- ---------- HOW IT WORKS ---------- -->
-    <section class="night tight">
+    <section class="night tight" id="flow-section">
       <div class="shell">
         <div class="sechead">
           <span class="eyebrow night">How it works</span>
@@ -863,7 +877,7 @@
             named person on the other end of every step.</p>
         </div>
 
-        <div class="flow">
+        <div class="flow" id="flow-track">
           <div class="st">
             <div class="med"><span class="a">Easy</span><span class="b">Package</span><span class="c">Selection</span>
             </div>
@@ -909,7 +923,7 @@
     </section>
 
     <!-- ---------- ALL 50 STATES ---------- -->
-    <section class="night tight" style="padding-top:0">
+    <section class="night tight" id="states-section" style="padding-top:0">
       <div class="shell">
         <div class="split wide" style="align-items:center">
           <div style="display:flex;flex-direction:column;gap:16px">
@@ -928,7 +942,7 @@
             </ul>
           </div>
           <div>
-            <div class="states" aria-label="All fifty states plus the District of Columbia">
+            <div class="states" id="states-grid" aria-label="All fifty states plus the District of Columbia">
               <span>AL</span><span>AK</span><span>AZ</span><span>AR</span><span>CA</span><span>CO</span>
               <span>CT</span><span>DE</span><span class="home">DC</span><span>FL</span><span>GA</span><span>HI</span>
               <span>ID</span><span>IL</span><span>IN</span><span>IA</span><span>KS</span><span>KY</span>
@@ -946,6 +960,12 @@
         </div>
       </div>
     </section>
+
+    <!-- ── PINNED WIPE WRAPPER: White Stage + Incoming Dark Price Sheet ── -->
+    <div class="pinned-wipe-wrapper" id="pinned-wipe-wrapper">
+
+    <!-- ── WHITE PIN STAGE: Why Us + Testimonials ── -->
+    <div id="white-pin-stage">
 
     <!-- ---------- WHY US ---------- -->
     <section>
@@ -1012,10 +1032,11 @@
         </div>
       </div>
     </section>
+    </div><!-- /#white-pin-stage -->
 
     <!-- Photo Break: couple on laptop at home -->
-    <div class="imgband gold-tint" style="--img:url('../Pics/AdobeStock_1797374371.jpeg')">
-      <div class="imgband-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <div class="imgband gold-tint" id="dark-price-sheet" style="--img:url('../Pics/AdobeStock_1797374371.jpeg')">
+      <div class="imgband-inner" id="price-sheet-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
         <div>
           <span class="eyebrow night" style="margin-bottom:14px">No mystery invoices</span>
           <h2 style="color:#fff;margin-bottom:16px">Every price is published<br>before you start.</h2>
@@ -1030,14 +1051,14 @@
             <div
               style="font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">
               Individual filing</div>
-            <div style="color:#fff;font-weight:600;font-size:1.1rem">From $200 &mdash; published, upfront</div>
+            <div style="color:#fff;font-weight:600;font-size:1.1rem">From $295 &mdash; published, upfront</div>
           </div>
           <div
             style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:20px 24px;backdrop-filter:blur(4px)">
             <div
               style="font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">
               Business filing</div>
-            <div style="color:#fff;font-weight:600;font-size:1.1rem">From $750 &mdash; scoped before invoiced</div>
+            <div style="color:#fff;font-weight:600;font-size:1.1rem">From $1,150 &mdash; scoped before invoiced</div>
           </div>
           <div
             style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:20px 24px;backdrop-filter:blur(4px)">
@@ -1050,107 +1071,118 @@
       </div>
     </div>
 
-    <!-- ---------- FREE HELP ---------- -->
-    <section class="tight">
-      <div class="shell">
-        <div class="split">
-          <div style="display:flex;flex-direction:column;gap:16px">
-            <span class="eyebrow">Free, and actually free</span>
-            <h2>Six things that cost you nothing.</h2>
-            <p class="lede">Not a trial and not a teaser. If we can answer it in twenty minutes, we
-              answer it.</p>
-            <ul class="ticks">
-              <li><b>Second Look</b> — we review your last three filed returns for what was missed.</li>
-              <li><b>Notice Triage</b> — send the IRS or state letter, get a plain-English read.</li>
-              <li><b>Entity Fit Check</b> — should you be an S-corp yet? With your actual breakeven.</li>
-              <li><b>Withholding Checkup</b> — stop lending the government money every year.</li>
-              <li><b>Deduction checklists</b> — by trade, not a generic list.</li>
-              <li><b>One hour with a human</b> — no charge, no obligation.</li>
-            </ul>
-            <div><a class="btn btn-o" href="free-help.html" style="margin-top:6px">All free services</a></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:16px">
-            <span class="eyebrow">Quick FAQs</span>
-            <h2>Three we get every week.</h2>
-            <dl class="faq">
-              <div>
-                <dt>Do I need Self-Employed if I have a small 1099 side gig?</dt>
-                <dd>Yes — any self-employment income on Schedule C falls under Self-Employed. Rental
-                  income on Schedule E starts at Premium. We&rsquo;ll confirm before you pay.</dd>
-              </div>
-              <div>
-                <dt>What counts as a &ldquo;basic&rdquo; K-1?</dt>
-                <dd>A straightforward partnership or S-corp K-1 without special allocations, multi-state
-                  apportionment, or complex basis tracking. We flag anything complex upfront, before it
-                  changes your price.</dd>
-              </div>
-              <div>
-                <dt>Can I add state returns or fix an old one?</dt>
-                <dd>Absolutely — we file in all fifty states, and we can file past years or amend
-                  returns if needed, priced after a quick scope check.</dd>
-              </div>
-            </dl>
-            <div><a class="btn btn-o" href="tel:+15714703754" style="margin-top:6px">Call 1 (571) 470-3754</a></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div><!-- /#pinned-wipe-wrapper -->
 
-    <!-- ---------- FOCUS ---------- -->
-    <section class="night tight">
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow night">What we do</span>
-          <h2>Tax isn&rsquo;t a department here.<br>It&rsquo;s the whole firm.</h2>
-          <p class="lede">Some firms do a bit of tax alongside everything else. We do income tax and the
-            work that surrounds it — nothing else, in every month of the year. That is why the answers come
-            back faster and the returns come back right.</p>
+    <!-- ── PINNED WIPE WRAPPER: White Split Section + Incoming Dark Focus Sheet ── -->
+    <div class="focus-pinned-wipe-wrapper" id="focus-wipe-wrapper">
+
+      <!-- Pinned White Content Stage -->
+      <div id="white-help-pin-stage" class="white-help-pin-stage">
+        <!-- ---------- FREE HELP ---------- -->
+        <section class="tight free-help-section" id="free-help-section">
+          <div class="shell">
+            <div class="split" id="free-help-split">
+              <div class="free-help-col free-help-col-left" style="display:flex;flex-direction:column;gap:16px">
+                <span class="eyebrow">Free, and actually free</span>
+                <h2>Six things that cost you nothing.</h2>
+                <p class="lede">Not a trial and not a teaser. If we can answer it in twenty minutes, we
+                  answer it.</p>
+                <ul class="ticks" id="free-help-ticks">
+                  <li><b>Second Look</b> — we review your last three filed returns for what was missed.</li>
+                  <li><b>Notice Triage</b> — send the IRS or state letter, get a plain-English read.</li>
+                  <li><b>Entity Fit Check</b> — should you be an S-corp yet? With your actual breakeven.</li>
+                  <li><b>Withholding Checkup</b> — stop lending the government money every year.</li>
+                  <li><b>Deduction checklists</b> — by trade, not a generic list.</li>
+                  <li><b>One hour with a human</b> — no charge, no obligation.</li>
+                </ul>
+                <div><a class="btn btn-o" href="free-help.html" style="margin-top:6px">All free services</a></div>
+              </div>
+              <div class="free-help-col free-help-col-right" style="display:flex;flex-direction:column;gap:16px">
+                <span class="eyebrow">Quick FAQs</span>
+                <h2>Three we get every week.</h2>
+                <dl class="faq" id="free-help-faqs">
+                  <div>
+                    <dt>Do I need Self-Employed if I have a small 1099 side gig?</dt>
+                    <dd>Yes — any self-employment income on Schedule C falls under Self-Employed. Rental
+                      income on Schedule E starts at Premium. We&rsquo;ll confirm before you pay.</dd>
+                  </div>
+                  <div>
+                    <dt>What counts as a &ldquo;basic&rdquo; K-1?</dt>
+                    <dd>A straightforward partnership or S-corp K-1 without special allocations, multi-state
+                      apportionment, or complex basis tracking. We flag anything complex upfront, before it
+                      changes your price.</dd>
+                  </div>
+                  <div>
+                    <dt>Can I add state returns or fix an old one?</dt>
+                    <dd>Absolutely — we file in all fifty states, and we can file past years or amend
+                      returns if needed, priced after a quick scope check.</dd>
+                  </div>
+                </dl>
+                <div><a class="btn btn-o" href="tel:+15714703754" style="margin-top:6px">Call 1 (571) 470-3754</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div><!-- /#white-help-pin-stage -->
+
+      <!-- Incoming Dark Sheet Wipe: Elevated Rounded Card Sheet -->
+      <!-- ---------- FOCUS ---------- -->
+      <section class="night tight dark-focus-sheet" id="dark-focus-sheet">
+        <div class="shell">
+          <div class="sechead" id="dark-focus-sechead">
+            <span class="eyebrow night">What we do</span>
+            <h2>Tax isn&rsquo;t a department here.<br>It&rsquo;s the whole firm.</h2>
+            <p class="lede">Some firms do a bit of tax alongside everything else. We do income tax and the
+              work that surrounds it — nothing else, in every month of the year. That is why the answers come
+              back faster and the returns come back right.</p>
+          </div>
+          <div class="grid g3" id="dark-focus-grid">
+            <div class="card focus-card"><span class="tag">Income tax</span>
+              <h3>Individual returns</h3>
+              <p>W-2, 1099, self-employment, investments, rentals, retirement income, multi-state, prior years and
+                amendments.</p>
+            </div>
+            <div class="card focus-card"><span class="tag">Income tax</span>
+              <h3>Business returns</h3>
+              <p>1065, 1120 and 1120-S. K-1s, owner compensation, apportionment, foreign reporting, virtual currency.</p>
+            </div>
+            <div class="card focus-card"><span class="tag">Planning</span>
+              <h3>Tax strategy</h3>
+              <p>Mid-year projections, entity and S-corp elections, owner pay, retirement and depreciation timing,
+                year-end moves. Our flagship engagement is <b>The Standing File</b>.</p>
+            </div>
+            <div class="card focus-card"><span class="tag">Compliance</span>
+              <h3>Payroll &amp; employment tax</h3>
+              <p>Payroll filings, W-2 and 1099 issuance, new-hire reporting, worker classification, multi-state
+                withholding.</p>
+            </div>
+            <div class="card focus-card"><span class="tag">Compliance</span>
+              <h3>Sales &amp; use tax</h3>
+              <p>Nexus monitoring, registrations, return filing and remittance in every state you sell into.</p>
+            </div>
+            <div class="card focus-card"><span class="tag">Resolution</span>
+              <h3>IRS &amp; state matters</h3>
+              <p>Notices, examinations, back taxes, liens and levies, unfiled years — federal and all fifty state
+                agencies.</p>
+            </div>
+          </div>
+          <div class="callout focus-callout" style="margin-top:24px;background:rgba(255,255,255,.055);border-left-color:var(--gold)">
+            <span class="h" style="color:var(--gold)">And the books behind them</span>
+            <p style="color:var(--night-ink-2)">We keep bookkeeping on the menu for one reason: a return is
+              only as good as the ledger under it, and a strategy you can&rsquo;t measure isn&rsquo;t a
+              strategy. Clean books are a tax service here, not a separate business.</p>
+          </div>
         </div>
-        <div class="grid g3">
-          <div class="card"><span class="tag">Income tax</span>
-            <h3>Individual returns</h3>
-            <p>W-2, 1099, self-employment, investments, rentals, retirement income, multi-state, prior years and
-              amendments.</p>
-          </div>
-          <div class="card"><span class="tag">Income tax</span>
-            <h3>Business returns</h3>
-            <p>1065, 1120 and 1120-S. K-1s, owner compensation, apportionment, foreign reporting, virtual currency.</p>
-          </div>
-          <div class="card"><span class="tag">Planning</span>
-            <h3>Tax strategy</h3>
-            <p>Mid-year projections, entity and S-corp elections, owner pay, retirement and depreciation timing,
-              year-end moves. Our flagship engagement is <b>The Standing File</b>.</p>
-          </div>
-          <div class="card"><span class="tag">Compliance</span>
-            <h3>Payroll &amp; employment tax</h3>
-            <p>Payroll filings, W-2 and 1099 issuance, new-hire reporting, worker classification, multi-state
-              withholding.</p>
-          </div>
-          <div class="card"><span class="tag">Compliance</span>
-            <h3>Sales &amp; use tax</h3>
-            <p>Nexus monitoring, registrations, return filing and remittance in every state you sell into.</p>
-          </div>
-          <div class="card"><span class="tag">Resolution</span>
-            <h3>IRS &amp; state matters</h3>
-            <p>Notices, examinations, back taxes, liens and levies, unfiled years — federal and all fifty state
-              agencies.</p>
-          </div>
-        </div>
-        <div class="callout" style="margin-top:24px;background:rgba(255,255,255,.055);border-left-color:var(--gold)">
-          <span class="h" style="color:var(--gold)">And the books behind them</span>
-          <p style="color:var(--night-ink-2)">We keep bookkeeping on the menu for one reason: a return is
-            only as good as the ledger under it, and a strategy you can&rsquo;t measure isn&rsquo;t a
-            strategy. Clean books are a tax service here, not a separate business.</p>
-        </div>
-      </div>
-    </section>
+      </section>
+
+    </div><!-- /#focus-wipe-wrapper -->
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer id="site-footer" class="site-footer">
     <div class="shell">
       <div class="cols">
-        <div>
+        <div class="footer-brand-col">
           <div class="brand" style="margin-bottom:14px">
             <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat icon" width="32" height="32"
               style="filter:brightness(1.2)">
@@ -1165,7 +1197,7 @@
           </p>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>File &amp; Strategy</h4>
           <ul>
             <li><a href="file-taxes.html">Individual Returns (1040)</a></li>
@@ -1176,7 +1208,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Resources &amp; Resolution</h4>
           <ul>
             <li><a href="resources.html">Tax Resources &amp; Deadlines</a></li>
@@ -1187,7 +1219,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Policies &amp; Legal</h4>
           <ul>
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -1200,7 +1232,7 @@
         </div>
       </div>
 
-      <p class="fine">
+      <p class="fine footer-legal">
         Prices shown are for the scopes described and are confirmed in writing before work begins. Representation before
         the Internal Revenue Service is provided only by practitioners authorised under Circular 230. Nothing on this
         site is a guarantee of any particular outcome; resolution results depend on individual financial circumstances
@@ -1211,8 +1243,13 @@
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+
   <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/hero-transition.js?v=4.0"></script>
   <script src="js/booking.js"></script>
 </body>
 

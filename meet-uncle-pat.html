@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/components.css?v=7.7">
   <link rel="stylesheet" href="css/pages.css">
   <link rel="icon" type="image/svg+xml" href="assets/brand/uncle-pat-favicon.svg">
 </head>
@@ -91,13 +91,13 @@
 
   <main id="main">
     <!-- Hero Banner -->
-    <section class="night">
+    <section class="night pat-hero-stage" id="pat-hero-stage">
       <div class="shell">
         <div class="split wide" style="align-items:center">
-          <div>
-            <span class="eyebrow night">The Character &amp; Philosophy</span>
-            <h1 style="color:#fff;margin-top:14px">Everybody&rsquo;s got an Uncle&nbsp;Sam.<br><em>Not everybody&rsquo;s got an Uncle&nbsp;Pat.</em></h1>
-            <p class="lede" style="margin-top:18px">
+          <div class="hero-intro-col" id="pat-hero-intro">
+            <span class="eyebrow night" id="pat-hero-eyebrow">The Character &amp; Philosophy</span>
+            <h1 style="color:#fff;margin-top:14px" id="pat-hero-h1">Everybody&rsquo;s got an Uncle&nbsp;Sam.<br><em>Not everybody&rsquo;s got an Uncle&nbsp;Pat.</em></h1>
+            <p class="lede" style="margin-top:18px" id="pat-hero-lede">
               Uncle Pat is an owl, and he has been doing this a long time. He has seen every notice the agency sends, and he is not impressed by any of them. He is the relative you call before you call a lawyer — the one who reads the letter, puts it down on the desk, and says: <em>&ldquo;Okay, here is what this actually is.&rdquo;</em>
             </p>
           </div>
@@ -198,104 +198,143 @@
       </div>
     </section>
 
-    <!-- Why An Owl & The Collar -->
-    <section>
-      <div class="shell">
-        <div class="split">
-          <div>
-            <span class="eyebrow">The Mark</span>
-            <h2 style="margin-top:8px">Why an owl in a collar and tie?</h2>
-            <p class="lede" style="margin-top:12px">
-              Owls see in the dark, hear what is buried, and hunt without making a sound.
-            </p>
-            <p style="margin-top:14px;color:var(--ink-2);line-height:1.65">
-              That is the job: find what is buried in a return, spot the audit risk before the agency does, and resolve it quietly. An owl is also the only bird nobody has ever accused of being loud about it.
-            </p>
-            <p style="margin-top:14px;color:var(--ink-2);line-height:1.65">
-              He wears a white collar and a gold tie. The collar gives him shoulders, and shoulders give him a job — turning an abstract owl shape into a portrait of someone you would trust with your most confidential financial documents.
-            </p>
-          </div>
+    <!-- Why An Owl & The Collar (Owl Philosophy Stage - Elevated White Deck) -->
+    <section class="owl-philosophy-stage" id="owl-philosophy-stage">
+      <div class="owl-philosophy-deck" id="owl-philosophy-deck">
+        <div class="shell">
+          <div class="split owl-split">
+            <div class="owl-mark-col" id="owl-mark-col">
+              <span class="eyebrow" id="mark-eyebrow">The Mark</span>
+              <h2 style="margin-top:8px" id="mark-title">Why an owl in a collar and tie?</h2>
+              <p class="lede" style="margin-top:12px" id="mark-lede">
+                Owls see in the dark, hear what is buried, and hunt without making a sound.
+              </p>
+              <p class="mark-desc-1" id="mark-desc-1" style="margin-top:14px;color:var(--ink-2);line-height:1.65">
+                That is the job: find what is buried in a return, spot the audit risk before the agency does, and resolve it quietly. An owl is also the only bird nobody has ever accused of being loud about it.
+              </p>
+              <p class="mark-desc-2" id="mark-desc-2" style="margin-top:14px;color:var(--ink-2);line-height:1.65">
+                He wears a white collar and a gold tie. The collar gives him shoulders, and shoulders give him a job — turning an abstract owl shape into a portrait of someone you would trust with your most confidential financial documents.
+              </p>
+            </div>
 
-          <!-- The 5 Voice Rules -->
-          <div class="card" style="padding:32px 26px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)">
-            <span class="tag"><b>Brand Architecture</b></span>
-            <h3 style="font-size:1.24rem;margin-top:4px">The Five Voice Rules</h3>
-            <ul class="ticks" style="margin-top:16px">
-              <li>
-                <b>01 · Calm First:</b> Uncle Pat never panics, and never makes the client panic. Fear is the competition’s instrument, not ours.
-              </li>
-              <li>
-                <b>02 · Plain Words:</b> &ldquo;The IRS thinks you left off $8,400 in revenue&rdquo; — never &ldquo;CP2000 automated underreporter inquiry.&rdquo;
-              </li>
-              <li>
-                <b>03 · Short Sentences:</b> He is talking across a desk, not submitting an academic legal brief.
-              </li>
-              <li>
-                <b>04 · Honest About Bad News:</b> If you owe the money, he tells you directly. Absolute credibility is the firm’s single greatest asset.
-              </li>
-              <li>
-                <b>05 · Dry, Never Jokey:</b> One wry beat per page at most. He is warm and composed, never comic relief.
-              </li>
-            </ul>
+            <!-- The 5 Voice Rules -->
+            <div class="voice-rules-card card" id="voice-rules-card">
+              <div class="voice-card-top-beam" id="voice-card-top-beam"></div>
+              <span class="tag voice-tag" id="voice-tag"><b>Brand Architecture</b></span>
+              <h3 style="font-size:1.24rem;margin-top:4px" id="voice-title">The Five Voice Rules</h3>
+              <ul class="ticks voice-rules-list" id="voice-rules-list" style="margin-top:16px">
+                <li class="voice-rule-item">
+                  <b>01 &middot; Calm First:</b> Uncle Pat never panics, and never makes the client panic. Fear is the competition&rsquo;s instrument, not ours.
+                </li>
+                <li class="voice-rule-item">
+                  <b>02 &middot; Plain Words:</b> &ldquo;The IRS thinks you left off $8,400 in revenue&rdquo; &mdash; never &ldquo;CP2000 automated underreporter inquiry.&rdquo;
+                </li>
+                <li class="voice-rule-item">
+                  <b>03 &middot; Short Sentences:</b> He is talking across a desk, not submitting an academic legal brief.
+                </li>
+                <li class="voice-rule-item">
+                  <b>04 &middot; Honest About Bad News:</b> If you owe the money, he tells you directly. Absolute credibility is the firm&rsquo;s single greatest asset.
+                </li>
+                <li class="voice-rule-item">
+                  <b>05 &middot; Dry, Never Jokey:</b> One wry beat per page at most. He is warm and composed, never comic relief.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- The Non-Negotiable Guardrail -->
-    <section class="night tight">
+    <section class="night tight guardrail-stage" id="guardrail-stage">
       <div class="shell">
-        <div class="callout" style="background:rgba(255,255,255,.05);border-left-color:var(--gold);padding:28px 32px">
-          <span class="h" style="color:var(--gold);font-size:.78rem">The Non-Negotiable Guardrail</span>
-          <h3 style="color:#fff;font-size:1.35rem;margin-top:8px">Uncle Pat defends against the letter — never against the government.</h3>
-          <p style="color:var(--night-ink-2);margin-top:10px;font-size:.92rem;line-height:1.65">
+        <div class="callout guardrail-callout" id="guardrail-callout" style="background:rgba(255,255,255,.05);border-left-color:var(--gold);padding:28px 32px">
+          <span class="h guardrail-eyebrow" id="guardrail-eyebrow" style="color:var(--gold);font-size:.78rem">The Non-Negotiable Guardrail</span>
+          <h3 class="guardrail-headline" id="guardrail-headline" style="color:#fff;font-size:1.35rem;margin-top:8px">Uncle Pat defends against the letter — never against the government.</h3>
+          <p class="guardrail-narrative" id="guardrail-narrative" style="color:var(--night-ink-2);margin-top:10px;font-size:.92rem;line-height:1.65">
             The moment a tax brand reads as anti-government or anti-IRS, it attracts frivolous positions no reputable practice wants. Uncle Pat operates strictly within statutory tax law: the government is entitled to exactly what the tax code requires — and not one single dollar more.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Image Band: Practitioner Meeting -->
-    <div class="imgband slim blue-tint" style="--img:url('../Pics/AdobeStock_487242751.jpeg')">
-      <div class="imgband-inner" style="padding:48px 24px;text-align:center">
-        <p style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">The Practice &middot; Circular 230 Authorized</p>
-        <h2 style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">The government is entitled to what the tax code requires.<br><em style="color:var(--gold);font-style:normal">And not one single dollar more.</em></h2>
+    <!-- Circular 230 Thesis Deck & Practitioner Panel -->
+    <section class="thesis-stage" id="thesis-stage">
+      <div class="thesis-deck-container" id="thesis-deck-container">
+        <!-- Underlay Visual: Practitioner Photo with Radial Vignette -->
+        <div class="thesis-visual-underlay" id="thesis-visual-underlay">
+          <img src="Pics/AdobeStock_487242751.jpeg" 
+               alt="Circular 230 authorized tax practitioner focused at desk" 
+               class="thesis-bg-img" 
+               id="thesis-bg-img"
+               width="1920" 
+               height="1080" 
+               loading="lazy">
+          <div class="thesis-vignette-mask" id="thesis-vignette-mask"></div>
+        </div>
+
+        <!-- Foreground Thesis Lockup -->
+        <div class="shell thesis-shell">
+          <div class="thesis-lockup" id="thesis-lockup">
+            <span class="thesis-eyebrow" id="thesis-eyebrow">The Practice &middot; Circular 230 Authorized</span>
+            
+            <div class="thesis-headline-wrap">
+              <h2 class="thesis-headline-lead" id="thesis-headline-lead">
+                The government is entitled to what the tax code requires.
+              </h2>
+            </div>
+
+            <div class="thesis-headline-wrap">
+              <h2 class="thesis-headline-climax" id="thesis-headline-climax">
+                And not one single dollar more.
+              </h2>
+            </div>
+
+            <!-- Cyan-to-Yellow Horizontal Gradient Laser Divider -->
+            <div class="thesis-laser-divider" id="thesis-laser-divider"></div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- The Team Behind Him -->
-    <section>
-      <div class="shell">
-        <div class="sechead">
-          <span class="eyebrow">About Pivot Aide Tax</span>
-          <h2>The Practice &amp; Team</h2>
-          <p class="lede">
-            Pivot Aide Tax is a dedicated tax strategy, compliance, and representation firm headquartered in Hyattsville, Maryland, serving clients across all 50 states.
-          </p>
-        </div>
-
-        <div class="grid g3">
-          <div class="card">
-            <span class="tag"><b>Credentialed</b></span>
-            <h3>Circular 230 Practice</h3>
-            <p>Our representation desk operates under statutory Circular 230 authorization. We hold Power of Attorney before the IRS and all 50 state taxing authorities.</p>
+    <!-- The Practice & Team — Credential Deck -->
+    <section class="credential-deck-stage" id="credential-deck-stage">
+      <div class="credential-deck-container" id="credential-deck-container">
+        <div class="shell">
+          <div class="sechead credential-sechead" id="credential-sechead">
+            <span class="eyebrow credential-eyebrow" id="credential-eyebrow">About Pivot Aide Tax</span>
+            <h2 class="credential-headline" id="credential-headline">The Practice &amp; Team</h2>
+            <p class="lede credential-lede" id="credential-lede">
+              Pivot Aide Tax is a dedicated tax strategy, compliance, and representation firm headquartered in Hyattsville, Maryland, serving clients across all 50 states.
+            </p>
           </div>
 
-          <div class="card">
-            <span class="tag"><b>Scope</b></span>
-            <h3>All 50 States</h3>
-            <p>We prepare multi-state personal and corporate returns, resolve economic nexus audits, and represent clients in every state revenue department.</p>
+          <div class="grid g3 credential-grid" id="credential-grid">
+            <div class="card credential-card" id="cred-card-1">
+              <div class="cred-card-top-beam"></div>
+              <span class="tag cred-tag" id="cred-tag-1"><b>Credentialed</b></span>
+              <h3>Circular 230 Practice</h3>
+              <p>Our representation desk operates under statutory Circular 230 authorization. We hold Power of Attorney before the IRS and all 50 state taxing authorities.</p>
+            </div>
+
+            <div class="card credential-card" id="cred-card-2">
+              <div class="cred-card-top-beam"></div>
+              <span class="tag cred-tag" id="cred-tag-2"><b>Scope</b></span>
+              <h3>All 50 States</h3>
+              <p>We prepare multi-state personal and corporate returns, resolve economic nexus audits, and represent clients in every state revenue department.</p>
+            </div>
+
+            <div class="card credential-card" id="cred-card-3">
+              <div class="cred-card-top-beam"></div>
+              <span class="tag cred-tag" id="cred-tag-3"><b>Headquarters</b></span>
+              <h3>The DMV Heart</h3>
+              <p>Located on New Hampshire Avenue in Hyattsville, Maryland. Daily contact with the Comptroller of Maryland, Virginia Tax, and the DC OTR.</p>
+            </div>
           </div>
 
-          <div class="card">
-            <span class="tag"><b>Headquarters</b></span>
-            <h3>The DMV Heart</h3>
-            <p>Located on New Hampshire Avenue in Hyattsville, Maryland. Daily contact with the Comptroller of Maryland, Virginia Tax, and the DC OTR.</p>
+          <div class="credential-cta-wrap" id="credential-cta-wrap">
+            <button class="btn btn-g credential-cta-btn" id="credential-cta-btn" onclick="openBookingModal('consultation')">Book a Free Consultation with the Team</button>
           </div>
-        </div>
-
-        <div style="margin-top:48px;text-align:center">
-          <button class="btn btn-g" onclick="openBookingModal('consultation')">Book a Free Consultation with the Team</button>
         </div>
       </div>
     </section>
@@ -359,7 +398,13 @@
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+
+  <!-- Core Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/hero-transition.js?v=7.7"></script>
   <script src="js/booking.js"></script>
   <script>
     document.querySelectorAll('.ground-dot').forEach(dot => {

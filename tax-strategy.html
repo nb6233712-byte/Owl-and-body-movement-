@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/pages.css?v=5.0">
   <link rel="icon" type="image/svg+xml" href="assets/brand/uncle-pat-favicon.svg">
 </head>
 <body>
@@ -90,25 +90,27 @@
   </div>
 
   <main id="main">
-<div class="night">
-    <section><div class="shell">
-      <div class="split wide" style="align-items:center">
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <span class="eyebrow night">Tax strategy &middot; by engagement</span>
-          <h2 style="font-size:clamp(2.2rem,4.8vw,3.5rem);font-weight:300;line-height:1.05">The Standing&nbsp;File</h2>
-          <p class="lede" style="font-size:1.16rem">Most firms open your file in February and close
-          it in April. This one never closes.</p>
-          <p class="lede">A year-round tax strategy engagement for high-income individuals and for
-          business owners — a named advisor who knows your situation, quarterly counsel, every
-          return and every notice handled, and someone to call <em>before</em> you do the thing,
-          not after.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-            <a class="btn btn-g" href="appointments.html">Request a scoping call</a>
-            <a class="btn btn-w" href="Pivot Aide Tax - Tax Strategy.pdf" target="_blank">Download Strategy PDF &darr;</a>
-            <a class="btn btn-w" href="tel:+15714703754">1 (571) 470-3754</a>
-          </div>
-        </div>
-        <div class="hero-owl" id="owl-container">
+    <!-- Pinned Transition Wrapper: Dark Hero Pin Stage & Elevated Case Study Sheet -->
+    <div class="strategy-pinned-wrapper" id="strategy-pinned-wrapper">
+      <section class="night strategy-hero-stage" id="strategy-hero-stage">
+        <div class="shell">
+          <div class="split wide strategy-hero-split" style="align-items:center">
+            <div class="strategy-hero-copy" id="strategy-hero-copy" style="display:flex;flex-direction:column;gap:18px">
+              <span class="eyebrow night">Tax strategy &middot; by engagement</span>
+              <h2 style="font-size:clamp(2.2rem,4.8vw,3.5rem);font-weight:300;line-height:1.05">The Standing&nbsp;File</h2>
+              <p class="lede" style="font-size:1.16rem">Most firms open your file in February and close
+              it in April. This one never closes.</p>
+              <p class="lede">A year-round tax strategy engagement for high-income individuals and for
+              business owners — a named advisor who knows your situation, quarterly counsel, every
+              return and every notice handled, and someone to call <em>before</em> you do the thing,
+              not after.</p>
+              <div class="strategy-hero-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+                <a class="btn btn-g strategy-btn-primary" href="appointments.html">Request a scoping call</a>
+                <a class="btn btn-w strategy-btn-outline" href="Pivot Aide Tax - Tax Strategy.pdf" target="_blank">Download Strategy PDF &darr;</a>
+                <a class="btn btn-w strategy-btn-outline" href="tel:+15714703754">1 (571) 470-3754</a>
+              </div>
+            </div>
+            <div class="hero-owl strategy-hero-owl" id="owl-container">
           <svg id="hero-owl-svg" viewBox="0 0 200 220" role="img" aria-label="Uncle Pat, the Pivot Aide Tax owl"
             width="220" height="242">
             <!-- Root interactive group -->
@@ -199,206 +201,238 @@
           <div class="owlmeet">
             <a class="meet" href="meet-uncle-pat.html">Meet Uncle&nbsp;Pat <i>&rarr;</i></a>
           </div>
-        </div>
-      </div>
-    </div></section>
-  </div>
-
-  <!-- ---------- CASE STUDY ---------- -->
-  <section class="tight"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow">Case study &middot; illustrative</span>
-      <h2>From a $500,000 salary to a<br>$126,000 tax-savings strategy.</h2>
-      <p class="lede">Here is what strategic tax planning can look like. The client was earning
-      $500,000 in W-2 income. On paper, an incredible income. Then came the taxes.</p>
-    </div>
-
-    <div class="split wide">
-      <div>
-        <table class="figs">
-          <caption>Before &middot; the year as it stood</caption>
-          <tbody>
-            <tr><th>Gross income</th><td>$500,000</td></tr>
-            <tr><th>Federal income tax</th><td>~$141,253</td></tr>
-            <tr><th>State income tax</th><td>~$25,000</td></tr>
-            <tr><th>Social Security</th><td>~$10,114</td></tr>
-            <tr><th>Medicare</th><td>~$9,950</td></tr>
-            <tr><th><b>Estimated total taxes</b></th><td>~$187,000</td></tr>
-            <tr><th><b>Estimated take-home</b></th><td>~$313,000</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div class="callout">
-          <span class="h">The number that starts the conversation</span>
-          <p>Nearly <b>37% of gross income</b> was going to taxes before there was any chance to
-          spend or invest it.</p>
-        </div>
-        <div class="patsays" style="margin-top:20px">
-          <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat" width="64" height="64">
-          <div>
-            <q>The question was never &ldquo;how do we make less money?&rdquo; It was
-            &ldquo;how do we legally keep more of what we&rsquo;re already earning?&rdquo;</q>
-            <div class="who">Uncle Pat</div>
           </div>
         </div>
-      </div>
-    </div>
-  </div></section>
+      </section>
 
-  <section class="night"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow night">The strategy</span>
-      <h2>Combine the tax planning with<br>an asset worth owning.</h2>
-      <p class="lede">Rather than accept the bill, we looked for a move that did two jobs at once.
-      It centred on the purchase of a <b style="color:#fff">$995,000 short-term rental
-      property</b> &mdash; but buying it was only the beginning. What mattered was how it was
-      structured and depreciated.</p>
+      <!-- ---------- CASE STUDY ELEVATED SHEET ---------- -->
+      <section class="tight strategy-case-sheet" id="strategy-case-sheet">
+        <div class="shell" id="strategy-case-inner">
+          <div class="sechead" id="strategy-case-header">
+            <span class="eyebrow">Case study &middot; illustrative</span>
+            <h2>From a $500,000 salary to a<br>$126,000 tax-savings strategy.</h2>
+            <p class="lede">Here is what strategic tax planning can look like. The client was earning
+            $500,000 in W-2 income. On paper, an incredible income. Then came the taxes.</p>
+          </div>
+
+          <div class="split wide strategy-case-split">
+            <div id="strategy-case-table-wrap">
+              <table class="figs strategy-case-table" id="strategy-case-table">
+                <caption>Before &middot; the year as it stood</caption>
+                <tbody>
+                  <tr><th>Gross income</th><td>$500,000</td></tr>
+                  <tr><th>Federal income tax</th><td>~$141,253</td></tr>
+                  <tr><th>State income tax</th><td>~$25,000</td></tr>
+                  <tr><th>Social Security</th><td>~$10,114</td></tr>
+                  <tr><th>Medicare</th><td>~$9,950</td></tr>
+                  <tr><th><b>Estimated total taxes</b></th><td>~$187,000</td></tr>
+                  <tr><th><b>Estimated take-home</b></th><td>~$313,000</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div id="strategy-case-callout-col">
+              <div class="callout strategy-callout-card" id="strategy-callout-card">
+                <div class="strategy-callout-accent-line" id="strategy-callout-accent-line"></div>
+                <span class="h">The number that starts the conversation</span>
+                <p>Nearly <b>37% of gross income</b> was going to taxes before there was any chance to
+                spend or invest it.</p>
+              </div>
+              <div class="patsays" id="strategy-patsays" style="margin-top:20px">
+                <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat" width="64" height="64">
+                <div>
+                  <q>The question was never &ldquo;how do we make less money?&rdquo; It was
+                  &ldquo;how do we legally keep more of what we&rsquo;re already earning?&rdquo;</q>
+                  <div class="who">Uncle Pat</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <div class="steps s3">
-      <div><span class="k">1</span>
-        <h3>Cost segregation</h3>
-        <p>A cost segregation study was performed. Instead of depreciating substantially all of the
-        building over the traditional 27.5-year residential period, the study identified qualifying
-        components that could be depreciated over shorter recovery periods &mdash; approximately
-        <b>$248,352</b> of accelerated and bonus depreciation.</p>
-      </div>
-      <div><span class="k">2</span>
-        <h3>The seven-day test</h3>
-        <p>Rental losses are ordinarily passive, and passive losses cannot offset wages. But the
-        average guest stay was seven days or less, which can take the activity outside the
-        definition of a rental activity for purposes of IRC&nbsp;&sect;469.</p>
-      </div>
-      <div><span class="k">3</span>
-        <h3>Material participation</h3>
-        <p>The client self-managed the property and participated in its operations. Where the
-        short-term-rental and material-participation requirements are both satisfied, the losses may
-        be treated as nonpassive &mdash; and nonpassive losses can offset W-2 income.</p>
-      </div>
-    </div>
+  <!-- Pinned Strategy Stage: High-Depth Dark Sheet Wipe & Synchronized Triad -->
+  <div class="dark-strategy-pinned-stage" id="dark-strategy-stage">
+    <section class="night dark-strategy-sheet" id="dark-strategy-sheet">
+      <div class="shell" id="dark-strategy-inner">
+        <div class="sechead dark-strategy-head" id="dark-strategy-head">
+          <span class="eyebrow night">The strategy</span>
+          <h2>Combine the tax planning with<br>an asset worth owning.</h2>
+          <p class="lede">Rather than accept the bill, we looked for a move that did two jobs at once.
+          It centred on the purchase of a <b style="color:#fff">$995,000 short-term rental
+          property</b> &mdash; but buying it was only the beginning. What mattered was how it was
+          structured and depreciated.</p>
+        </div>
 
-    <div class="callout" style="margin-top:26px;background:rgba(255,255,255,.055);border-left-color:var(--gold)">
-      <span class="h" style="color:var(--gold)">Why both halves were necessary</span>
-      <p style="color:var(--night-ink-2)">Generating a large deduction was only half the work.
-      A deduction that cannot reach the income it was meant to offset is worth nothing. Combined
-      with other eligible depreciation and deductions on the property, estimated first-year
-      deductions reached approximately <b style="color:#fff">$340,676</b> &mdash; and the
-      &sect;469 analysis is what allowed them to land against a salary.</p>
-    </div>
-  </div></section>
+        <div class="steps s3 dark-strategy-grid" id="dark-strategy-grid">
+          <div class="strategy-card" id="strategy-card-1">
+            <span class="k strategy-numeral">1</span>
+            <h3>Cost segregation</h3>
+            <p>A cost segregation study was performed. Instead of depreciating substantially all of the
+            building over the traditional 27.5-year residential period, the study identified qualifying
+            components that could be depreciated over shorter recovery periods &mdash; approximately
+            <b>$248,352</b> of accelerated and bonus depreciation.</p>
+          </div>
+          <div class="strategy-card" id="strategy-card-2">
+            <span class="k strategy-numeral">2</span>
+            <h3>The seven-day test</h3>
+            <p>Rental losses are ordinarily passive, and passive losses cannot offset wages. But the
+            average guest stay was seven days or less, which can take the activity outside the
+            definition of a rental activity for purposes of IRC&nbsp;&sect;469.</p>
+          </div>
+          <div class="strategy-card" id="strategy-card-3">
+            <span class="k strategy-numeral">3</span>
+            <h3>Material participation</h3>
+            <p>The client self-managed the property and participated in its operations. Where the
+            short-term-rental and material-participation requirements are both satisfied, the losses may
+            be treated as nonpassive &mdash; and nonpassive losses can offset W-2 income.</p>
+          </div>
+        </div>
 
-  <section class="tight"><div class="shell">
-    <div class="sechead">
+        <div class="callout dark-strategy-callout" id="dark-strategy-callout" style="margin-top:26px;background:rgba(255,255,255,.055);border-left-color:var(--gold)">
+          <span class="h" style="color:var(--gold)">Why both halves were necessary</span>
+          <p style="color:var(--night-ink-2)">Generating a large deduction was only half the work.
+          A deduction that cannot reach the income it was meant to offset is worth nothing. Combined
+          with other eligible depreciation and deductions on the property, estimated first-year
+          deductions reached approximately <b style="color:#fff">$340,676</b> &mdash; and the
+          &sect;469 analysis is what allowed them to land against a salary.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="tight" id="exposure-section"><div class="shell">
+    <div class="sechead" id="exposure-header">
       <span class="eyebrow">The numbers</span>
       <h2>What happened to the exposure.</h2>
     </div>
 
-    <div class="ba">
-      <div>
+    <div class="ba exposure-ba-grid" id="exposure-ba-grid">
+      <div class="exposure-card exposure-card-ba" id="exposure-card-before">
         <span class="k">Before the strategy</span>
-        <div class="v">$500,000</div>
+        <div class="v exposure-num" id="exposure-num-before" data-val="500000">$500,000</div>
         <p>Gross W-2 income, exposed to federal and state income tax before other deductions.</p>
       </div>
-      <div class="after">
+      <div class="after exposure-card exposure-card-ba exposure-card-after" id="exposure-card-after">
         <span class="k">After the strategy</span>
-        <div class="v">$159,324</div>
+        <div class="v exposure-num" id="exposure-num-after" data-val="159324">$159,324</div>
         <p>Remaining income before other applicable adjustments, after illustrative short-term
         rental deductions of $340,676.</p>
       </div>
     </div>
 
-    <div class="kpi">
-      <div>
+    <div class="kpi exposure-kpi-grid" id="exposure-kpi-grid">
+      <div class="exposure-card exposure-card-kpi" id="exposure-card-savings">
         <span class="k">Estimated tax savings</span>
-        <div class="v">$126,050</div>
+        <div class="v exposure-num" id="exposure-num-savings" data-val="126050">$126,050</div>
         <p>On the assumptions used in this case.</p>
       </div>
-      <div>
+      <div class="exposure-card exposure-card-kpi" id="exposure-card-cashflow">
         <span class="k">Projected annual cash flow</span>
-        <div class="v">$72,000</div>
+        <div class="v exposure-num" id="exposure-num-cashflow" data-val="72000">$72,000</div>
         <p>From the property itself, separately from the tax result.</p>
       </div>
-      <div class="tot">
+      <div class="tot exposure-card exposure-card-kpi exposure-card-total" id="exposure-card-total">
         <span class="k">Combined first-year impact</span>
-        <div class="v">$198,050</div>
+        <div class="v exposure-num" id="exposure-num-total" data-val="198050">$198,050</div>
         <p>And the client still owns the underlying real estate.</p>
       </div>
     </div>
 
-    <div class="split wide" style="margin-top:34px">
-      <div>
+    <div class="split wide exposure-asset-split" id="exposure-asset-split" style="margin-top:34px">
+      <div id="exposure-asset-intro">
         <h3 style="font-size:1.3rem;font-weight:400">The asset is the part that keeps working.</h3>
         <p class="lede" style="margin-top:12px">Instead of writing a larger cheque to the
         government, the client used a legitimate planning strategy built around acquiring an
         income-producing asset. That asset can go on to:</p>
       </div>
       <div>
-        <ul class="ticks">
-          <li>Generate cash flow</li>
-          <li>Build equity</li>
-          <li>Appreciate over time</li>
-          <li>Create future tax-planning opportunities</li>
+        <ul class="ticks exposure-benefit-ticks" id="exposure-benefit-ticks">
+          <li class="exposure-benefit-item">Generate cash flow</li>
+          <li class="exposure-benefit-item">Build equity</li>
+          <li class="exposure-benefit-item">Appreciate over time</li>
+          <li class="exposure-benefit-item">Create future tax-planning opportunities</li>
         </ul>
       </div>
     </div>
   </div></section>
 
-  <!-- Photo Split: Strategic Advisory Roundtable -->
-  <div class="img-split img-right night-side">
-    <div class="img-col">
-      <img src="Pics/People Sitting at Table.jpg" alt="Pivot Aide advisors in strategic roundtable planning session" width="1200" height="800" decoding="async">
+  <!-- Photo Split: Strategic Advisory Roundtable & Proactive Advisory Pin -->
+  <div class="img-split img-right night-side exposure-photo-split standing-split-stage" id="standing-split-stage">
+    <div class="img-col exposure-photo-col standing-split-photo-col" id="standing-split-photo-col">
+      <div class="standing-split-img-mask" id="standing-split-img-mask">
+        <img src="Pics/People Sitting at Table.jpg" class="exposure-photo-img standing-split-photo-img" id="standing-split-photo-img" alt="Pivot Aide advisors in strategic roundtable planning session" width="1200" height="800" decoding="async">
+      </div>
     </div>
-    <div class="text-col">
-      <span class="eyebrow night" style="margin-bottom:14px">Proactive Advisory</span>
-      <h2 style="color:#fff;margin-bottom:16px">The Standing File isn&rsquo;t a folder.<br>It&rsquo;s a proactive conversation.</h2>
-      <p style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:20px">
-        Most firms wait until tax season to discover what you did last year. We meet quarterly so that entity selections, asset timing, and deduction structures are locked in <em>before</em> the tax year closes.
-      </p>
-      <ul class="ticks" style="margin-bottom:24px">
-        <li>Quarterly tax forecasting &amp; safe harbor checks</li>
-        <li>Real estate, equipment &amp; retirement election modeling</li>
-        <li>Direct access to your dedicated strategist all year</li>
-      </ul>
-      <div>
-        <a class="btn btn-g" href="appointments.html" style="align-self:flex-start">Request a scoping call</a>
+    <div class="text-col standing-split-text-col" id="standing-split-text-col">
+      <div class="standing-split-content-inner" id="standing-split-content-inner">
+        <span class="eyebrow night standing-split-eyebrow" id="standing-split-eyebrow" style="margin-bottom:14px">Proactive Advisory</span>
+        <h2 class="standing-split-heading" id="standing-split-heading" style="color:#fff;margin-bottom:16px">The Standing File isn&rsquo;t a folder.<br>It&rsquo;s a proactive conversation.</h2>
+        <p class="standing-split-lede" id="standing-split-lede" style="color:var(--night-ink-2);max-width:48ch;line-height:1.7;margin-bottom:24px">
+          Most firms wait until tax season to discover what you did last year. We meet quarterly so that entity selections, asset timing, and deduction structures are locked in <em>before</em> the tax year closes.
+        </p>
+        <ul class="standing-split-checklist" id="standing-split-checklist">
+          <li class="standing-split-item" id="standing-split-item-1">
+            <span class="standing-split-item-text">Quarterly tax forecasting &amp; safe harbor checks</span>
+            <div class="standing-split-divider" id="standing-split-divider-1"></div>
+          </li>
+          <li class="standing-split-item" id="standing-split-item-2">
+            <span class="standing-split-item-text">Real estate, equipment &amp; retirement election modeling</span>
+            <div class="standing-split-divider" id="standing-split-divider-2"></div>
+          </li>
+          <li class="standing-split-item" id="standing-split-item-3">
+            <span class="standing-split-item-text">Direct access to your dedicated strategist all year</span>
+            <div class="standing-split-divider" id="standing-split-divider-3"></div>
+          </li>
+        </ul>
+        <div class="standing-split-cta-wrap" id="standing-split-cta-wrap">
+          <a class="btn btn-g standing-split-btn" id="standing-split-btn" href="appointments.html" style="align-self:flex-start">Request a scoping call</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <section class="night tight"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow night">What we do differently</span>
-      <h2>Anyone can tell you what you owe<br>after the year is over.</h2>
-      <p class="lede">Our job is to help you understand what you can do <em>before</em> it is. That
+  <!-- Advisory Pinned Stage (Dark) -->
+  <section class="night tight advisory-pinned-stage" id="advisory-pinned-stage"><div class="shell" id="advisory-pinned-shell">
+    <div class="sechead" id="advisory-pinned-head">
+      <span class="eyebrow night" id="advisory-pinned-eyebrow">What we do differently</span>
+      <h2 id="advisory-pinned-h2">Anyone can tell you what you owe<br>after the year is over.</h2>
+      <p class="lede" id="advisory-pinned-lede">Our job is to help you understand what you can do <em>before</em> it is. That
       means looking past the return, at income, investments, business, real estate, deductions, tax
       exposure and long-term wealth strategy as one connected picture.</p>
     </div>
 
-    <div class="grid g3">
-      <div class="card"><h3>Real estate</h3>
+    <div class="grid g3 advisory-pillar-grid" id="advisory-pillar-grid">
+      <div class="card advisory-pillar-card" id="advisory-pillar-re">
+        <h3>Real estate</h3>
         <p>Short-term rental strategies, cost segregation, bonus depreciation, material
-        participation, and real estate tax planning.</p></div>
-      <div class="card"><h3>Business and entity</h3>
+        participation, and real estate tax planning.</p>
+      </div>
+      <div class="card advisory-pillar-card" id="advisory-pillar-biz">
+        <h3>Business and entity</h3>
         <p>Entity structure, owner compensation, and the retirement strategies that follow from
-        both.</p></div>
-      <div class="card"><h3>Timing</h3>
+        both.</p>
+      </div>
+      <div class="card advisory-pillar-card" id="advisory-pillar-timing">
+        <h3>Timing</h3>
         <p>Year-end planning and multi-year projections, so a decision is priced before the
-        transaction happens rather than after.</p></div>
+        transaction happens rather than after.</p>
+      </div>
     </div>
 
-    <div class="wait">
-      <p>The objective isn&rsquo;t to chase deductions. It&rsquo;s to make better decisions with
+    <div class="wait advisory-wait-wrap" id="advisory-wait-wrap">
+      <p id="advisory-wait-text">The objective isn&rsquo;t to chase deductions. It&rsquo;s to make better decisions with
       the tax already counted.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn btn-g" href="appointments.html">Schedule a tax strategy consultation</a>
+        <a class="btn btn-g advisory-cta-btn" id="advisory-cta-btn" href="appointments.html">Schedule a tax strategy consultation</a>
       </div>
     </div>
   </div></section>
 
-  <section class="tight"><div class="shell">
-    <div class="split wide">
-      <div>
+  <!-- Incoming White Sheet Overlay: "You earned the money..." -->
+  <section class="tight closing-white-sheet" id="closing-white-sheet"><div class="shell" id="closing-white-shell">
+    <div class="split wide closing-white-split" id="closing-white-split">
+      <div class="closing-white-left" id="closing-white-left">
         <h3 style="font-size:1.42rem;font-weight:400">You earned the money.<br>Now let&rsquo;s talk
         about how much you keep.</h3>
         <p class="lede" style="margin-top:14px">If you are earning $250,000, $500,000, a million or
@@ -407,8 +441,8 @@
         while building long-term wealth.</p>
         <p class="lede" style="margin-top:12px"><b>See the bigger picture before you file.</b></p>
       </div>
-      <div>
-        <div class="callout" style="border-left-color:var(--ink-3)">
+      <div class="closing-white-right" id="closing-white-right">
+        <div class="callout closing-disclaimer-card" id="closing-disclaimer-card" style="border-left-color:var(--ink-3)">
           <span class="h" style="color:var(--ink-2)">Important</span>
           <p style="font-size:.83rem;line-height:1.6">This case study is provided for illustrative
           and educational purposes. Figures are based on specific assumptions and should not be
@@ -423,29 +457,29 @@
     </div>
   </div></section>
 
-  <!-- ---------- THREE PILLARS ---------- -->
-  <section class="tight"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow">What the engagement is</span>
-      <h2>Three things you are actually buying.</h2>
+  <!-- ---------- THREE PILLARS (ENGAGEMENT SCOPE) ---------- -->
+  <section class="tight engagement-scope-section" id="engagement-scope-section"><div class="shell" id="engagement-scope-shell">
+    <div class="sechead engagement-scope-head" id="engagement-scope-head">
+      <span class="eyebrow engagement-scope-eyebrow" id="engagement-scope-eyebrow">What the engagement is</span>
+      <h2 class="engagement-scope-h2" id="engagement-scope-h2">Three things you are actually buying.</h2>
     </div>
-    <div class="grid g3">
-      <div class="card">
-        <span class="tag">01</span>
+    <div class="grid g3 engagement-cards-grid" id="engagement-cards-grid">
+      <div class="card engagement-value-card" id="engagement-card-01">
+        <span class="tag engagement-num-tag" id="engagement-tag-01">01</span>
         <h3>A dedicated tax advisor</h3>
         <p>One named person, not a queue and not whoever is free. They hold your file, they know
         what you did last year and why, and their number is in your phone. You will not explain your
         situation from scratch again.</p>
       </div>
-      <div class="card">
-        <span class="tag">02</span>
+      <div class="card engagement-value-card" id="engagement-card-02">
+        <span class="tag engagement-num-tag" id="engagement-tag-02">02</span>
         <h3>Counsel across the whole year</h3>
         <p>A quarterly session on the calendar, a written strategy plan, a mid-year projection, and
         a year-end review — plus unlimited questions in between. The point is to reach every
         decision before it hardens into a filing.</p>
       </div>
-      <div class="card">
-        <span class="tag">03</span>
+      <div class="card engagement-value-card" id="engagement-card-03">
+        <span class="tag engagement-num-tag" id="engagement-tag-03">03</span>
         <h3>Everything filed and handled</h3>
         <p>Your returns, your estimates, your notices. Included, not billed. When an envelope
         arrives from the IRS or a state, you forward it and stop thinking about it — that is the
@@ -454,19 +488,19 @@
     </div>
   </div></section>
 
-  <!-- ---------- TWO TRACKS ---------- -->
-  <section class="tight" style="padding-top:0"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow">Two tracks</span>
-      <h2>Built for the two situations that need it.</h2>
-      <p class="lede">Same spine — named advisor, quarterly counsel, everything filed. What changes
+  <!-- ---------- TWO TRACKS (PERSONA PINNED STAGE) ---------- -->
+  <section class="tight persona-tracks-stage" id="persona-tracks-stage" style="padding-top:0"><div class="shell" id="persona-tracks-shell">
+    <div class="sechead persona-tracks-head" id="persona-tracks-head">
+      <span class="eyebrow persona-tracks-eyebrow" id="persona-tracks-eyebrow">Two tracks</span>
+      <h2 class="persona-tracks-h2" id="persona-tracks-h2">Built for the two situations that need it.</h2>
+      <p class="lede persona-tracks-lede" id="persona-tracks-lede">Same spine — named advisor, quarterly counsel, everything filed. What changes
       is the work underneath, because a high W-2 and equity package is a different animal from an
       operating business.</p>
     </div>
-    <div class="filecards">
-      <div class="filecard">
-        <div class="fh"><span>Track A</span><b>High-income individuals</b></div>
-        <div class="fb">
+    <div class="filecards persona-cards-wrap" id="persona-cards-wrap">
+      <div class="filecard persona-track-card" id="persona-track-a">
+        <div class="fh persona-track-head"><span>Track A</span><b>High-income individuals</b></div>
+        <div class="fb persona-track-body">
           <p>Large W-2 or professional income, equity compensation, investment and rental portfolios,
           a liquidity event on the horizon.</p>
           <ul class="ticks tight">
@@ -482,9 +516,9 @@
           </ul>
         </div>
       </div>
-      <div class="filecard">
-        <div class="fh"><span>Track B</span><b>Business owners &amp; entities</b></div>
-        <div class="fb">
+      <div class="filecard persona-track-card" id="persona-track-b">
+        <div class="fh persona-track-head"><span>Track B</span><b>Business owners &amp; entities</b></div>
+        <div class="fb persona-track-body">
           <p>An operating company, or several. Partnerships, S-corps and C-corps, single-state or
           spread across the country.</p>
           <ul class="ticks tight">
@@ -503,43 +537,43 @@
     </div>
   </div></section>
 
-  <!-- ---------- WHAT'S INCLUDED ---------- -->
-  <section class="night"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow night">Included in the engagement</span>
-      <h2>No line items. No surprise invoices.</h2>
-      <p class="lede">Everything below is inside the annual fee. The reason is simple: a client who
+  <!-- ---------- WHAT'S INCLUDED (PINNED SCOPE STAGE) ---------- -->
+  <section class="night included-dark-sheet scope-pinned-stage" id="scope-pinned-stage"><div class="shell" id="scope-pinned-shell">
+    <div class="sechead included-dark-head scope-pinned-head" id="scope-pinned-head">
+      <span class="eyebrow night included-dark-eyebrow scope-pinned-eyebrow" id="scope-pinned-eyebrow">Included in the engagement</span>
+      <h2 class="included-dark-h2 scope-pinned-h2" id="scope-pinned-h2">No line items. No surprise invoices.</h2>
+      <p class="lede included-dark-lede scope-pinned-lede" id="scope-pinned-lede">Everything below is inside the annual fee. The reason is simple: a client who
       hesitates before calling their tax advisor is a client who calls too late.</p>
     </div>
-    <div class="split">
-      <div>
-        <div class="colhead-n">Advice &amp; planning</div>
-        <ul class="ticks">
-          <li><b>Quarterly strategy sessions</b> — four a year, scheduled, with an agenda and notes</li>
-          <li><b>Written annual strategy plan</b> — quantified, with an implementation calendar</li>
-          <li><b>Mid-year projection</b> — your year run forward while it can still be changed</li>
-          <li><b>Year-end review</b> — the closing window, worked properly in November</li>
-          <li><b>Transaction support</b> — call before the purchase, the sale or the exercise</li>
-          <li><b>Unlimited questions</b> — email or phone, no clock running</li>
-          <li><b>Second Look on prior years</b> — three filed returns reviewed at onboarding</li>
-          <li><b>Coordination with your other advisors</b> — attorney, wealth manager, lender</li>
+    <div class="split scope-dual-split" id="scope-dual-split">
+      <div class="scope-col" id="scope-col-advice">
+        <div class="colhead-n scope-colhead" id="scope-head-advice">Advice &amp; planning</div>
+        <ul class="ticks scope-item-list" id="scope-list-advice">
+          <li class="scope-item"><span class="scope-item-text"><b>Quarterly strategy sessions</b> — four a year, scheduled, with an agenda and notes</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Written annual strategy plan</b> — quantified, with an implementation calendar</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Mid-year projection</b> — your year run forward while it can still be changed</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Year-end review</b> — the closing window, worked properly in November</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Transaction support</b> — call before the purchase, the sale or the exercise</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Unlimited questions</b> — email or phone, no clock running</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Second Look on prior years</b> — three filed returns reviewed at onboarding</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Coordination with your other advisors</b> — attorney, wealth manager, lender</span><div class="scope-item-divider"></div></li>
         </ul>
       </div>
-      <div>
-        <div class="colhead-n">Filing &amp; compliance</div>
-        <ul class="ticks">
-          <li><b>All personal returns</b> — federal and every state you touch</li>
-          <li><b>All entity returns</b> — 1065, 1120-S or 1120, on Track B</li>
-          <li><b>Quarterly estimates managed</b> — recalculated, vouchers issued, safe harbour tracked</li>
-          <li><b>Extensions</b> — filed with a payment estimate, not a guess</li>
-          <li><b>Notice handling</b> — any IRS or state letter, answered, at no separate fee</li>
-          <li><b>Examination representation</b> — on returns we prepared</li>
-          <li><b>Amendments</b> — where they are worth filing</li>
-          <li><b>Document vault</b> — permanent, and yours whether or not you stay</li>
+      <div class="scope-col" id="scope-col-filing">
+        <div class="colhead-n scope-colhead" id="scope-head-filing">Filing &amp; compliance</div>
+        <ul class="ticks scope-item-list" id="scope-list-filing">
+          <li class="scope-item"><span class="scope-item-text"><b>All personal returns</b> — federal and every state you touch</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>All entity returns</b> — 1065, 1120-S or 1120, on Track B</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Quarterly estimates managed</b> — recalculated, vouchers issued, safe harbour tracked</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Extensions</b> — filed with a payment estimate, not a guess</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Notice handling</b> — any IRS or state letter, answered, at no separate fee</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Examination representation</b> — on returns we prepared</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Amendments</b> — where they are worth filing</span><div class="scope-item-divider"></div></li>
+          <li class="scope-item"><span class="scope-item-text"><b>Document vault</b> — permanent, and yours whether or not you stay</span><div class="scope-item-divider"></div></li>
         </ul>
       </div>
     </div>
-    <div class="callout w-note" style="margin-top:26px">
+    <div class="callout w-note scope-boundary-card" id="scope-boundary-card" style="margin-top:26px">
       <span class="h">One boundary, stated plainly</span>
       <p>Representation before the IRS is provided only by practitioners authorised under Circular
       230, and outcomes in any examination or collection matter depend on your circumstances and on
@@ -548,190 +582,370 @@
     </div>
   </div></section>
 
-  <!-- ---------- PREMIUM SUPPORT ---------- -->
-  <section class="tight"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow">Premium support</span>
-      <h2>What &ldquo;dedicated&rdquo; actually means here.</h2>
-      <p class="lede">Most firms use the word. These are the commitments behind it, and they are in
-      the engagement letter, not just on this page.</p>
-    </div>
-    <div class="grid g4">
-      <div class="card">
-        <span class="tag">Response</span>
-        <h3>One business day</h3>
-        <p>Every question gets a substantive answer within one business day — not an acknowledgement,
-        an answer. If it needs research, you get the timeline that day.</p>
+  <!-- ---------- PREMIUM SUPPORT (PINNED SHEET OVERLAY & EQUALIZER CASCADE) ---------- -->
+  <div class="support-pinned-stage" id="support-pinned-stage">
+    <section class="tight support-white-sheet" id="support-white-sheet"><div class="shell" id="support-white-shell">
+      <div class="sechead support-white-head" id="support-white-head">
+        <span class="eyebrow support-eyebrow" id="support-eyebrow">Premium support</span>
+        <h2 class="support-h2" id="support-h2">What &ldquo;dedicated&rdquo; actually means here.</h2>
+        <p class="lede support-lede" id="support-lede">Most firms use the word. These are the commitments behind it, and they are in
+        the engagement letter, not just on this page.</p>
       </div>
-      <div class="card">
-        <span class="tag">Access</span>
-        <h3>Direct line, no gate</h3>
-        <p>Your advisor&rsquo;s direct number and email. No ticket queue, no general inbox, no
-        re-explaining your situation to whoever picks up.</p>
+      <div class="grid g4 support-cards-grid" id="support-cards-grid">
+        <div class="card support-pillar-card" id="support-card-response">
+          <span class="tag support-tag" id="support-tag-response">Response</span>
+          <h3 class="support-card-h3">One business day</h3>
+          <p>Every question gets a substantive answer within one business day — not an acknowledgement,
+          an answer. If it needs research, you get the timeline that day.</p>
+        </div>
+        <div class="card support-pillar-card" id="support-card-access">
+          <span class="tag support-tag" id="support-tag-access">Access</span>
+          <h3 class="support-card-h3">Direct line, no gate</h3>
+          <p>Your advisor&rsquo;s direct number and email. No ticket queue, no general inbox, no
+          re-explaining your situation to whoever picks up.</p>
+        </div>
+        <div class="card support-pillar-card" id="support-card-urgency">
+          <span class="tag support-tag" id="support-tag-urgency">Urgency</span>
+          <h3 class="support-card-h3">Deadline triage same day</h3>
+          <p>Anything with a date on it — a notice, a closing, an exercise window — is read and
+          answered the day it arrives.</p>
+        </div>
+        <div class="card support-pillar-card" id="support-card-continuity">
+          <span class="tag support-tag" id="support-tag-continuity">Continuity</span>
+          <h3 class="support-card-h3">A second who knows you</h3>
+          <p>A named backup advisor reads your file too, so holidays, illness and filing season never
+          leave you starting over.</p>
+        </div>
       </div>
-      <div class="card">
-        <span class="tag">Urgency</span>
-        <h3>Deadline triage same day</h3>
-        <p>Anything with a date on it — a notice, a closing, an exercise window — is read and
-        answered the day it arrives.</p>
-      </div>
-      <div class="card">
-        <span class="tag">Continuity</span>
-        <h3>A second who knows you</h3>
-        <p>A named backup advisor reads your file too, so holidays, illness and filing season never
-        leave you starting over.</p>
-      </div>
-    </div>
-  </div></section>
-
-  <!-- ---------- THE YEAR ---------- -->
-  <section class="night tight"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow night">How the year runs</span>
-      <h2>Four quarters, four conversations.</h2>
-      <p class="lede">The engagement has a rhythm, and it is the opposite of the usual one — the
-      heavy thinking happens in the quiet months and April is mostly paperwork.</p>
-    </div>
-    <div class="cal night-cal">
-      <div>
-        <span class="mo">Q1 &middot; Jan – Apr</span>
-        <h3>Filing</h3>
-        <p class="say">Returns prepared and filed. If the other three quarters were done properly,
-        nothing here is news.</p>
-        <ul>
-          <li>All returns, federal and state</li>
-          <li>K-1s chased on your behalf</li>
-          <li>Q1 estimate set</li>
-        </ul>
-      </div>
-      <div>
-        <span class="mo">Q2 &middot; May – Jul</span>
-        <h3>Structure</h3>
-        <p class="say">The quiet quarter, and the one that moves the number most. Everything
-        structural is cheapest to change now.</p>
-        <ul>
-          <li>Entity and election review</li>
-          <li>Compensation reset</li>
-          <li>Retirement plan design</li>
-        </ul>
-      </div>
-      <div>
-        <span class="mo">Q3 &middot; Aug – Oct</span>
-        <h3>Projection</h3>
-        <p class="say">Your year run forward to a written figure, with the levers still available
-        listed against it.</p>
-        <ul>
-          <li>Mid-year projection issued</li>
-          <li>Estimates re-cut</li>
-          <li>Equipment and gains timing</li>
-        </ul>
-      </div>
-      <div>
-        <span class="mo">Q4 &middot; Nov – Dec</span>
-        <h3>Execution</h3>
-        <p class="say">The closing window. Everything agreed in Q3 gets done before the year shuts,
-        with a checklist and a deadline each.</p>
-        <ul>
-          <li>Contributions funded</li>
-          <li>Income and expense timing</li>
-          <li>Distributions and bonuses set</li>
-        </ul>
-      </div>
-    </div>
-  </div></section>
-
-  <!-- Image Band: Strategic Precision & Execution -->
-  <div class="imgband slim gold-tint" style="--img:url('../Pics/AdobeStock_480131145.jpeg')">
-    <div class="imgband-inner" style="padding:48px 24px;text-align:center">
-      <p style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">Precision Modeling &middot; Year-Round Advisory</p>
-      <h2 style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">Decisions made in July change the number in April.<br><em style="color:var(--gold);font-style:normal">Every scenario modeled before anything is signed.</em></h2>
-    </div>
+    </div></section>
   </div>
 
-  <!-- ---------- FIT ---------- -->
-  <section class="tight"><div class="shell">
-    <div class="sechead">
-      <span class="eyebrow">Fit</span>
-      <h2>Worth being honest about.</h2>
-      <p class="lede">This is a significant annual commitment and it is not right for everyone. We
-      would rather tell you that on the first call than in the second year.</p>
-    </div>
-    <div class="split">
-      <div>
-        <div class="colhead blue">It earns its fee when</div>
-        <ul class="ticks">
-          <li>Your income is high enough that timing and structure move real money</li>
-          <li>You own a business, or several, and the entity questions are live</li>
-          <li>Equity compensation, real estate or investments make the year complicated</li>
-          <li>You operate or earn in more than one state</li>
-          <li>A sale, a purchase or a liquidity event is somewhere on the horizon</li>
-          <li>You have been surprised by a tax bill more than once</li>
-        </ul>
+  <!-- ---------- THE YEAR (QUARTERLY CADENCE SCRUB) ---------- -->
+  <div class="quarterly-pinned-stage" id="quarterly-pinned-stage">
+    <section class="night tight quarterly-cadence-section quarterly-dark-sheet" id="quarterly-cadence-section"><div class="shell" id="quarterly-cadence-shell">
+      <div class="sechead quarterly-cadence-head" id="quarterly-cadence-head">
+        <span class="eyebrow night quarterly-cadence-eyebrow" id="quarterly-cadence-eyebrow">How the year runs</span>
+        <h2 class="quarterly-cadence-h2" id="quarterly-cadence-h2">Four quarters, four conversations.</h2>
+        <p class="lede quarterly-cadence-lede" id="quarterly-cadence-lede">The engagement has a rhythm, and it is the opposite of the usual one — the
+        heavy thinking happens in the quiet months and April is mostly paperwork.</p>
       </div>
-      <div>
-        <div class="colhead lime">It does not, yet, when</div>
-        <ul class="ticks lime">
-          <li>A straightforward return is genuinely all you need — take a filing package</li>
-          <li>The business is new and not yet profitable — start with books and estimates</li>
-          <li>You want a return prepared and no conversation. That is a fair thing to want.</li>
-          <li>The main problem is a balance owed or unfiled years — start with Audit &amp; Resolution</li>
-        </ul>
-        <p class="small" style="margin-top:14px">If any of these is you, we will say so and point you
-        at the right thing. It costs us a sale and saves you a year.</p>
-      </div>
-    </div>
-  </div></section>
 
-  <!-- ---------- PRICING & CTA ---------- -->
-  <section class="night"><div class="shell">
-    <div class="split wide" style="align-items:center">
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <span class="eyebrow night">Fee</span>
-        <h2>Scoped, not listed.</h2>
-        <p class="lede">The Standing File is an annual engagement, quoted after a scoping call,
-        because the work genuinely differs — a two-state consultant and a six-entity group are not
-        the same year. What we can promise is that the number is fixed for the term, agreed in
-        writing before anything starts, and does not move because you called too often.</p>
-        <ul class="ticks" style="max-width:60ch">
-          <li>Annual engagement, billed monthly or annually — your choice</li>
-          <li>Fixed for the term. No hourly billing, no per-question charges</li>
-          <li>Scope, deliverables and dates set out in a written engagement letter</li>
-          <li>Includes the returns, so compare it against what you pay today in total</li>
-        </ul>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn btn-g" href="appointments.html">Request a scoping call</a>
-          <a class="btn btn-w" href="tel:+15714703754">Call 1 (571) 470-3754</a>
-        </div>
+      <!-- SVG Laser Rail Track -->
+      <div class="quarterly-rail-wrap" id="quarterly-rail-wrap" aria-hidden="true">
+        <svg class="quarterly-rail-svg" id="quarterly-rail-svg" viewBox="0 0 1000 4" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- base track -->
+          <line x1="0" y1="2" x2="1000" y2="2" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+          <!-- laser beam (drawn via GSAP strokeDashoffset) -->
+          <line id="quarterly-laser-beam" x1="0" y1="2" x2="1000" y2="2"
+                stroke="#019FFF" stroke-width="2"
+                stroke-dasharray="1000" stroke-dashoffset="1000"/>
+          <!-- 4 node dots -->
+          <circle class="quarterly-rail-node" id="qnode-1" cx="125" cy="2" r="5" fill="#0E1621" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+          <circle class="quarterly-rail-node" id="qnode-2" cx="375" cy="2" r="5" fill="#0E1621" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+          <circle class="quarterly-rail-node" id="qnode-3" cx="625" cy="2" r="5" fill="#0E1621" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+          <circle class="quarterly-rail-node" id="qnode-4" cx="875" cy="2" r="5" fill="#0E1621" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        </svg>
       </div>
-      <div class="filecard dark-fc">
-        <div class="fh"><span>How it starts</span><b>Four steps</b></div>
-        <div class="fb">
-          <ul class="ticks tight">
-            <li><b>1 &middot; Scoping call</b> — 45 minutes, no charge. Your situation, honestly assessed.</li>
-            <li><b>2 &middot; Second Look</b> — we read your last three returns before quoting anything.</li>
-            <li><b>3 &middot; Written proposal</b> — scope, deliverables, named advisor and a fixed fee.</li>
-            <li><b>4 &middot; Onboarding</b> — file built, calendar set, first strategy session booked.</li>
+
+      <div class="cal night-cal quarterly-cards-grid" id="quarterly-cards-grid">
+        <div class="quarterly-card" id="quarterly-card-q1" data-q="1">
+          <span class="mo quarterly-period" id="quarterly-period-q1">Q1 &middot; Jan – Apr</span>
+          <h3 class="quarterly-title" id="quarterly-title-q1">Filing</h3>
+          <p class="say quarterly-body" id="quarterly-body-q1">Returns prepared and filed. If the other three quarters were done properly,
+          nothing here is news.</p>
+          <ul class="quarterly-bullets" id="quarterly-bullets-q1">
+            <li>All returns, federal and state</li>
+            <li>K-1s chased on your behalf</li>
+            <li>Q1 estimate set</li>
           </ul>
-          <p class="small" style="margin-top:14px">Nothing is billed until step three is signed.</p>
+        </div>
+        <div class="quarterly-card" id="quarterly-card-q2" data-q="2">
+          <span class="mo quarterly-period" id="quarterly-period-q2">Q2 &middot; May – Jul</span>
+          <h3 class="quarterly-title" id="quarterly-title-q2">Structure</h3>
+          <p class="say quarterly-body" id="quarterly-body-q2">The quiet quarter, and the one that moves the number most. Everything
+          structural is cheapest to change now.</p>
+          <ul class="quarterly-bullets" id="quarterly-bullets-q2">
+            <li>Entity and election review</li>
+            <li>Compensation reset</li>
+            <li>Retirement plan design</li>
+          </ul>
+        </div>
+        <div class="quarterly-card" id="quarterly-card-q3" data-q="3">
+          <span class="mo quarterly-period" id="quarterly-period-q3">Q3 &middot; Aug – Oct</span>
+          <h3 class="quarterly-title" id="quarterly-title-q3">Projection</h3>
+          <p class="say quarterly-body" id="quarterly-body-q3">Your year run forward to a written figure, with the levers still available
+          listed against it.</p>
+          <ul class="quarterly-bullets" id="quarterly-bullets-q3">
+            <li>Mid-year projection issued</li>
+            <li>Estimates re-cut</li>
+            <li>Equipment and gains timing</li>
+          </ul>
+        </div>
+        <div class="quarterly-card" id="quarterly-card-q4" data-q="4">
+          <span class="mo quarterly-period" id="quarterly-period-q4">Q4 &middot; Nov – Dec</span>
+          <h3 class="quarterly-title" id="quarterly-title-q4">Execution</h3>
+          <p class="say quarterly-body" id="quarterly-body-q4">The closing window. Everything agreed in Q3 gets done before the year shuts,
+          with a checklist and a deadline each.</p>
+          <ul class="quarterly-bullets" id="quarterly-bullets-q4">
+            <li>Contributions funded</li>
+            <li>Income and expense timing</li>
+            <li>Distributions and bonuses set</li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class="patsays" style="margin-top:30px;border-left-color:var(--gold)">
-      <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat" width="64" height="64">
-      <div>
-        <q>Call me before you sign it. Afterwards I&rsquo;m just a witness.</q>
-        <div class="who">Uncle Pat</div>
-      </div>
-    </div>
-  </div></section>
-</div>
+    </div></section>
+
+    <!-- ============================================================
+         DIAL FIT PINNED STAGE — Gauge Banner + Elevated White Sheet
+         ============================================================ -->
+    <div class="dial-fit-pinned-stage" id="dial-fit-pinned-stage">
+
+      <!-- Dark Modeling Banner (Pinned Dial) -->
+      <div class="dial-banner-wrap" id="dial-banner-wrap">
+        <div class="imgband slim gold-tint quarterly-dial-banner dial-banner" id="dial-banner"
+             style="--img:url('../Pics/AdobeStock_480131145.jpeg')">
+          <!-- Rotating gauge graphic (CSS-driven SVG ring, animated by GSAP) -->
+          <div class="dial-gauge-bg" id="dial-gauge-bg" aria-hidden="true">
+            <svg class="dial-gauge-svg" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer arc track -->
+              <circle cx="260" cy="260" r="230" fill="none"
+                stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+              <!-- Mid ring -->
+              <circle cx="260" cy="260" r="190" fill="none"
+                stroke="rgba(234,228,47,0.09)" stroke-width="1"/>
+              <!-- Tick marks -->
+              <g stroke="rgba(255,255,255,0.12)" stroke-width="1">
+                <line x1="260" y1="32"  x2="260" y2="56"  transform="rotate(0   260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(30  260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(60  260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="56"  transform="rotate(90  260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(120 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(150 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="56"  transform="rotate(180 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(210 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(240 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="56"  transform="rotate(270 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(300 260 260)"/>
+                <line x1="260" y1="32"  x2="260" y2="48"  transform="rotate(330 260 260)"/>
+              </g>
+              <!-- Glowing needle -->
+              <line id="dial-needle" x1="260" y1="90" x2="260" y2="260"
+                stroke="#EAE42F" stroke-width="2" stroke-linecap="round"
+                opacity="0.7"/>
+              <!-- Inner hub -->
+              <circle cx="260" cy="260" r="8" fill="#EAE42F" opacity="0.5"/>
+              <circle cx="260" cy="260" r="3" fill="#fff"/>
+            </svg>
+          </div>
+          <!-- Banner copy -->
+          <div class="imgband-inner quarterly-dial-inner dial-banner-inner" id="dial-banner-inner"
+               style="padding:48px 24px;text-align:center;position:relative;z-index:2">
+            <p class="quarterly-dial-eyebrow dial-eyebrow" id="dial-banner-eyebrow"
+               style="font-family:var(--f-mono);font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin:0 0 10px">
+              Precision Modeling &middot; Year-Round Advisory
+            </p>
+            <h2 class="quarterly-dial-h2 dial-headline" id="dial-banner-h2"
+                style="color:#fff;margin:0;font-size:clamp(1.4rem,2.8vw,2.2rem)">
+              Decisions made in July change the number in April.<br>
+              <em class="quarterly-dial-accent" id="dial-banner-accent"
+                  style="color:var(--gold);font-style:normal">Every scenario modeled before anything is signed.</em>
+            </h2>
+          </div>
+        </div>
+      </div><!-- /dial-banner-wrap -->
+
+      <!-- Elevated White Fit Sheet (slides over the pinned dial) -->
+      <div class="fit-white-sheet" id="fit-white-sheet">
+        <div class="shell" id="fit-white-shell">
+
+          <!-- Section header -->
+          <div class="sechead fit-sechead" id="fit-sechead">
+            <span class="eyebrow fit-eyebrow" id="fit-eyebrow">Fit</span>
+            <h2 class="fit-headline" id="fit-headline">Worth being honest about.</h2>
+            <p class="lede fit-lede" id="fit-lede">This is a significant annual commitment and it is not right for
+            everyone. We would rather tell you that on the first call than in the second year.</p>
+          </div>
+
+          <!-- Two-column ledger -->
+          <div class="split fit-ledger-split" id="fit-ledger-split">
+
+            <!-- Left column: earns its fee when -->
+            <div class="fit-col fit-col-left" id="fit-col-left">
+              <div class="fit-colhead fit-colhead-cyan" id="fit-colhead-earn">
+                It earns its fee when:
+              </div>
+              <ul class="fit-list fit-list-earn" id="fit-list-earn">
+                <li class="fit-item" id="fit-item-e1">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">Your income is high enough that timing and structure move real money</span>
+                </li>
+                <li class="fit-item" id="fit-item-e2">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">You own a business, or several, and the entity questions are live</span>
+                </li>
+                <li class="fit-item" id="fit-item-e3">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">Equity compensation, real estate or investments make the year complicated</span>
+                </li>
+                <li class="fit-item" id="fit-item-e4">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">You operate or earn in more than one state</span>
+                </li>
+                <li class="fit-item" id="fit-item-e5">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">A sale, a purchase or a liquidity event is somewhere on the horizon</span>
+                </li>
+                <li class="fit-item" id="fit-item-e6">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">You have been surprised by a tax bill more than once</span>
+                </li>
+              </ul>
+            </div><!-- /fit-col-left -->
+
+            <!-- Right column: does not yet when -->
+            <div class="fit-col fit-col-right" id="fit-col-right">
+              <div class="fit-colhead fit-colhead-warn" id="fit-colhead-not">
+                It does not yet when:
+              </div>
+              <ul class="fit-list fit-list-not" id="fit-list-not">
+                <li class="fit-item fit-item-warn" id="fit-item-n1">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">A straightforward return is genuinely all you need
+                    &mdash; <a href="file-taxes.html" class="fit-redirect">take a filing package</a>
+                  </span>
+                </li>
+                <li class="fit-item fit-item-warn" id="fit-item-n2">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">The business is new and not yet profitable
+                    &mdash; <a href="business.html" class="fit-redirect">start with books and estimates</a>
+                  </span>
+                </li>
+                <li class="fit-item fit-item-warn" id="fit-item-n3">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">You want a return prepared and no conversation. That is a fair thing to want.</span>
+                </li>
+                <li class="fit-item fit-item-warn" id="fit-item-n4">
+                  <span class="fit-dash" aria-hidden="true">&#x2013;</span>
+                  <span class="fit-item-text">The main problem is a balance owed or unfiled years
+                    &mdash; <a href="audit-resolution.html" class="fit-redirect">start with Audit &amp; Resolution</a>
+                  </span>
+                </li>
+              </ul>
+              <p class="small fit-redirect-note" id="fit-redirect-note" style="margin-top:14px">
+                If any of these is you, we will say so and point you at the right thing.
+                It costs us a sale and saves you a year.
+              </p>
+            </div><!-- /fit-col-right -->
+
+          </div><!-- /fit-ledger-split -->
+        </div><!-- /shell -->
+      </div><!-- /fit-white-sheet -->
+
+    </div><!-- /dial-fit-pinned-stage -->
+  </div><!-- /quarterly-pinned-stage -->
+
+  <!-- ============================================================
+       FEE PINNED STAGE — Dark Sheet Wipe + Two-Column Stagger
+       ============================================================ -->
+  <div class="fee-pinned-stage" id="fee-pinned-stage">
+
+    <!-- Elevated Dark Fee Sheet -->
+    <section class="night fee-dark-sheet" id="fee-dark-sheet">
+      <div class="shell" id="fee-shell">
+
+        <!-- Two-column layout -->
+        <div class="split wide fee-split" id="fee-split" style="align-items:flex-start">
+
+          <!-- LEFT COLUMN: Fee copy + CTAs -->
+          <div class="fee-left-col" id="fee-left-col" style="display:flex;flex-direction:column;gap:16px">
+            <span class="eyebrow night fee-eyebrow" id="fee-eyebrow">Fee</span>
+            <h2 class="fee-headline" id="fee-headline">Scoped, not listed.</h2>
+            <p class="lede fee-lede" id="fee-lede">The Standing File is an annual engagement, quoted after a scoping call,
+            because the work genuinely differs &mdash; a two-state consultant and a six-entity group are not
+            the same year. What we can promise is that the number is fixed for the term, agreed in
+            writing before anything starts, and does not move because you called too often.</p>
+
+            <!-- 4 bullet line items -->
+            <ul class="fee-bullet-list" id="fee-bullet-list" style="max-width:60ch">
+              <li class="fee-bullet-item" id="fee-bullet-1">
+                <span class="fee-dash" aria-hidden="true">&#x2013;</span>
+                <span>Annual engagement, billed monthly or annually &mdash; your choice</span>
+              </li>
+              <li class="fee-bullet-item" id="fee-bullet-2">
+                <span class="fee-dash" aria-hidden="true">&#x2013;</span>
+                <span>Fixed for the term. No hourly billing, no per-question charges</span>
+              </li>
+              <li class="fee-bullet-item" id="fee-bullet-3">
+                <span class="fee-dash" aria-hidden="true">&#x2013;</span>
+                <span>Scope, deliverables and dates set out in a written engagement letter</span>
+              </li>
+              <li class="fee-bullet-item" id="fee-bullet-4">
+                <span class="fee-dash" aria-hidden="true">&#x2013;</span>
+                <span>Includes the returns, so compare it against what you pay today in total</span>
+              </li>
+            </ul>
+
+            <!-- CTA block -->
+            <div class="fee-cta-wrap" id="fee-cta-wrap" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+              <a class="btn btn-g fee-cta-primary" id="fee-cta-primary" href="appointments.html">Request a scoping call</a>
+              <a class="btn btn-w fee-cta-phone" id="fee-cta-phone" href="tel:+15714703754">Call 1 (571) 470-3754</a>
+            </div>
+          </div><!-- /fee-left-col -->
+
+          <!-- RIGHT COLUMN: Dossier "How it starts" -->
+          <div class="filecard dark-fc fee-dossier-card" id="fee-dossier-card">
+            <div class="fh fee-dossier-header" id="fee-dossier-header">
+              <span id="fee-dossier-eyebrow">How it starts</span>
+              <b>Four steps</b>
+            </div>
+            <div class="fb fee-dossier-body" id="fee-dossier-body">
+              <!-- Step items with individual IDs for the accent beam sweep -->
+              <ul class="fee-step-list" id="fee-step-list">
+                <li class="fee-step-item" id="fee-step-1" data-step="1">
+                  <span class="fee-step-num" aria-hidden="true">1</span>
+                  <span class="fee-step-text"><b>Scoping call</b> &mdash; 45&nbsp;minutes, no charge. Your situation, honestly assessed.</span>
+                </li>
+                <li class="fee-step-item" id="fee-step-2" data-step="2">
+                  <span class="fee-step-num" aria-hidden="true">2</span>
+                  <span class="fee-step-text"><b>Second Look</b> &mdash; we read your last three returns before quoting anything.</span>
+                </li>
+                <li class="fee-step-item" id="fee-step-3" data-step="3">
+                  <span class="fee-step-num" aria-hidden="true">3</span>
+                  <span class="fee-step-text"><b>Written proposal</b> &mdash; scope, deliverables, named advisor and a fixed fee.</span>
+                </li>
+                <li class="fee-step-item" id="fee-step-4" data-step="4">
+                  <span class="fee-step-num" aria-hidden="true">4</span>
+                  <span class="fee-step-text"><b>Onboarding</b> &mdash; file built, calendar set, first strategy session booked.</span>
+                </li>
+              </ul>
+              <p class="small fee-dossier-note" id="fee-dossier-note" style="margin-top:14px">Nothing is billed until step three is signed.</p>
+            </div>
+          </div><!-- /fee-dossier-card -->
+
+        </div><!-- /fee-split -->
+
+        <!-- Uncle Pat Quote Card -->
+        <div class="patsays fee-patsays" id="fee-patsays" style="margin-top:30px;border-left-color:var(--gold)">
+          <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat" id="fee-pat-avatar" width="64" height="64">
+          <div>
+            <q id="fee-pat-quote">Call me before you sign it. Afterwards I&rsquo;m just a witness.</q>
+            <div class="who fee-pat-who" id="fee-pat-who">Uncle Pat</div>
+          </div>
+        </div><!-- /fee-patsays -->
+
+      </div><!-- /shell -->
+    </section><!-- /fee-dark-sheet -->
+
+  </div><!-- /fee-pinned-stage -->
+</div><!-- closes the outer wrapper from quarterly-pinned-stage era -->
+
 
   </main>
 
-  <footer>
+  <footer id="site-footer">
     <div class="shell">
       <div class="cols">
-        <div>
+        <div class="footer-brand-col">
           <div class="brand" style="margin-bottom:14px">
             <img src="assets/brand/uncle-pat-avatar.svg" alt="Uncle Pat icon" width="32" height="32" style="filter:brightness(1.2)">
             <span class="wm">Pivot Aide Tax</span>
@@ -744,7 +958,7 @@
           </p>
         </div>
 
-                <div>
+        <div class="footer-nav-col">
           <h4>File &amp; Strategy</h4>
           <ul>
             <li><a href="file-taxes.html">Individual Returns (1040)</a></li>
@@ -755,7 +969,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Resources &amp; Resolution</h4>
           <ul>
             <li><a href="resources.html">Tax Resources &amp; Deadlines</a></li>
@@ -766,7 +980,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="footer-nav-col">
           <h4>Policies &amp; Legal</h4>
           <ul>
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -774,18 +988,26 @@
             <li><a href="security-policy.html">Security Policy</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
             <li><a href="service-expectations.html">Service Expectations</a></li>
-            <li><a href="file-room.html">Client Portal Login</a></li>
+            <li><a href="file-room.html" class="portal-link">Client Portal Login</a></li>
           </ul>
         </div>
       </div>
 
-      <p class="fine">
+      <div class="footer-hairline" id="footer-hairline"></div>
+
+      <p class="fine footer-legal">
         Prices shown are for the scopes described and are confirmed in writing before work begins. Representation before the Internal Revenue Service is provided only by practitioners authorised under Circular 230. Nothing on this site is a guarantee of any particular outcome; resolution results depend on individual financial circumstances and on agency determination. &middot; <a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="payment-policy.html">Payment Policy</a> &middot; <a href="security-policy.html">Security</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="service-expectations.html">Service Expectations</a>
       </p>
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger -->
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+
+  <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/hero-transition.js?v=6.0"></script>
   <script src="js/booking.js"></script>
 </body>
 </html>
