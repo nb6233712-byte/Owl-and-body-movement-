@@ -18,10 +18,10 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'pivotaide_fileroom_v1';
+  const STORAGE_KEY = 'pivotaide_fileroom_v2';
 
-  // Initial State Seed based on Build Plan specifications
-  const INITIAL_STATE = {
+  // Demo seed state for Marcus Whitfield client file
+  const SAMPLE_CLIENT_STATE = {
     currentUser: {
       id: 'client_mw',
       name: 'Marcus & Elena Whitfield',
@@ -30,11 +30,11 @@
       role: 'client',
       phone: '•••• 4417'
     },
-    authStatus: 'authenticated', // 'signin', 'mfa', 'authenticated'
-    deviceMode: 'phone', // 'phone' or 'desk'
+    authStatus: 'authenticated',
+    deviceMode: 'desk',
     activeScreen: 'home',
     returnProgress: 68,
-    returnStage: 'in_prep', // 'in_prep', 'ready_to_sign', 'signed', 'accepted'
+    returnStage: 'in_prep',
     spineSteps: [
       { id: 1, title: 'Engagement letter signed', date: '14 January', status: 'done' },
       { id: 2, title: 'Documents received — 11 of 13', date: 'Last upload 2 September', status: 'done' },
@@ -53,24 +53,6 @@
       { id: 'd7', name: 'Brokerage 1099 Composite', type: 'Dividends & gains', status: 'received', date: 'Uploaded 26 Aug', size: '1.8 MB' },
       { id: 'd8', name: 'Prior year return — TY2025', type: 'Form 1040', status: 'received', date: 'Carried over from file', size: '4.2 MB' }
     ],
-    kba: {
-      step: 1,
-      selectedAnswer: null,
-      attemptsUsed: 0,
-      maxAttempts: 3,
-      verified: false,
-      failed: false
-    },
-    signature: {
-      signed: false,
-      signerName: 'Marcus Whitfield',
-      spouseSigned: false,
-      signatureMethod: 'electronic',
-      signatureData: null,
-      timestamp: null,
-      ipAddress: '73.194.28.102',
-      certId: null
-    },
     messages: [
       { id: 'm1', sender: 'preparer', name: 'Denise R.', time: '2 Sep, 9:14', text: 'I have the closing disclosure — thank you. One question: was the Halcyon Row property let for the whole year, or was there a vacant stretch after the tenants left in March?' },
       { id: 'm2', sender: 'client', name: 'You', time: '2 Sep, 9:31', text: 'Vacant for six weeks, then relet from mid-May. I can dig out the new lease if that helps.' },
@@ -81,8 +63,8 @@
       number: '2026-0418',
       dueDate: '15 Sep 2026',
       subtotal: 1240.00,
-      paymentMethod: 'ach', // 'ach' or 'card'
-      cardSurchargeRate: 0.03, // 3% lawful surcharge
+      paymentMethod: 'ach',
+      cardSurchargeRate: 0.03,
       isPaid: false,
       paidAt: null,
       transactionId: null,
@@ -90,6 +72,63 @@
         { id: 'inv-prev-1', desc: 'Invoice 2026-0207 · Q1 planning session', date: 'Paid 3 Apr 2026', amount: '$350.00' },
         { id: 'inv-prev-2', desc: 'Invoice 2025-1140 · TY2025 return', date: 'Paid 12 Feb 2026', amount: '$1,105.00' }
       ]
+    }
+  };
+
+  // Initial Clean State: Starts on empty Login Screen
+  const INITIAL_STATE = {
+    currentUser: {
+      id: '',
+      name: '',
+      initials: '',
+      email: '',
+      role: 'guest',
+      phone: ''
+    },
+    pendingEmail: '',
+    authStatus: 'signin', // 'signin', 'mfa', 'authenticated'
+    deviceMode: 'desk', // Desktop web app portal
+    activeScreen: 'signin', // Starts on sign in screen
+    returnProgress: 0,
+    returnStage: 'new',
+    spineSteps: [
+      { id: 1, title: 'Engagement letter signed', date: 'Pending intake', status: 'pending' },
+      { id: 2, title: 'Documents received', date: '0 uploaded', status: 'pending' },
+      { id: 3, title: 'Two documents still needed', date: 'Awaiting upload', status: 'pending' },
+      { id: 4, title: 'Return prepared and reviewed', date: 'Pending', status: 'pending' },
+      { id: 5, title: 'You approve and sign Form 8879', date: 'Takes about four minutes', status: 'pending' },
+      { id: 6, title: 'Filed and accepted', date: 'We watch for acceptance and tell you', status: 'pending' }
+    ],
+    documents: [],
+    kba: {
+      step: 1,
+      selectedAnswer: null,
+      attemptsUsed: 0,
+      maxAttempts: 3,
+      verified: false,
+      failed: false
+    },
+    signature: {
+      signed: false,
+      signerName: '',
+      spouseSigned: false,
+      signatureMethod: 'electronic',
+      signatureData: null,
+      timestamp: null,
+      ipAddress: '73.194.28.102',
+      certId: null
+    },
+    messages: [],
+    invoice: {
+      number: '2026-0001',
+      dueDate: 'Due upon completion',
+      subtotal: 0.00,
+      paymentMethod: 'ach',
+      cardSurchargeRate: 0.03,
+      isPaid: false,
+      paidAt: null,
+      transactionId: null,
+      history: []
     },
     notifications: {
       urgent: true,
@@ -104,11 +143,7 @@
       { id: 'fq3', client: 'Whitfield, M. & E.', issue: '2 docs outstanding', detail: 'Auto-reminder scheduled', status: 'pending', actionText: 'Send Chaser', actionType: 'chase' },
       { id: 'fq4', client: 'Ferrante, L.', issue: 'IRS Notice CP2000 uploaded', detail: 'Free read promised within 2 business days', status: 'pending', actionText: 'Review Notice', actionType: 'notice' }
     ],
-    auditLogs: [
-      { time: '14 Jan 2026 10:14', actor: 'MW (Client)', event: 'Engagement letter electronically authorized', ip: '73.194.28.102' },
-      { time: '28 Aug 2026 14:22', actor: 'MW (Client)', event: 'Document uploaded: W-2 Halstead Medical Group (SHA-256 verified)', ip: '73.194.28.102' },
-      { time: '02 Sep 2026 09:12', actor: 'DR (Denise R.)', event: 'Staff opened file for Schedule E examination', ip: '68.100.45.19' }
-    ]
+    auditLogs: []
   };
 
   // Active state initialized from localStorage if present
@@ -118,7 +153,9 @@
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        return Object.assign({}, INITIAL_STATE, JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        parsed.deviceMode = 'desk'; // Always desktop web app portal
+        return Object.assign({}, INITIAL_STATE, parsed);
       }
     } catch (e) {
       console.warn('Could not read saved File Room state, using defaults', e);
@@ -136,9 +173,15 @@
 
   function resetState() {
     state = JSON.parse(JSON.stringify(INITIAL_STATE));
+    // Clear input forms
+    const emailEl = document.getElementById('signin-email');
+    const passEl = document.getElementById('signin-password');
+    if (emailEl) emailEl.value = '';
+    if (passEl) passEl.value = '';
+    document.querySelectorAll('.mfa-digit-input').forEach(i => i.value = '');
     saveState();
     renderAll();
-    showToast('Demo data reset to original state', 'info');
+    showToast('Demo data reset to clean initial login screen', 'info');
   }
 
   // DOM Elements cache
@@ -234,13 +277,11 @@
   }
 
   function setDeviceMode(mode) {
-    state.deviceMode = mode;
+    state.deviceMode = 'desk';
     if (dom.device) {
-      dom.device.classList.toggle('mode-phone', mode === 'phone');
-      dom.device.classList.toggle('mode-desk', mode === 'desk');
+      dom.device.classList.remove('mode-phone');
+      dom.device.classList.add('mode-desk');
     }
-    if (dom.btnPhone) dom.btnPhone.classList.toggle('active', mode === 'phone');
-    if (dom.btnDesk) dom.btnDesk.classList.toggle('active', mode === 'desk');
     saveState();
   }
 
@@ -275,7 +316,7 @@
   }
 
   function renderAll() {
-    setDeviceMode(state.deviceMode);
+    setDeviceMode('desk');
     navigateTo(state.activeScreen);
     renderScreen01Auth();
     renderScreen02Dashboard();
@@ -301,6 +342,8 @@
     if (signinForm) {
       signinForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const emailEl = document.getElementById('signin-email');
+        state.pendingEmail = (emailEl && emailEl.value.trim()) ? emailEl.value.trim() : 'client@example.com';
         state.authStatus = 'mfa';
         renderScreen01Auth();
         showToast('Password verified. Verification code sent via SMS.', 'info');
@@ -309,18 +352,13 @@
 
     if (quickClientBtn) {
       quickClientBtn.addEventListener('click', () => {
-        state.currentUser = {
-          id: 'client_mw',
-          name: 'Marcus & Elena Whitfield',
-          initials: 'MW',
-          email: 'm.whitfield@example.com',
-          role: 'client',
-          phone: '•••• 4417'
-        };
+        // Load populated demo client state
+        Object.assign(state, JSON.parse(JSON.stringify(SAMPLE_CLIENT_STATE)));
         state.authStatus = 'authenticated';
-        renderScreen01Auth();
-        navigateTo('home');
-        showToast('Signed in as Marcus Whitfield (Client)', 'ok');
+        state.activeScreen = 'home';
+        saveState();
+        renderAll();
+        showToast('Signed in as Marcus Whitfield (Demo Client)', 'ok');
       });
     }
 
@@ -335,8 +373,9 @@
           phone: 'Staff Office'
         };
         state.authStatus = 'authenticated';
-        renderScreen01Auth();
-        navigateTo('firm');
+        state.activeScreen = 'firm';
+        saveState();
+        renderAll();
         showToast('Signed in as Denise R. (Firm Console)', 'ok');
       });
     }
@@ -358,11 +397,25 @@
     if (mfaForm) {
       mfaForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const userEmail = state.pendingEmail || 'client@example.com';
+        const userPart = userEmail.split('@')[0];
+        const userName = userPart.replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Client';
+        const userInitials = (userName.split(' ').map(w => w[0]).join('').slice(0, 2) || 'CL').toUpperCase();
+
+        state.currentUser = {
+          id: 'client_active',
+          name: userName,
+          initials: userInitials,
+          email: userEmail,
+          role: 'client',
+          phone: '•••• 4417'
+        };
         state.authStatus = 'authenticated';
-        renderScreen01Auth();
+        saveState();
+        renderAll();
         navigateTo('home');
-        showToast('Identity verified under FTC Safeguards Rule. Welcome back!', 'ok');
-        logAudit('User login authenticated with 2-Factor Authentication');
+        showToast('Identity verified under FTC Safeguards Rule. Welcome to The File Room!', 'ok');
+        logAudit(`User login authenticated for ${userEmail}`);
       });
     }
 
@@ -371,8 +424,16 @@
     if (signoutBtn) {
       signoutBtn.addEventListener('click', () => {
         state.authStatus = 'signin';
-        renderScreen01Auth();
-        navigateTo('signin');
+        state.activeScreen = 'signin';
+        state.currentUser = JSON.parse(JSON.stringify(INITIAL_STATE.currentUser));
+        // Clear input values
+        const emailEl = document.getElementById('signin-email');
+        const passEl = document.getElementById('signin-password');
+        if (emailEl) emailEl.value = '';
+        if (passEl) passEl.value = '';
+        mfaInputs.forEach(i => i.value = '');
+        saveState();
+        renderAll();
         showToast('Signed out of The File Room', 'info');
       });
     }
@@ -384,8 +445,15 @@
     const cardUserActive = document.getElementById('card-user-active');
     const userInitialsEl = document.getElementById('app-top-avatar');
     const userRoleBadge = document.getElementById('app-user-role-badge');
+    const userBadgeContainer = document.getElementById('app-user-badge');
+    const guestBadgeContainer = document.getElementById('app-guest-badge');
 
-    if (userInitialsEl) userInitialsEl.textContent = state.currentUser.initials;
+    const isAuthenticated = state.authStatus === 'authenticated';
+
+    if (userBadgeContainer) userBadgeContainer.style.display = isAuthenticated ? 'flex' : 'none';
+    if (guestBadgeContainer) guestBadgeContainer.style.display = isAuthenticated ? 'none' : 'block';
+
+    if (userInitialsEl) userInitialsEl.textContent = state.currentUser.initials || '??';
     if (userRoleBadge) {
       userRoleBadge.textContent = state.currentUser.role === 'firm' ? 'Staff' : 'Client';
       userRoleBadge.className = `app-chip ${state.currentUser.role === 'firm' ? 'warn' : 'gold'}`;

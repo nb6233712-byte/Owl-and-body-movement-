@@ -55,6 +55,7 @@ button, input, select, textarea {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--f-display);
   font-weight: 600;
+  color: var(--ink);
   margin: 0;
   text-wrap: balance;
   letter-spacing: -0.015em;

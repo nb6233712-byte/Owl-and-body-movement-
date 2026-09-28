@@ -142,7 +142,7 @@
   line-height: 1.2;
 }
 
-/* App Stage & Device Frames */
+/* App Stage & Device Container */
 .app-stage-container {
   padding: 36px 16px 64px;
   display: flex;
@@ -152,59 +152,22 @@
 }
 
 .app-device-wrapper {
-  transition: width .25s ease, max-width .25s ease;
-  width: 100%;
-}
-
-/* Phone View */
-.app-device-wrapper.mode-phone {
-  max-width: 412px;
-  border: 10px solid #081620;
-  border-radius: 42px;
-  box-shadow: 0 28px 70px rgba(6, 26, 38, .36), 0 0 0 1px rgba(255,255,255,.08);
-  overflow: hidden;
-  background: var(--surface);
-}
-.app-device-wrapper.mode-phone .phone-notch {
-  background: #081620;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 24px 10px;
-  font-family: var(--f-mono);
-  font-size: .66rem;
-  letter-spacing: .06em;
-}
-.app-device-wrapper.mode-phone .phone-notch .dot-sensor {
-  width: 54px;
-  height: 6px;
-  border-radius: 3px;
-  background: #1c3240;
-}
-.app-device-wrapper.mode-phone .desk-urlbar {
-  display: none !important;
-}
-.app-device-wrapper.mode-phone .app-sidebar {
-  display: none !important;
-}
-.app-device-wrapper.mode-phone .app-mobile-tabbar {
-  display: flex;
-}
-
-/* Desktop View */
-.app-device-wrapper.mode-desk {
   max-width: 1180px;
+  width: 100%;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 20px 60px rgba(6, 26, 38, .12);
   overflow: hidden;
   background: var(--surface);
+  transition: width .25s ease, max-width .25s ease;
 }
-.app-device-wrapper.mode-desk .phone-notch {
+
+.phone-notch {
   display: none !important;
 }
-.app-device-wrapper.mode-desk .desk-urlbar {
+
+/* Desktop View Header / URL Bar */
+.app-device-wrapper .desk-urlbar {
   display: flex;
   background: var(--surface-2);
   border-bottom: 1px solid var(--line);
@@ -212,21 +175,21 @@
   align-items: center;
   gap: 12px;
 }
-.app-device-wrapper.mode-desk .desk-urlbar .traffic-lights {
+.app-device-wrapper .desk-urlbar .traffic-lights {
   display: flex;
   gap: 6px;
 }
-.app-device-wrapper.mode-desk .desk-urlbar .traffic-lights span {
+.app-device-wrapper .desk-urlbar .traffic-lights span {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   display: block;
 }
-.app-device-wrapper.mode-desk .desk-urlbar .traffic-lights .c-red { background: #FF5F56; }
-.app-device-wrapper.mode-desk .desk-urlbar .traffic-lights .c-yel { background: #FFBD2E; }
-.app-device-wrapper.mode-desk .desk-urlbar .traffic-lights .c-grn { background: #27C93F; }
+.app-device-wrapper .desk-urlbar .traffic-lights .c-red { background: #FF5F56; }
+.app-device-wrapper .desk-urlbar .traffic-lights .c-yel { background: #FFBD2E; }
+.app-device-wrapper .desk-urlbar .traffic-lights .c-grn { background: #27C93F; }
 
-.app-device-wrapper.mode-desk .desk-urlbar .url-box {
+.app-device-wrapper .desk-urlbar .url-box {
   flex: 1;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -239,25 +202,50 @@
   align-items: center;
   gap: 6px;
 }
-.app-device-wrapper.mode-desk .desk-urlbar .url-box svg {
+.app-device-wrapper .desk-urlbar .url-box svg {
   width: 12px;
   height: 12px;
   color: var(--ok);
 }
-.app-device-wrapper.mode-desk .app-main-layout {
+.app-device-wrapper .app-main-layout {
   display: grid;
   grid-template-columns: 220px 1fr;
   grid-template-rows: auto 1fr;
   height: 740px;
 }
-.app-device-wrapper.mode-desk .app-top-header {
+.app-device-wrapper .app-top-header {
   grid-column: 1 / -1;
 }
-.app-device-wrapper.mode-desk .app-sidebar {
+.app-device-wrapper .app-sidebar {
   display: flex;
 }
-.app-device-wrapper.mode-desk .app-mobile-tabbar {
+.app-device-wrapper .app-mobile-tabbar {
   display: none !important;
+}
+
+/* Mobile responsive adjustments for actual phone screens */
+@media (max-width: 860px) {
+  .app-stage-container {
+    padding: 12px 8px 32px;
+  }
+  .app-device-wrapper {
+    border-radius: 8px;
+  }
+  .app-device-wrapper .desk-urlbar {
+    display: none !important;
+  }
+  .app-device-wrapper .app-main-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: auto;
+    min-height: 600px;
+  }
+  .app-device-wrapper .app-sidebar {
+    display: none !important;
+  }
+  .app-device-wrapper .app-mobile-tabbar {
+    display: flex !important;
+  }
 }
 
 /* App Internal Layout */

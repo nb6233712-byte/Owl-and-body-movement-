@@ -2482,7 +2482,7 @@ ul.ticks.lime li:before {
   z-index: 10;
   box-shadow: 0 16px 36px -10px rgba(1, 159, 255, 0.16), 0 0 0 1px #019FFF;
   border-color: #019FFF;
-  background: #FFFFFF;
+  background: var(--surface-hover);
 }
 
 .citation-card .t {
@@ -2751,7 +2751,7 @@ footer .fine a:hover {
     border-radius: 0 0 36px 36px !important;
     box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45) !important;
     margin-bottom: 0 !important;
-    background: #FFFFFF !important;
+    background: var(--ground) !important;
   }
 
   main > :last-child,
@@ -3014,10 +3014,10 @@ footer .fine a:hover {
 
 /* Card Geometry & Typography */
 .triage-card {
-  background: #FFFFFF;
+  background: var(--surface);
   border-radius: 14px;
   padding: 14px 18px;
-  border: 1px solid #DCE5EE;
+  border: 1px solid var(--line);
   border-top: 4px solid rgba(1, 159, 255, 0.3);
   box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.14);
   position: relative;
@@ -3270,10 +3270,10 @@ footer .fine a:hover {
 }
 
 .diagnostic-card {
-  background: #FFFFFF;
+  background: var(--surface);
   border-radius: 16px;
   padding: 32px 26px;
-  border: 1px solid #DCE5EE;
+  border: 1px solid var(--line);
   border-top: 3px solid transparent;
   box-shadow: 0 4px 16px -2px rgba(14, 22, 33, 0.05);
   display: flex;
@@ -3717,10 +3717,10 @@ footer .fine a:hover {
 }
 
 .industry-card {
-  background: #FFFFFF;
+  background: var(--surface);
   border-radius: 16px;
   padding: 32px 28px;
-  border: 1px solid #DCE5EE;
+  border: 1px solid var(--line);
   border-top: 3px solid transparent;
   box-shadow: 0 4px 16px -2px rgba(14, 22, 33, 0.05);
   display: flex;
@@ -5157,7 +5157,7 @@ footer .fine a:hover {
 .state-deck-container {
   width: 100%;
   border-radius: 36px 36px 0 0;
-  background: #ffffff;
+  background: var(--ground);
   box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 84px 0 96px;
@@ -5218,8 +5218,8 @@ footer .fine a:hover {
 /* Individual Regional Card */
 .state-card {
   position: relative;
-  background: #FFFFFF;
-  border: 1px solid #E3E8ED;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 30px 26px;
   box-shadow: 0 4px 16px rgba(10, 28, 40, 0.04);
@@ -5574,7 +5574,7 @@ footer .fine a:hover {
 
 .owl-philosophy-deck {
   position: relative;
-  background: #FFFFFF;
+  background: var(--ground);
   border-radius: 36px 36px 0 0;
   box-shadow: 0 -35px 70px rgba(0, 0, 0, 0.45);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
@@ -5791,14 +5791,14 @@ footer .fine a:hover {
 .credential-deck-stage {
   position: relative;
   z-index: 25;
-  background: #FFFFFF;
+  background: var(--ground);
   border-radius: 36px 36px 36px 36px;
   box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.22);
 }
 
 .credential-deck-container {
   position: relative;
-  background: #FFFFFF;
+  background: var(--ground);
   border-radius: 36px 36px 0 0;
   padding: 100px 0 110px;
   will-change: transform, opacity;
