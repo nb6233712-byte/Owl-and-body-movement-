@@ -34,11 +34,17 @@
   letter-spacing: 0.14em;
 }
 
+/* ---------- Base & Reset ---------- */
+html, body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 /* ---------- Topbar & Navigation ---------- */
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   background: var(--surface);
   border-bottom: 1px solid var(--line);
   transition: box-shadow var(--transition-fast);
@@ -314,17 +320,19 @@ nav.main-nav a.hot.active, .nav-item.has-dropdown > a.hot.active {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--surface);
-  padding: 24px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 24px 20px 40px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   overflow-y: auto;
-  transform: translateY(-100%);
+  transform: translateY(-16px);
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.28s ease, opacity 0.28s ease;
-  z-index: 99;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  z-index: 999;
   border-bottom: 1px solid var(--line);
 }
 
@@ -336,14 +344,39 @@ nav.main-nav a.hot.active, .nav-item.has-dropdown > a.hot.active {
 
 .mobile-drawer a {
   font-size: 1.05rem;
-  padding: 10px 0;
+  padding: 12px 6px;
   border-bottom: 1px solid var(--line-2);
   color: var(--ink);
+  transition: color 0.2s ease, transform 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-drawer a:hover,
+.mobile-drawer a:active {
+  color: var(--blue);
+  padding-left: 10px;
 }
 
 .mobile-drawer a.active {
   color: var(--blue);
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.mobile-drawer .mobile-dropdown-group {
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 8px;
+}
+
+.mobile-drawer .mobile-sublinks a {
+  font-size: 0.95rem;
+  padding: 8px 14px;
+  border-bottom: none;
+  color: var(--ink-2);
+}
+
+.mobile-drawer .mobile-sublinks a:hover,
+.mobile-drawer .mobile-sublinks a.active {
+  color: var(--blue);
+  padding-left: 18px;
 }
 
 /* ---------- Buttons ---------- */
@@ -616,6 +649,42 @@ section.tight {
 
 .night .ptab td.p small {
   color: var(--night-ink-2);
+}
+
+@media (max-width: 640px) {
+  .ptab {
+    display: block;
+    width: 100%;
+  }
+  .ptab thead {
+    display: none;
+  }
+  .ptab tbody {
+    display: block;
+    width: 100%;
+  }
+  .ptab tr {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 0;
+    gap: 4px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .ptab td {
+    display: block;
+    width: 100% !important;
+    padding: 2px 0 !important;
+  }
+  .ptab td.n {
+    font-size: 0.98rem;
+    font-weight: 600;
+  }
+  .ptab td.p {
+    text-align: left;
+    margin-top: 4px;
+    font-size: 1.1rem;
+    white-space: normal;
+  }
 }
 
 /* ---------- Grid & Cards ---------- */
@@ -2847,6 +2916,33 @@ footer .fine a:hover {
 
 .protobar ~ .topbar {
   top: 35px;
+}
+
+@media (max-width: 768px) {
+  .protobar {
+    position: relative;
+    top: auto;
+    padding: 6px 0;
+    z-index: 10;
+  }
+  .protobar .in {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px 10px;
+    font-size: 0.60rem;
+    letter-spacing: 0.08em;
+    padding: 0 16px;
+  }
+  .protobar .sec-indicator {
+    font-size: 0.60rem;
+  }
+  .protobar .proto-tag {
+    font-size: 0.58rem;
+  }
+  .protobar ~ .topbar {
+    top: 0;
+  }
 }
 
 /* Pinned Hero Stage Container */
@@ -5456,11 +5552,15 @@ footer .fine a:hover {
 
 /* Hero Stage */
 .pat-hero-stage {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 1;
-  min-height: 100vh;
+  height: 100vh;                    /* Full-screen: sticky card-stack anchor */
+  display: flex;
+  align-items: center;
   background: var(--night);
   will-change: transform, opacity, filter;
+  overflow: hidden;                 /* Clip blurred edges on recession */
 }
 
 /* Elevated Philosophy Deck Stage (Card Stacking Sheet) */
@@ -5619,6 +5719,15 @@ footer .fine a:hover {
 }
 
 @media (max-width: 1023px) {
+  .pat-hero-stage {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+    padding: 36px 0 48px !important;
+  }
   .owl-philosophy-deck {
     padding: 70px 0 80px;
     border-radius: 28px 28px 0 0;
@@ -5626,13 +5735,38 @@ footer .fine a:hover {
 }
 
 @media (max-width: 767px) {
+  .pat-hero-stage {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+    padding: 24px 0 40px !important;
+  }
+  .pat-hero-stage .split {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .pat-hero-stage .hero-owl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .pat-hero-stage .hero-owl svg {
+    max-width: 190px;
+    height: auto;
+  }
   .owl-philosophy-stage {
     overflow: visible;
   }
   .owl-philosophy-deck {
-    padding: 60px 0 70px;
+    padding: 44px 0 54px;
     border-radius: 24px 24px 0 0;
-    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 -16px 36px rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -5653,6 +5787,7 @@ footer .fine a:hover {
    MEET-UNCLE-PAT: PRACTICE & TEAM CREDENTIAL DECK (SORABAN SUITE)
    ───────────────────────────────────────────────────────────── */
 
+/* Stage & Container */
 .credential-deck-stage {
   position: relative;
   z-index: 25;
@@ -5669,6 +5804,7 @@ footer .fine a:hover {
   will-change: transform, opacity;
 }
 
+/* Section Header */
 .credential-sechead {
   margin-bottom: 56px;
   text-align: center;
@@ -5703,10 +5839,12 @@ footer .fine a:hover {
   will-change: transform, opacity;
 }
 
+/* 3-Column Credential Grid */
 .credential-grid {
   gap: 24px;
 }
 
+/* Individual Credential Card */
 .credential-card {
   position: relative;
   overflow: hidden;
@@ -5723,6 +5861,7 @@ footer .fine a:hover {
   cursor: default;
 }
 
+/* Illuminated Top Beam */
 .cred-card-top-beam {
   position: absolute;
   top: 0;
@@ -5734,6 +5873,7 @@ footer .fine a:hover {
   will-change: background, box-shadow;
 }
 
+/* Category Tag */
 .cred-tag {
   display: inline-block;
   font-family: var(--f-mono, 'Roboto Mono', monospace);
@@ -5765,6 +5905,7 @@ footer .fine a:hover {
   color: var(--ink-2);
 }
 
+/* Hover: active card lifts, siblings dim */
 .credential-grid:has(.credential-card:hover) .credential-card:not(:hover) {
   opacity: 0.7;
 }
@@ -5787,6 +5928,7 @@ footer .fine a:hover {
   background: rgba(1, 159, 255, 0.14);
 }
 
+/* CTA Wrap & Button */
 .credential-cta-wrap {
   margin-top: 52px;
   text-align: center;
@@ -5825,17 +5967,38 @@ footer .fine a:hover {
   box-shadow: 0 4px 12px rgba(234, 228, 47, 0.2);
 }
 
+/* Responsive */
 @media (max-width: 1023px) {
-  .credential-deck-container { padding: 70px 0 80px; }
-  .credential-sechead { margin-bottom: 40px; }
+  .credential-deck-container {
+    padding: 70px 0 80px;
+  }
+  .credential-sechead {
+    margin-bottom: 40px;
+  }
 }
 
 @media (max-width: 767px) {
-  .credential-deck-stage { border-radius: 0 0 24px 24px; overflow: visible; }
-  .credential-deck-container { padding: 60px 0 70px; }
-  .credential-grid { grid-template-columns: 1fr !important; gap: 16px; }
-  .credential-card { padding: 28px 22px; min-height: 44px; }
-  .credential-cta-btn { width: 100%; justify-content: center; padding: 18px 24px; font-size: 1rem; }
+  .credential-deck-stage {
+    border-radius: 0 0 24px 24px;
+    overflow: visible;
+  }
+  .credential-deck-container {
+    padding: 60px 0 70px;
+  }
+  .credential-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+  .credential-card {
+    padding: 28px 22px;
+    min-height: 44px;
+  }
+  .credential-cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 18px 24px;
+    font-size: 1rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -5886,6 +6049,8 @@ footer .fine a:hover {
 
 .card,
 .pkg,
+.svc,
+.prob,
 .legal-category-card,
 .legal-card,
 .bridge,
@@ -5897,17 +6062,58 @@ footer .fine a:hover {
 }
 
 .card:hover,
-.pkg:hover {
+.pkg:hover,
+.svc:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 34px rgba(10, 28, 40, 0.08);
 }
 
+/* Mobile & Touch Feedback */
+.card:active,
+.pkg:active,
+.svc:active,
+.btn:active,
+.d:active {
+  transform: scale(0.985) translateY(0);
+  transition-duration: 0.12s;
+}
+
+/* Primary Button Pulse & Shimmer */
+.btn-p,
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease;
+}
+
+.btn-p:hover,
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(1, 159, 255, 0.3);
+}
+
+/* Global Top Reading Progress Indicator */
+#site-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  z-index: 999999;
+  background: linear-gradient(90deg, #019FFF 0%, #EAE42F 100%);
+  box-shadow: 0 0 10px rgba(1, 159, 255, 0.7);
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+}
+
 .ptab tr {
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .ptab tr:hover {
-  background-color: rgba(1, 159, 255, 0.03);
+  background-color: rgba(1, 159, 255, 0.04);
 }
 
 .legal-nav a,

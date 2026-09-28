@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pivot Aide Tax Pricing — 2026 Revision</title>
+<!--
+  Pivot Aide Tax — revised 2026 filing fees.
+  Self-contained: no external fonts, scripts, stylesheets or images.
+  Opens in any browser on any computer, online or offline.
+  Print to PDF for a handout.
+-->
+
+<style>
+/* Deliberately single-theme: this is a brand specimen and must show the
+   section exactly as it will ship on the live site. */
+:root{
+  --blue:#019FFF; --blue-deep:#0A6BA8; --accent:#EAE42F;
+  --ink:#0E1621; --ink-2:#1B2733; --body:#4A5763; --mute:#8B98A5;
+  --rule:#E3E8ED; --wash:#F7F9FB; --board:#EDF1F5;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:Georgia,"Iowan Old Style","Palatino Linotype","Times New Roman",serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+html,body{background:var(--board);}
+body{margin:0;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;}
+*,*::before,*::after{box-sizing:border-box;}
+
+.spine{background:var(--ink);color:#fff;padding-block:20px;padding-inline:24px;
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;}
+.spine__in{max-width:1160px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px 28px;
+  align-items:baseline;justify-content:space-between;}
+.spine__mark{display:flex;align-items:baseline;gap:11px;}
+.spine__dot{width:9px;height:9px;border-radius:2px;background:var(--blue);transform:translateY(-1px);flex:none;}
+.spine__name{font-size:15px;font-weight:600;letter-spacing:-.01em;margin:0;}
+.spine__ref{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E8C9A;margin:0;}
+.spine__ref b{color:var(--accent);font-weight:500;}
+
+.wrap{max-width:1160px;margin:0 auto;padding-inline:24px;}
+.brief{padding-block:52px 40px;}
+.brief h1{font-family:var(--serif);font-size:clamp(28px,3.8vw,42px);line-height:1.12;
+  letter-spacing:-.015em;font-weight:700;margin:0 0 16px;max-width:19ch;text-wrap:balance;}
+.brief p{font-size:16.5px;line-height:1.7;color:var(--body);max-width:64ch;margin:0 0 14px;}
+.brief strong{color:var(--ink);font-weight:600;}
+
+h2.sec{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--blue-deep);margin:0 0 22px;padding-bottom:11px;border-bottom:2px solid var(--ink);}
+
+/* change table */
+.chg{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:#fff;}
+table.chgt{width:100%;border-collapse:collapse;min-width:460px;}
+.chgt th{text-align:left;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute);padding:15px 20px 11px;border-bottom:1px solid var(--rule);}
+.chgt td{padding:13px 20px;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--ink);}
+.chgt tr:last-child td{border-bottom:0;}
+.chgt .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.chgt th.num{text-align:right;}
+.chgt .old{color:var(--mute);text-decoration:line-through;}
+.chgt .new{font-weight:700;}
+.chgt .pct{font-family:var(--mono);font-size:13px;color:var(--blue-deep);}
+
+/* specimen */
+.spec{padding-block:56px 0;}
+.spec__cap{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:0 0 12px;}
+.spec__cap::after{content:"";flex:1;height:1px;background:var(--rule);}
+.spec__box{background:#fff;border:1px solid var(--rule);border-radius:3px;overflow:hidden;
+  box-shadow:0 24px 60px -32px rgba(14,22,33,.35);}
+.spec__box .pat-pricing{--pat-font:var(--sans);padding-block:52px;}
+.spec__box .pat-pricing + .pat-pricing{border-top:1px solid var(--rule);}
+.spec__box .pat-head__title{font-family:var(--serif);}
+.spec__box .pat-head__eyebrow,.spec__box .pat-tier__flag,.spec__box .pat-table th,
+.spec__box .pat-table caption,.spec__box .pat-head__form{font-family:var(--mono);font-weight:500;}
+.spec__box .pat-tier__amt{font-family:var(--sans);}
+
+/* files */
+.files{padding-block:60px 0;}
+.flist{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px;overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));}
+.flist li{background:#fff;padding:22px 22px;}
+.flist code{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:500;
+  display:block;margin-bottom:7px;word-break:break-all;}
+.flist span{font-size:13.5px;line-height:1.55;color:var(--body);display:block;}
+.flist li.gen code{color:var(--mute);}
+.flow{margin-top:22px;padding:20px 24px;background:var(--ink);color:#B9C6D2;border-radius:3px;
+  font-family:var(--mono);font-size:13px;line-height:1.9;overflow-x:auto;}
+.flow b{color:#fff;font-weight:500;}
+.flow em{color:var(--accent);font-style:normal;}
+
+.notes{padding-block:60px 0;}
+.nlist{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+.nlist li{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--blue);
+  border-radius:3px;padding:20px 24px;font-size:14.5px;line-height:1.65;color:var(--body);}
+.nlist li b{color:var(--ink);font-weight:600;}
+.nlist li.warn{border-left-color:var(--accent);}
+
+.foot{padding-block:54px 60px;font-size:13px;color:var(--mute);line-height:1.6;}
+@media (max-width:640px){.brief{padding-block:36px 28px;}.spec,.files,.notes{padding-block:40px 0;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+
+<style>
+/* ===========================================================
+   Pivot Aide Tax — pricing module
+   Generated markup depends on these classes. Prefix: .pat-
+   Drop into the site stylesheet, or link this file.
+   =========================================================== */
+.pat-pricing{
+  --pat-blue:#019FFF;
+  --pat-blue-deep:#0A6BA8;
+  --pat-accent:#EAE42F;
+  --pat-ink:#0E1621;
+  --pat-body:#4A5763;
+  --pat-mute:#8B98A5;
+  --pat-rule:#E3E8ED;
+  --pat-wash:#F7F9FB;
+  --pat-font:inherit;
+
+  font-family:var(--pat-font);
+  color:var(--pat-ink);
+  max-width:1160px;
+  margin-inline:auto;
+  padding-block:72px;
+  padding-inline:24px;
+}
+.pat-pricing *,.pat-pricing *::before,.pat-pricing *::after{box-sizing:border-box;}
+
+/* ---- section head ---- */
+.pat-head{margin:0 0 40px;}
+.pat-head__eyebrow{
+  display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pat-blue-deep);
+}
+.pat-head__eyebrow::before{content:"";width:26px;height:2px;background:var(--pat-blue);}
+.pat-head__title{font-size:clamp(26px,3.4vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin:0 0 10px;text-wrap:balance;}
+.pat-head__form{font-size:14px;color:var(--pat-mute);margin:0;letter-spacing:.02em;}
+
+/* ---- tier grid ---- */
+.pat-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));align-items:stretch;}
+.pat-grid--two{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+.pat-tier{
+  position:relative;display:flex;flex-direction:column;
+  background:#fff;border:1px solid var(--pat-rule);border-radius:4px;padding:32px 26px 28px;
+}
+.pat-tier::before{content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:3px;background:var(--pat-rule);border-radius:4px 4px 0 0;}
+.pat-tier--flagged{border-color:#CBE9FF;}
+.pat-tier--flagged::before{background:var(--pat-blue);}
+.pat-tier__flag{
+  position:absolute;top:-11px;right:22px;background:var(--pat-accent);color:var(--pat-ink);
+  font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;padding:5px 12px;border-radius:2px;
+}
+.pat-tier__name{font-size:21px;font-weight:700;letter-spacing:-.015em;margin:0 0 4px;}
+.pat-tier__blurb{font-size:13.5px;color:var(--pat-mute);margin:0 0 20px;line-height:1.5;}
+.pat-tier__price{
+  display:flex;align-items:baseline;gap:3px;margin:0 0 22px;padding-bottom:20px;
+  border-bottom:1px solid var(--pat-rule);font-variant-numeric:tabular-nums;
+}
+.pat-tier__cur{font-size:19px;font-weight:600;color:var(--pat-body);transform:translateY(-6px);}
+.pat-tier__amt{font-size:40px;font-weight:700;letter-spacing:-.03em;line-height:1;}
+.pat-tier__carry{font-size:13.5px;font-weight:700;color:var(--pat-ink);margin:0 0 12px;}
+.pat-tier__list{list-style:none;margin:0 0 26px;padding:0;}
+.pat-tier__list li{position:relative;padding:0 0 10px 20px;font-size:14px;line-height:1.5;color:var(--pat-body);}
+.pat-tier__list li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border:1.5px solid var(--pat-blue);border-radius:50%;}
+.pat-tier__cta{
+  margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:13px 18px;border-radius:3px;text-decoration:none;font-size:14px;font-weight:700;
+  border:1.5px solid var(--pat-blue-deep);color:var(--pat-blue-deep);background:#fff;
+  transition:background .18s ease,color .18s ease;
+}
+.pat-tier__cta:hover{background:var(--pat-blue-deep);color:#fff;}
+.pat-tier--flagged .pat-tier__cta{background:var(--pat-blue-deep);color:#fff;}
+.pat-tier--flagged .pat-tier__cta:hover{background:var(--pat-ink);border-color:var(--pat-ink);}
+
+/* ---- add-on table ---- */
+.pat-tablewrap{overflow-x:auto;border:1px solid var(--pat-rule);border-radius:4px;background:#fff;}
+table.pat-table{width:100%;border-collapse:collapse;min-width:520px;}
+.pat-table caption{text-align:left;padding:22px 24px 0;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pat-blue-deep);}
+.pat-table th{
+  text-align:left;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pat-mute);
+  padding:18px 24px 12px;border-bottom:1px solid var(--pat-rule);
+}
+.pat-table th:last-child,.pat-table td:last-child{text-align:right;}
+.pat-table td{padding:16px 24px;border-bottom:1px solid var(--pat-rule);vertical-align:top;font-size:14.5px;color:var(--pat-body);}
+.pat-table tr:last-child td{border-bottom:0;}
+.pat-table .pat-t__name{color:var(--pat-ink);font-weight:600;display:block;margin-bottom:3px;}
+.pat-table .pat-t__detail{font-size:13px;color:var(--pat-mute);line-height:1.5;}
+.pat-table .pat-t__price{color:var(--pat-ink);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.pat-table .pat-t__unit{display:block;font-size:12px;font-weight:500;color:var(--pat-mute);margin-top:2px;}
+.pat-table .pat-t__quoted{color:var(--pat-body);font-weight:600;font-size:13.5px;white-space:nowrap;}
+
+/* ---- footnote + offer ---- */
+.pat-foot{
+  margin-top:34px;padding:22px 26px;background:#fff;border:1px solid var(--pat-rule);
+  border-left:3px solid var(--pat-accent);border-radius:3px;
+  font-size:14px;line-height:1.65;color:var(--pat-body);
+}
+.pat-offer{
+  margin-top:20px;padding:22px 26px;background:var(--pat-ink);color:#fff;border-radius:3px;
+  display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;
+}
+.pat-offer__h{font-size:16px;font-weight:700;margin:0;letter-spacing:-.01em;}
+.pat-offer__b{font-size:14px;line-height:1.6;margin:0;color:#B9C6D2;max-width:60ch;}
+
+@media (max-width:640px){
+  .pat-pricing{padding-block:52px;}
+  .pat-tier__amt{font-size:34px;}
+}
+
+</style>
+
+<header class="spine">
+  <div class="spine__in">
+    <div class="spine__mark">
+      <span class="spine__dot"></span>
+      <p class="spine__name">Pivot Aide Tax</p>
+    </div>
+    <p class="spine__ref">Pricing revision &middot; 2026 season &middot; <b>Draft A</b></p>
+  </div>
+</header>
+
+<div class="wrap brief">
+  <h1>Revised filing fees for the 2026 season</h1>
+  <p>
+    The current ladder sits under the market at every rung &mdash; a $200 floor against a
+    <strong>$281</strong> benchmark for a plain 1040, and an 1120-S at $750 against
+    <strong>$1,123</strong>. This draft resets all six tiers and the add-ons.
+  </p>
+  <p>
+    It also moves every price into <strong>one data file</strong>. Today the same numbers are
+    written out by hand on the homepage, File Taxes and Business &mdash; three copies that will
+    eventually disagree with each other in front of a client.
+  </p>
+</div>
+
+<div class="wrap">
+  <h2 class="sec">What changes</h2>
+  <div class="chg">
+    <table class="chgt">
+      <thead>
+        <tr><th scope="col">Tier</th><th scope="col" class="num">Current</th><th scope="col" class="num">Proposed</th><th scope="col" class="num">Change</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Essential</td><td class="num old">$200</td><td class="num new">$295</td><td class="num pct">+48%</td></tr>
+      <tr><td>Standard</td><td class="num old">$350</td><td class="num new">$425</td><td class="num pct">+21%</td></tr>
+      <tr><td>Premium</td><td class="num old">$450</td><td class="num new">$595</td><td class="num pct">+32%</td></tr>
+      <tr><td>Self-Employed</td><td class="num old">$550</td><td class="num new">$750</td><td class="num pct">+36%</td></tr>
+      <tr><td>Business</td><td class="num old">$750</td><td class="num new">$1,150</td><td class="num pct">+53%</td></tr>
+      <tr><td>Business Pro</td><td class="num old">$1,250</td><td class="num new">$1,950</td><td class="num pct">+56%</td></tr>
+      <tr><td>Additional state return</td><td class="num old">$75</td><td class="num new">$95</td><td class="num pct">+27%</td></tr>
+      <tr><td>Amended return (1040-X)</td><td class="num old">$250</td><td class="num new">$395</td><td class="num pct">+58%</td></tr>
+      <tr><td>In-season rush</td><td class="num old">$150</td><td class="num new">$250</td><td class="num pct">+67%</td></tr>
+      <tr><td>Audit Shield</td><td class="num old">$75</td><td class="num new">$95</td><td class="num pct">+27%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="wrap spec">
+  <p class="spec__cap">Live preview &middot; buttons inert in this document; they point at file-room.html on the site</p>
+  <div class="spec__box">
+<!-- GENERATED by build-pricing.mjs from pricing.json — do not edit by hand -->
+<section class="pat-pricing" id="pricing-individual">
+  <div class="pat-head">
+    <p class="pat-head__eyebrow">Pricing</p>
+    <h2 class="pat-head__title">Individual Tax Filing</h2>
+    <p class="pat-head__form">Form 1040</p>
+  </div>
+  <div class="pat-grid">
+      <article class="pat-tier">
+        <h3 class="pat-tier__name">Essential</h3>
+        <p class="pat-tier__blurb">For simple returns</p>
+        <p class="pat-tier__price"><span class="pat-tier__cur">$</span><span class="pat-tier__amt">295</span></p>
+        <ul class="pat-tier__list">
+          <li>W-2 income</li>
+          <li>Unemployment (1099-G)</li>
+          <li>Standard credits &amp; deductions</li>
+          <li>E-file + e-signature portal</li>
+          <li>One state included</li>
+          <li>No Schedule C or E</li>
+        </ul>
+        <a class="pat-tier__cta" href="#" onclick="return false" aria-disabled="true">Start QuickPrepare &rarr;</a>
+      </article>
+      <article class="pat-tier">
+        <h3 class="pat-tier__name">Standard</h3>
+        <p class="pat-tier__blurb">For most employees and families</p>
+        <p class="pat-tier__price"><span class="pat-tier__cur">$</span><span class="pat-tier__amt">425</span></p>
+        <p class="pat-tier__carry">Everything in Essential, plus:</p>
+        <ul class="pat-tier__list">
+          <li>Multiple W-2s</li>
+          <li>HSA (Form 8889)</li>
+          <li>Schedule A — itemised deductions</li>
+          <li>Retirement distributions (1099-R)</li>
+          <li>Live expert Q&amp;A</li>
+          <li>Document review checklist</li>
+        </ul>
+        <a class="pat-tier__cta" href="#" onclick="return false" aria-disabled="true">Start QuickPrepare &rarr;</a>
+      </article>
+      <article class="pat-tier pat-tier--flagged">
+        <span class="pat-tier__flag">Most chosen</span>
+        <h3 class="pat-tier__name">Premium</h3>
+        <p class="pat-tier__blurb">For mixed income</p>
+        <p class="pat-tier__price"><span class="pat-tier__cur">$</span><span class="pat-tier__amt">595</span></p>
+        <p class="pat-tier__carry">Everything in Standard, plus:</p>
+        <ul class="pat-tier__list">
+          <li>Investments — 1099-DIV / INT / B</li>
+          <li>1099-B consolidated statements</li>
+          <li>Capital gains, Schedules B and D</li>
+          <li>Schedule E — one rental property</li>
+          <li>Rental &amp; investment deduction support</li>
+          <li>Priority support and final review</li>
+        </ul>
+        <a class="pat-tier__cta" href="#" onclick="return false" aria-disabled="true">Start QuickPrepare &rarr;</a>
+      </article>
+      <article class="pat-tier">
+        <h3 class="pat-tier__name">Self-Employed</h3>
+        <p class="pat-tier__blurb">For 1099 and Schedule C filers</p>
+        <p class="pat-tier__price"><span class="pat-tier__cur">$</span><span class="pat-tier__amt">750</span></p>
+        <p class="pat-tier__carry">Everything in Premium, plus:</p>
+        <ul class="pat-tier__list">
+          <li>Schedule C — sole proprietor</li>
+          <li>Home office and vehicle</li>
+          <li>Depreciation and asset schedule</li>
+          <li>Self-employment tax</li>
+          <li>Next year's quarterly estimates set up</li>
+        </ul>
+        <a class="pat-tier__cta" href="#" onclick="return false" aria-disabled="true">Start QuickPrepare &rarr;</a>
+      </article>
+  </div>
+</section>
+
+<!-- GENERATED by build-pricing.mjs from pricing.json — do not edit by hand -->
+<section class="pat-pricing" id="pricing-business">
+  <div class="pat-head">
+    <p class="pat-head__eyebrow">Pricing</p>
+    <h2 class="pat-head__title">Business Tax Filing</h2>
+    <p class="pat-head__form">1065 / 1120 / 1120-S</p>
+  </div>
+  <div class="pat-grid pat-grid--two">
+      <article class="pat-tier">
+        <h3 class="pat-tier__name">Business</h3>
+        <p class="pat-tier__blurb">For entities and business owners</p>
+        <p class="pat-tier__price"><span class="pat-tier__cur">$</span><span class="pat-tier__amt">1,150</span></p>
+        <ul class="pat-tier__list">
+          <li>1065, 1120, or 1120-S return</li>
+          <li>Owner / officer W-2 support</li>
+          <li>Schedule C or E as applicable</li>
+          <li>Up to 3 basic K-1s included</li>
+          <li>Year-end entity compliance checklist</li>
+          <li>One state included</li>
+        </ul>
+        <a class="pat-tier__cta" href="#" onclick="return false" aria-disabled="true">Start QuickPrepare &rarr;</a>
+      </article>
+      <article class="pat-tier">
+        <h3 class="pat-tier__name">Business Pro</h3>
+        <p class="pat-tier__blurb">For complex and multi-state entities</p>
+        <p class="pat-tier__price"><span class="pat-tier__cur">$</span><span class="pat-tier__amt">1,950</span></p>
+        <p class="pat-tier__carry">Everything in Business, plus:</p>
+        <ul class="pat-tier__list">
+          <li>Multi-state apportionment</li>
+          <li>More than 3 K-1s, complex allocations</li>
+          <li>Schedule D — covered, non-covered and PTP transactions</li>
+          <li>FBAR and foreign form reporting</li>
+          <li>Virtual currency transactions</li>
+          <li>Hedge fund reporting and complex / HNI returns</li>
+        </ul>
+        <a class="pat-tier__cta" href="#" onclick="return false" aria-disabled="true">Start QuickPrepare &rarr;</a>
+      </article>
+  </div>
+</section>
+
+<!-- GENERATED by build-pricing.mjs from pricing.json — do not edit by hand -->
+<section class="pat-pricing" id="pricing-addons">
+  <div class="pat-head">
+    <p class="pat-head__eyebrow">Also available</p>
+    <h2 class="pat-head__title">Add-Ons &amp; Special Scopes</h2>
+  </div>
+  <div class="pat-tablewrap">
+    <table class="pat-table">
+      <thead>
+        <tr><th scope="col">Scope</th><th scope="col">Fee</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><span class="pat-t__name">Additional state return</span><span class="pat-t__detail">Per state, beyond the one included</span></td>
+        <td><span class="pat-t__price">$95<span class="pat-t__unit">per state</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="pat-t__name">File an extension</span><span class="pat-t__detail">Credited toward your return when you file with us</span></td>
+        <td><span class="pat-t__price">$100</span></td>
+      </tr>
+      <tr>
+        <td><span class="pat-t__name">Amended return (1040-X)</span><span class="pat-t__detail">Correcting a return already filed</span></td>
+        <td><span class="pat-t__price">$395</span></td>
+      </tr>
+      <tr>
+        <td><span class="pat-t__name">In-season rush</span><span class="pat-t__detail">Completed inside 72 hours, subject to capacity</span></td>
+        <td><span class="pat-t__price">$250</span></td>
+      </tr>
+      <tr>
+        <td><span class="pat-t__name">Audit Shield</span><span class="pat-t__detail">Representation on the return you file with us</span></td>
+        <td><span class="pat-t__price">$95<span class="pat-t__unit">per year</span></span></td>
+      </tr>
+      <tr>
+        <td><span class="pat-t__name">Prior-year catch-up return</span><span class="pat-t__detail">Per tax year, priced at the matching tier</span></td>
+        <td><span class="pat-t__quoted">Tier rate</span></td>
+      </tr>
+      <tr>
+        <td><span class="pat-t__name">Complex K-1s · foreign income · bookkeeping cleanup</span><span class="pat-t__detail">Scope varies materially by file</span></td>
+        <td><span class="pat-t__quoted">Quoted after scope check</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="pat-foot">All prices are flat fees quoted before work begins. One state return is included in every tier. Scope is confirmed at document review — if your return needs a different tier, we tell you before we start, not after.</p>
+  <div class="pat-offer">
+    <p class="pat-offer__h">Bookkeeping clients file at half price</p>
+    <p class="pat-offer__b">Monthly bookkeeping clients receive their annual entity return at 50% off, up to $600.</p>
+  </div>
+</section>
+
+  </div>
+</div>
+
+<div class="wrap files">
+  <h2 class="sec">How it's built</h2>
+  <ul class="flist">
+    <li><code>pricing.json</code><span>Source of truth. Every price, tier, feature and add-on. The only file anyone edits.</span></li>
+    <li><code>build-pricing.mjs</code><span>Node 18+, zero dependencies. Regenerates the partials and prints a change report.</span></li>
+    <li><code>pricing.css</code><span>Styles for the generated markup. Class prefix <code style="display:inline">.pat-</code>, no collisions.</span></li>
+    <li class="gen"><code>partials/pricing-individual.html</code><span>Generated. 1040 tiers.</span></li>
+    <li class="gen"><code>partials/pricing-business.html</code><span>Generated. Entity return tiers.</span></li>
+    <li class="gen"><code>partials/pricing-addons.html</code><span>Generated. Add-on table, footnote, bookkeeping offer.</span></li>
+  </ul>
+  <p class="flow">
+    edit <b>pricing.json</b> &nbsp;&rarr;&nbsp; run <b>node build-pricing.mjs</b> &nbsp;&rarr;&nbsp; commit <b>partials/</b><br>
+    <em>never hand-edit anything in partials/ &mdash; the next build overwrites it</em>
+  </p>
+</div>
+
+<div class="wrap notes">
+  <h2 class="sec">For the developer</h2>
+  <ul class="nlist">
+    <li><b>Include the partials server-side or at build time, not by client-side fetch.</b> Pricing is search-relevant content on a tax site &mdash; it needs to be in the served HTML, not assembled in the browser.</li>
+    <li><b>All CTAs are generated from one constant.</b> <code>CTA</code> at the top of <code>build-pricing.mjs</code> currently points at <code>file-room.html</code>. Repoint it once to swap every button &mdash; for example to Stripe Payment Links, so a published price can actually be paid.</li>
+    <li><b>Set <code>--pat-font</code></b> on <code>.pat-pricing</code> if the module shouldn't inherit the page typeface. Everything else themes off the seven variables at the top of <code>pricing.css</code>.</li>
+    <li class="warn"><b>The bookkeeping discount is now capped at $600.</b> Uncapped, 50% off a $1,150 business return gives away $575, and grows with every future increase. The cap lives in <code>conversionOffer</code>.</li>
+    <li class="warn"><b>Strip the old numbers everywhere.</b> Grep the repo for <code>$200</code>, <code>$350</code>, <code>$450</code>, <code>$550</code>, <code>$750</code> and <code>$1,250</code> before shipping &mdash; including meta descriptions, JSON-LD and any alt text.</li>
+  </ul>
+</div>
+
+<p class="wrap foot">
+  Benchmarks from the National Society of Accountants fee survey, inflation-adjusted.
+  Draft for review &mdash; not yet published to pivotaidetax.com.
+</p>
+
+<style>
+/* Printable: File > Print > Save as PDF gives a clean handout */
+@media print{
+  html,body{background:#fff!important;}
+  .spine{position:static!important;}
+  .spec__box{box-shadow:none!important;}
+  .wrap,.spec,.files,.notes{padding-block:18px!important;}
+  .spec__box .pat-pricing{padding-block:26px!important;}
+  .pat-tier,.flist li,.nlist li,.chg,.spec__box{break-inside:avoid;}
+  .flow,.pat-offer{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @page{margin:14mm;}
+}
+</style>
+</body>
+</html>

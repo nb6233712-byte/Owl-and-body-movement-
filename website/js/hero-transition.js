@@ -40,15 +40,7 @@
       const heroText = hero ? hero.querySelector('.shell.in > div:first-child') : null;
       const owlContainer = document.getElementById('owl-container');
 
-      if (!isDesktop) {
-        if (hero) gsap.set(hero, { clearProps: 'all' });
-        if (section2) gsap.set(section2, { clearProps: 'all' });
-        if (heroText) gsap.set(heroText, { clearProps: 'all' });
-        if (owlContainer) gsap.set(owlContainer, { clearProps: 'all' });
-        return;
-      }
-
-      if (!hero || !section2 || !heroText || !owlContainer) return;
+      if (!hero || !section2) return;
 
       // Section 02 Internal Stagger Targets
       const s2Eyebrow = section2.querySelector('.sechead .eyebrow');
@@ -58,6 +50,106 @@
       const rightCard = section2.querySelector('.versus > div.pat') || section2.querySelector('.versus > div:nth-child(2)');
       const s2Patsays = section2.querySelector('.patsays');
       const s2Wait    = section2.querySelector('.wait');
+
+      if (!isDesktop) {
+        // Mobile & Small Viewport (< 768px): Responsive fluid scroll transitions
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          if (hero) gsap.set(hero, { clearProps: 'all' });
+          if (section2) gsap.set(section2, { clearProps: 'all' });
+          return;
+        }
+
+        // 1. Hero text & Mascot Pat smooth scroll exit
+        if (heroText || owlContainer) {
+          gsap.to([heroText, owlContainer].filter(Boolean), {
+            y: -30,
+            opacity: 0.25,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: hero,
+              start: 'top top',
+              end: 'bottom 40%',
+              scrub: 0.8
+            }
+          });
+        }
+
+        // 2. Section 02 Frosted Sheet Reveal
+        const s2HeadGroup = [s2Eyebrow, s2Heading, s2Lede].filter(Boolean);
+        if (s2HeadGroup.length) {
+          gsap.fromTo(s2HeadGroup,
+            { y: 28, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.08,
+              duration: 0.65,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: section2,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        // 3. Compliance vs Strategy Cards: Opposing slide-in
+        if (leftCard) {
+          gsap.fromTo(leftCard,
+            { x: -24, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.65,
+              ease: 'back.out(1.3)',
+              scrollTrigger: {
+                trigger: leftCard,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+        if (rightCard) {
+          gsap.fromTo(rightCard,
+            { x: 24, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.65,
+              ease: 'back.out(1.3)',
+              scrollTrigger: {
+                trigger: rightCard,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        // 4. Mascot Quote Banner & CTAs
+        const s2Bottom = [s2Patsays, s2Wait].filter(Boolean);
+        if (s2Bottom.length) {
+          gsap.fromTo(s2Bottom,
+            { y: 20, scale: 0.96, opacity: 0 },
+            {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              stagger: 0.1,
+              duration: 0.6,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: s2Bottom[0],
+                start: 'top 88%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+        return;
+      }
 
       // ─────────────────────────────────────────────────────────────
       // MASTER SCRUBBED TIMELINE (Pins Hero while Section 02 climbs)
@@ -221,13 +313,47 @@
       const yearLede = yearSection.querySelector('.sechead .lede');
 
       if (!isDesktop) {
-        // Clear pins and transforms on mobile / reduced-motion
-        gsap.set([splitSection, yearSection, textCol, photo, dimOverlay], { clearProps: 'all' });
-        if (yearEyebrow) gsap.set(yearEyebrow, { clearProps: 'all' });
-        if (yearHeading) gsap.set(yearHeading, { clearProps: 'all' });
-        if (yearLede) gsap.set(yearLede, { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set([splitSection, yearSection, textCol, photo, dimOverlay], { clearProps: 'all' });
+          return;
+        }
 
-        // Natural entrance fade for mobile/tablet
+        if (photo) {
+          gsap.fromTo(photo,
+            { scale: 1.05, y: 16, opacity: 0.8 },
+            {
+              scale: 1.0,
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: splitSection,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        if (textCol) {
+          gsap.fromTo(textCol.children,
+            { y: 22, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.08,
+              duration: 0.6,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: textCol,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
         const textElements = [yearEyebrow, yearHeading, yearLede].filter(Boolean);
         if (textElements.length) {
           gsap.fromTo(textElements,
@@ -235,13 +361,13 @@
             {
               y: 0,
               opacity: 1,
-              stagger: 0.1,
+              stagger: 0.08,
               duration: 0.6,
-              ease: 'power2.out',
+              ease: 'power3.out',
               scrollTrigger: {
                 trigger: yearSection,
                 start: 'top 85%',
-                toggleActions: 'play none none reverse'
+                toggleActions: 'play none none none'
               }
             }
           );
@@ -374,33 +500,81 @@
       if (!cards.length) return;
 
       if (!isDesktop) {
-        // Fallback for mobile / reduced-motion
-        if (progressBar) gsap.set(progressBar, { clearProps: 'all' });
-        cards.forEach(card => {
-          gsap.set(card, { clearProps: 'all' });
-          const bullets = card.querySelectorAll('li');
-          if (bullets.length) gsap.set(bullets, { clearProps: 'all' });
-          const badge = card.querySelector('.mo');
-          if (badge) gsap.set(badge, { clearProps: 'all' });
-        });
-        if (callout) gsap.set(callout, { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          if (progressBar) gsap.set(progressBar, { clearProps: 'all' });
+          cards.forEach(card => gsap.set(card, { clearProps: 'all' }));
+          if (callout) gsap.set(callout, { clearProps: 'all' });
+          return;
+        }
 
-        // Mobile entrance stagger for vertical cards
-        gsap.fromTo(cards,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.15,
-            duration: 0.6,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: yearSection.querySelector('.cal'),
-              start: 'top 80%',
-              toggleActions: 'play none none none'
+        cards.forEach((card, idx) => {
+          const bullets = card.querySelectorAll('li');
+          const badge = card.querySelector('.mo');
+
+          gsap.fromTo(card,
+            { y: 28, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                onEnter: () => {
+                  card.classList.add('is-active');
+                  if (progressBar) {
+                    gsap.to(progressBar, {
+                      scaleX: (idx + 1) / cards.length,
+                      duration: 0.4,
+                      ease: 'power1.out'
+                    });
+                  }
+                }
+              }
             }
+          );
+
+          if (badge) {
+            gsap.fromTo(badge,
+              { scale: 0.88 },
+              {
+                scale: 1,
+                duration: 0.45,
+                ease: 'back.out(2)',
+                scrollTrigger: { trigger: card, start: 'top 85%' }
+              }
+            );
           }
-        );
+
+          if (bullets.length) {
+            gsap.fromTo(bullets,
+              { x: -10, opacity: 0 },
+              {
+                x: 0,
+                opacity: 1,
+                stagger: 0.05,
+                duration: 0.4,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: card, start: 'top 85%' }
+              }
+            );
+          }
+        });
+
+        if (callout) {
+          gsap.fromTo(callout,
+            { y: 20, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.55,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: callout, start: 'top 88%' }
+            }
+          );
+        }
         return;
       }
 
@@ -729,28 +903,42 @@
       const cards = Array.from(stage.querySelectorAll('.svcs .svc'));
 
       if (!isDesktop) {
-        // Mobile / Tablet / Reduced Motion Fallback
-        if (lensBg) gsap.set(lensBg, { clearProps: 'all' });
-        if (ambientGlow) gsap.set(ambientGlow, { clearProps: 'all' });
-        if (introLayer) gsap.set(introLayer, { clearProps: 'all' });
-        if (servicesLayer) gsap.set(servicesLayer, { clearProps: 'all' });
-        if (sechead) gsap.set(sechead, { clearProps: 'all' });
-        if (servicesHeading) gsap.set(servicesHeading, { clearProps: 'all' });
-        if (servicesSub) gsap.set(servicesSub, { clearProps: 'all' });
-        cards.forEach(card => gsap.set(card, { clearProps: 'all' }));
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          cards.forEach(card => gsap.set(card, { clearProps: 'all' }));
+          return;
+        }
 
-        // Lightweight entrance for mobile
-        if (cards.length) {
-          gsap.fromTo(cards,
-            { y: 30, opacity: 0 },
+        const headEls = [sechead, servicesHeading, servicesSub].filter(Boolean);
+        if (headEls.length) {
+          gsap.fromTo(headEls,
+            { y: 22, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              stagger: 0.1,
-              duration: 0.6,
-              ease: 'power2.out',
+              stagger: 0.08,
+              duration: 0.55,
+              ease: 'power3.out',
               scrollTrigger: {
-                trigger: stage.querySelector('.svcs'),
+                trigger: stage,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        if (cards.length) {
+          gsap.fromTo(cards,
+            { y: 32, opacity: 0, scale: 0.96 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              stagger: 0.1,
+              duration: 0.65,
+              ease: 'back.out(1.3)',
+              scrollTrigger: {
+                trigger: stage.querySelector('.svcs') || stage,
                 start: 'top 85%',
                 toggleActions: 'play none none none'
               }
@@ -1248,6 +1436,7 @@
     run(initBusinessTransitions);
     run(initAppointmentsTransitions);
     run(initFileRoomTransitions);
+    run(initResourcesTransitions);
     run(initLegalPoliciesTransitions);
 
     // Recalculate all ScrollTrigger start/end triggers accurately
@@ -1562,9 +1751,29 @@
         };
       },
 
-      // Fallback for screens < 1024px: standard native scrolling
+      // Fallback for screens < 1024px: smooth staggered entrance
       '(max-width: 1023px)': function () {
-        gsap.set([pinStage, darkSheet, ...testimonialCards, ...staggerTargets], { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set([pinStage, darkSheet, ...testimonialCards, ...staggerTargets], { clearProps: 'all' });
+          return;
+        }
+        if (staggerTargets.length) {
+          gsap.fromTo(staggerTargets,
+            { y: 24, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.08,
+              duration: 0.55,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: darkSheet,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
       }
     });
   }
@@ -1719,9 +1928,29 @@
         };
       },
 
-      // Fallback for screens < 1024px: standard native scrolling
+      // Fallback for screens < 1024px: smooth staggered entrance
       '(max-width: 1023px)': function () {
-        gsap.set([pinStage, darkSheet, splitEl, ...whiteRecedingTargets, ...allStaggerTargets], { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set([pinStage, darkSheet, splitEl, ...whiteRecedingTargets, ...allStaggerTargets], { clearProps: 'all' });
+          return;
+        }
+        if (allStaggerTargets.length) {
+          gsap.fromTo(allStaggerTargets,
+            { y: 24, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.07,
+              duration: 0.55,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: darkSheet,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
       }
     });
   }
@@ -1986,10 +2215,32 @@
         };
       },
 
-      // 5. Mobile Fallback (< 768px): standard natural document flow
+      // 5. Mobile Fallback (< 768px): smooth staggered entrance
       '(max-width: 767px)': function () {
-        gsap.set(allTargets, { clearProps: 'all' });
-        if (colHeaders.length) gsap.set(colHeaders, { clearProps: 'letterSpacing,color' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set(allTargets, { clearProps: 'all' });
+          if (colHeaders.length) gsap.set(colHeaders, { clearProps: 'letterSpacing,color' });
+          return;
+        }
+
+        const mobileTargets = [brandCol, ...navCols, legalNote].filter(Boolean);
+        if (mobileTargets.length) {
+          gsap.fromTo(mobileTargets,
+            { y: 18, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.08,
+              duration: 0.55,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: footer,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
       }
     });
   }
@@ -2139,9 +2390,44 @@
         };
       },
 
-      // Fallback for mobile & small screens (< 900px): clean native stacked flow
+      // Mobile & small screens (< 900px): clean native stacked flow with smooth entrance
       '(max-width: 899px)': function () {
-        gsap.set(allTargets, { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set(allTargets, { clearProps: 'all' });
+          return;
+        }
+
+        if (heroContent) {
+          gsap.fromTo(heroContent.children,
+            { y: 22, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out' }
+          );
+        }
+
+        if (quickprepareCard) {
+          gsap.fromTo(quickprepareCard,
+            { y: 30, opacity: 0, scale: 0.96 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.65, delay: 0.2, ease: 'back.out(1.3)' }
+          );
+        }
+
+        if (docBand && docHeadline) {
+          gsap.fromTo([docEyebrow, docHeadline].filter(Boolean),
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              stagger: 0.08,
+              duration: 0.6,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: docBand,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
       }
     });
   }
@@ -4891,8 +5177,74 @@
 
       // ── MOBILE OR PREFERS-REDUCED-MOTION FALLBACK ───────────────
       if (!isDesktop) {
-        gsap.set(allAnimatable, { clearProps: 'all' });
-        feeSteps.forEach(step => step.classList.add('is-lit'));
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set(allAnimatable, { clearProps: 'all' });
+          feeSteps.forEach(step => step.classList.add('is-lit'));
+          return function () {
+            gsap.set(allAnimatable, { clearProps: 'all' });
+            feeSteps.forEach(step => step.classList.remove('is-lit'));
+          };
+        }
+
+        const leftGroup = [...leftTypo, ...feeBullets, ...ctas].filter(Boolean);
+        if (leftGroup.length) {
+          gsap.fromTo(leftGroup,
+            { y: 20, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.06,
+              duration: 0.55,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: feeDarkSheet,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        if (feeDossierCard) {
+          gsap.fromTo(feeDossierCard,
+            { y: 30, opacity: 0, scale: 0.97 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.65,
+              ease: 'back.out(1.4)',
+              scrollTrigger: {
+                trigger: feeDossierCard,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                onEnter: () => {
+                  feeSteps.forEach((s, idx) => {
+                    setTimeout(() => s.classList.add('is-lit'), idx * 120);
+                  });
+                }
+              }
+            }
+          );
+        }
+
+        if (feePatsays) {
+          gsap.fromTo(feePatsays,
+            { y: 20, opacity: 0, scale: 0.96 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.55,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: feePatsays,
+                start: 'top 88%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
         return function () {
           gsap.set(allAnimatable, { clearProps: 'all' });
           feeSteps.forEach(step => step.classList.remove('is-lit'));
@@ -6219,6 +6571,158 @@
   // ─────────────────────────────────────────────────────────────
   // BUSINESS PAGE: KINETIC HERO, 3D PACKAGE CASCADE & TABLE FLOW
   // ─────────────────────────────────────────────────────────────
+  
+  // ─────────────────────────────────────────────────────────────
+  // TAX RESOURCES: DESK PARALLAX, DEADLINES CASCADE & KEY FIGURES
+  // ─────────────────────────────────────────────────────────────
+  function initResourcesTransitions() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    const sechead = document.querySelector('#main > section.tight:first-child .sechead');
+    const imgband = document.querySelector('#main .imgband');
+    const datesSection = document.querySelector('#main section.night.tight .dates');
+    const tables = document.querySelectorAll('#main .ptab tbody tr');
+    const cards = document.querySelectorAll('#main .card, #main .question, #main figure');
+
+    if (!sechead && !datesSection && !imgband) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // 1. Hero Entrance
+    if (sechead) {
+      gsap.fromTo(sechead.children,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.08, duration: 0.65, ease: 'power3.out' }
+      );
+    }
+
+    // 2. 2026 Reference Desk Image Band Parallax
+    if (imgband) {
+      gsap.fromTo(imgband,
+        { backgroundPositionY: '65%' },
+        {
+          backgroundPositionY: '35%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: imgband,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        }
+      );
+      const inner = imgband.querySelector('.imgband-inner');
+      if (inner) {
+        gsap.fromTo(inner.children,
+          { y: 20, opacity: 0 },
+          {
+            y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+            scrollTrigger: { trigger: imgband, start: 'top 80%', toggleActions: 'play none none none' }
+          }
+        );
+      }
+    }
+
+    // 3. Upcoming Deadlines (.dates .d) Stagger & Gold Soon Pulse
+    if (datesSection) {
+      const dateItems = datesSection.querySelectorAll('.d');
+      if (dateItems.length) {
+        gsap.fromTo(dateItems,
+          { x: -25, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            stagger: 0.08,
+            duration: 0.55,
+            ease: 'back.out(1.2)',
+            scrollTrigger: {
+              trigger: datesSection,
+              start: 'top 82%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+
+        // Gold pulse for imminent deadlines (.soon)
+        const soonItems = datesSection.querySelectorAll('.d.soon');
+        soonItems.forEach(item => {
+          gsap.fromTo(item,
+            { boxShadow: '0 0 0 rgba(234, 228, 47, 0)' },
+            {
+              boxShadow: '0 0 18px rgba(234, 228, 47, 0.28)',
+              duration: 1.6,
+              repeat: -1,
+              yoyo: true,
+              ease: 'sine.inOut'
+            }
+          );
+        });
+      }
+    }
+
+    // 4. Tax Reference Table Rows Cascade
+    if (tables.length) {
+      gsap.fromTo(tables,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.03,
+          duration: 0.45,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: tables[0],
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    }
+
+    // 5. Question & Guide Cards Cascade & Hover/Touch Physics
+    if (cards.length) {
+      gsap.fromTo(cards,
+        { y: 35, opacity: 0, scale: 0.96 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          stagger: 0.08,
+          duration: 0.6,
+          ease: 'back.out(1.3)',
+          scrollTrigger: {
+            trigger: cards[0],
+            start: 'top 82%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            y: -6,
+            boxShadow: '0 18px 36px -8px rgba(1, 159, 255, 0.2)',
+            borderColor: '#019FFF',
+            duration: 0.25,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            y: 0,
+            boxShadow: '0 4px 16px rgba(10, 28, 40, 0.04)',
+            borderColor: '',
+            duration: 0.3,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          });
+        });
+      });
+    }
+  }
+
   function initBusinessTransitions() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     const hero = document.querySelector('#main > section.night.tight');
@@ -6533,10 +7037,12 @@
     const appToolbar = document.querySelector('.app-toolbar');
     if (!appDevice && !appToolbar) return;
 
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     // 1. App Toolbar Entrance
     if (appToolbar) {
       gsap.fromTo(appToolbar,
-        { y: -30, opacity: 0 },
+        { y: -25, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
       );
     }
@@ -6550,8 +7056,13 @@
       );
     }
 
-    // 3. Interactive 3D Device Tilt
+    // 3. Device Mockup Smooth Entrance on both Mobile and Desktop
     if (appDevice) {
+      gsap.fromTo(appDevice,
+        { y: 35, opacity: 0, scale: 0.98 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.75, ease: 'power3.out', delay: 0.2 }
+      );
+
       const stage = appDevice.closest('.app-stage-container') || appDevice.parentElement;
       if (stage) {
         stage.style.perspective = '1400px';
@@ -6657,9 +7168,52 @@
       const { isDesktop, isTablet } = context.conditions;
 
       if (!isDesktop && !isTablet) {
-        // Mobile fallback (< 768px) and prefers-reduced-motion
-        gsap.set([patsays, verification, ...cards], { clearProps: 'all' });
-        if (footer) gsap.set([brandCol, ...navCols, legalNote].filter(Boolean), { clearProps: 'all' });
+        // Mobile fallback (< 768px) with smooth entrance
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set([patsays, verification, ...cards], { clearProps: 'all' });
+          if (footer) gsap.set([brandCol, ...navCols, legalNote].filter(Boolean), { clearProps: 'all' });
+          return;
+        }
+
+        const mobileTargets = [patsays, verification, ...cards].filter(Boolean);
+        if (mobileTargets.length) {
+          gsap.fromTo(mobileTargets,
+            { y: 22, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.08,
+              duration: 0.55,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: stage,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        if (footer) {
+          const footerTargets = [brandCol, ...navCols, legalNote].filter(Boolean);
+          if (footerTargets.length) {
+            gsap.fromTo(footerTargets,
+              { y: 18, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                stagger: 0.06,
+                duration: 0.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                  trigger: footer,
+                  start: 'top 90%',
+                  toggleActions: 'play none none none'
+                }
+              }
+            );
+          }
+        }
         return;
       }
 
@@ -7899,9 +8453,67 @@
         );
       },
 
-      // Mobile Fallback (< 768px): Natural vertical flow
+      // Mobile Fallback (< 768px): Natural vertical flow with smooth entrance
       '(max-width: 767px)': function () {
-        gsap.set(allTargets, { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set(allTargets, { clearProps: 'all' });
+          return;
+        }
+
+        const headGroup = [eyebrow, h2, lede, stepLabel].filter(Boolean);
+        if (headGroup.length) {
+          gsap.fromTo(headGroup,
+            { y: 20, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.06,
+              duration: 0.5,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: stage,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        if (cards.length) {
+          gsap.fromTo(cards,
+            { y: 25, opacity: 0, scale: 0.97 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              stagger: 0.06,
+              duration: 0.55,
+              ease: 'back.out(1.3)',
+              scrollTrigger: {
+                trigger: cards[0],
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+
+        if (drawer) {
+          gsap.fromTo(drawer,
+            { y: 20, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: drawer,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
       }
     });
 
@@ -9378,11 +9990,76 @@
         };
       },
 
-      // ── 3. Mobile Fallback (< 768px): Natural vertical document flow ──
+      // ── 3. Mobile (< 768px): Natural flow with smooth ScrollTrigger reveals ──
       '(max-width: 767px)': function () {
-        gsap.set(allTargets, { clearProps: 'all' });
-        if (heroStage) gsap.set(heroStage, { clearProps: 'all' });
-        if (guardCallout) gsap.set(guardCallout, { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set(allTargets, { clearProps: 'all' });
+          if (heroStage) gsap.set(heroStage, { clearProps: 'all' });
+          if (guardCallout) gsap.set(guardCallout, { clearProps: 'all' });
+          return;
+        }
+
+        const mobDeckTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: philStage,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+
+        if (deck) {
+          mobDeckTl.fromTo(deck,
+            { y: 30, opacity: 0.95 },
+            { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' },
+            0
+          );
+        }
+
+        if (eyebrow) {
+          mobDeckTl.fromTo(eyebrow,
+            { y: 15, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' },
+            0.1
+          );
+        }
+
+        if (title) {
+          mobDeckTl.fromTo(title,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' },
+            0.15
+          );
+        }
+
+        const textEls = [lede, desc1, desc2].filter(Boolean);
+        if (textEls.length) {
+          mobDeckTl.fromTo(textEls,
+            { y: 18, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.08, duration: 0.38, ease: 'power2.out' },
+            0.2
+          );
+        }
+
+        if (voiceCard) {
+          mobDeckTl.fromTo(voiceCard,
+            { y: 25, opacity: 0, scale: 0.98 },
+            { y: 0, opacity: 1, scale: 1.0, duration: 0.45, ease: 'back.out(1.2)' },
+            0.25
+          );
+        }
+
+        if (voiceItems.length) {
+          mobDeckTl.fromTo(voiceItems,
+            { x: -10, opacity: 0 },
+            { x: 0, opacity: 1, stagger: 0.05, duration: 0.3, ease: 'power2.out' },
+            0.32
+          );
+        }
+
+        return function () {
+          if (mobDeckTl && mobDeckTl.scrollTrigger) mobDeckTl.scrollTrigger.kill();
+          gsap.set(allTargets, { clearProps: 'all' });
+        };
       }
     });
 
@@ -9607,12 +10284,35 @@
         };
       },
 
-      // ── 3. Mobile Fallback (< 768px): Natural vertical document flow ──
+      // ── 3. Mobile Fallback (< 768px): Natural vertical document flow with smooth entrance ──
       '(max-width: 767px)': function () {
-        gsap.set(allTargets, { clearProps: 'all' });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          gsap.set(allTargets, { clearProps: 'all' });
+          return;
+        }
+
+        const mobileElements = [eyebrow, leadH2, climaxH2, divider].filter(Boolean);
+        if (mobileElements.length) {
+          gsap.fromTo(mobileElements,
+            { y: 22, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.08,
+              duration: 0.55,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: stage,
+                start: 'top 82%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
       }
     });
   }
+
   // ─────────────────────────────────────────────────────────────
   // MEET-UNCLE-PAT: PRACTICE & TEAM CREDENTIAL DECK
   // ─────────────────────────────────────────────────────────────
@@ -9631,8 +10331,13 @@
     if (!stage || !container || cards.length === 0) return;
 
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
 
+    if (prefersReduced) {
+      // Skip all animation for accessibility — just show content
+      return;
+    }
+
+    // ── Initial hidden states ──────────────────────────────────────
     if (eyebrow)  gsap.set(eyebrow,  { y: 22, opacity: 0 });
     if (headline) gsap.set(headline, { y: 22, opacity: 0 });
     if (lede)     gsap.set(lede,     { y: 18, opacity: 0 });
@@ -9640,6 +10345,8 @@
     gsap.set(tags,   { letterSpacing: '0.08em' });
     if (ctaWrap)  gsap.set(ctaWrap,  { y: 18, opacity: 0, scale: 0.95 });
 
+    // ── Single timeline triggered on section enter — no pin, no spacer ──
+    // Works identically on desktop, tablet and mobile.
     var tl = gsap.timeline({
       scrollTrigger: {
         id: 'credential-deck-enter',
@@ -9649,18 +10356,44 @@
       }
     });
 
-    if (eyebrow)  tl.to(eyebrow,  { y: 0, opacity: 1, duration: 0.5,  ease: 'power3.out' }, 0);
-    if (headline) tl.to(headline, { y: 0, opacity: 1, duration: 0.5,  ease: 'power3.out' }, 0.08);
-    if (lede)     tl.to(lede,     { y: 0, opacity: 1, duration: 0.45, ease: 'power2.out' }, 0.16);
+    // 1. Eyebrow → Headline → Lede staggered reveal
+    if (eyebrow) {
+      tl.to(eyebrow,
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' },
+        0
+      );
+    }
+    if (headline) {
+      tl.to(headline,
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' },
+        0.08
+      );
+    }
+    if (lede) {
+      tl.to(lede,
+        { y: 0, opacity: 1, duration: 0.45, ease: 'power2.out' },
+        0.16
+      );
+    }
 
+    // 2. Card cascade — left → right with Soraban-style back.out spring
     tl.to(cards,
-      { y: 0, opacity: 1, duration: 0.55, ease: 'back.out(1.4)', stagger: 0.09 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.55,
+        ease: 'back.out(1.4)',
+        stagger: 0.09
+      },
       0.26
     );
+
+    // 3. Tag letter-spacing expansion
     tl.to(tags,
       { letterSpacing: '0.14em', duration: 0.4, ease: 'power2.out', stagger: 0.09 },
       0.34
     );
+
+    // 4. CTA spring pop
     if (ctaWrap) {
       tl.to(ctaWrap,
         { y: 0, opacity: 1, scale: 1.0, duration: 0.55, ease: 'back.out(1.6)' },
@@ -9686,5 +10419,10 @@
   window.initAppointmentsTransitions = initAppointmentsTransitions;
   window.initFileRoomTransitions = initFileRoomTransitions;
   window.initLegalPoliciesTransitions = initLegalPoliciesTransitions;
+  window.initResourcesTransitions = initResourcesTransitions;
 
 })(window, document);
+
+
+
+

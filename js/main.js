@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroEntrance();
   initScrollReveal();
   initLegalNavSpy();
+  initGlobalScrollProgress();
+  initStatCounters();
 });
 
 function initNavigation() {
@@ -34,6 +36,19 @@ function initNavigation() {
       toggleBtn.innerHTML = isOpen
         ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>`
         : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
+
+      if (isOpen) {
+        const items = drawer.querySelectorAll(':scope > a, :scope > .mobile-dropdown-group, :scope > div');
+        items.forEach((item, idx) => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(-10px)';
+          setTimeout(() => {
+            item.style.transition = 'opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, 35 + idx * 30);
+        });
+      }
     });
 
     window.addEventListener('resize', updateDrawerTop);
@@ -874,5 +889,90 @@ function initLegalNavSpy() {
     }
   }, { passive: true });
 }
+
+/* ─────────────────────────────────────────────────────────────
+   GLOBAL READING PROGRESS & STAT COUNTERS
+   ───────────────────────────────────────────────────────────── */
+
+function initGlobalScrollProgress() {
+  let bar = document.getElementById('site-scroll-progress');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'site-scroll-progress';
+    document.body.appendChild(bar);
+  }
+
+  function update() {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0) {
+      const scrolled = (window.scrollY / docHeight) * 100;
+      bar.style.width = `${Math.min(100, Math.max(0, scrolled))}%`;
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+}
+
+function initStatCounters() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const countEls = document.querySelectorAll('[data-counter], .stat-val, .metric-num, .count-up');
+  if (!countEls.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        obs.unobserve(entry.target);
+        animateCounter(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  countEls.forEach(el => observer.observe(el));
+
+  function animateCounter(el) {
+    const raw = el.textContent.trim();
+    const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+    if (isNaN(num)) return;
+
+    const prefix = raw.startsWith('$') ? '$' : '';
+    const suffix = raw.endsWith('%') ? '%' : (raw.endsWith('+') ? '+' : '');
+    const isInt = Number.isInteger(num);
+    const duration = 1200;
+    const startTime = performance.now();
+
+    function step(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = isInt ? Math.round(eased * num) : (eased * num).toFixed(1);
+      el.textContent = `${prefix}${current}${suffix}`;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = raw;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+}
+
+// ── Back-Forward Cache (bfcache) & Navigation Lifecycle ──────────────────
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    if (typeof ScrollTrigger !== 'undefined') {
+      setTimeout(function () {
+        ScrollTrigger.refresh(true);
+      }, 80);
+    }
+  }
+});
+
+window.addEventListener('pagehide', function () {
+  // Suspend smoothly on page hide
+});
 
 
