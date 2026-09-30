@@ -5991,6 +5991,7 @@ footer .fine a:hover {
 }
 
 .newlaw-headline {
+  color: #FFFFFF;
   margin-bottom: 0;
   will-change: transform, opacity;
 }

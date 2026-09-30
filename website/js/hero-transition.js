@@ -3328,13 +3328,13 @@
       }
 
       // ── DESKTOP PINNED SHEET WIPE TIMELINE (>= 1024px) ──
-      // Initial states for fluid curtain reveal
+      // Initial states for fluid curtain reveal: sheet slides from bottom, contents fully styled and ready
       gsap.set(caseSheet, { yPercent: 100, force3D: true });
-      if (caseHeader) gsap.set(caseHeader, { y: 25, opacity: 0, force3D: true });
-      if (caseTable) gsap.set(caseTable, { y: 25, opacity: 0, force3D: true });
-      if (calloutCard) gsap.set(calloutCard, { scale: 0.96, opacity: 0, force3D: true });
-      if (calloutLine) gsap.set(calloutLine, { scaleY: 0, transformOrigin: 'top center', force3D: true });
-      if (patsays) gsap.set(patsays, { y: 20, opacity: 0, force3D: true });
+      if (caseHeader) gsap.set(caseHeader, { y: 0, opacity: 1, force3D: true });
+      if (caseTable) gsap.set(caseTable, { y: 0, opacity: 1, force3D: true });
+      if (calloutCard) gsap.set(calloutCard, { scale: 1, opacity: 1, force3D: true });
+      if (calloutLine) gsap.set(calloutLine, { scaleY: 1, transformOrigin: 'top center', force3D: true });
+      if (patsays) gsap.set(patsays, { y: 0, opacity: 1, force3D: true });
 
       // Master Scrubbed Timeline: Pin stage for +=100vh
       const masterTl = gsap.timeline({
@@ -3345,7 +3345,12 @@
           pin: true,
           scrub: 1.1,
           anticipatePin: 1,
-          invalidateOnRefresh: true
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (self.progress >= 0.20 && caseTable) {
+              animateTableFigures(caseTable);
+            }
+          }
         }
       });
 
@@ -3373,68 +3378,13 @@
       // 3. Incoming White Case Study Sheet Wipe: smoothly slides upward from yPercent: 100 to yPercent: 0 directly over dark stage
       masterTl.to(caseSheet, {
         yPercent: 0,
-        ease: 'none',
+        ease: 'power1.out',
+        duration: 0.45,
         force3D: true
       }, 0);
 
-      // 4. Internal Case Study Stagger & Number Count (Triggered once white card docks)
-      // Eyebrow and title drift upward into view (y: 25px to 0, opacity: 0 to 1, ease: 'power3.out')
-      if (caseHeader) {
-        masterTl.to(caseHeader, {
-          y: 0,
-          opacity: 1,
-          duration: 0.18,
-          ease: 'power3.out',
-          force3D: true
-        }, 0.50);
-      }
-
-      // Financial breakdown table slides up with a subtle 0.08s delay
-      if (caseTable) {
-        masterTl.to(caseTable, {
-          y: 0,
-          opacity: 1,
-          duration: 0.18,
-          ease: 'power3.out',
-          force3D: true,
-          onStart: () => animateTableFigures(caseTable)
-        }, 0.58);
-      }
-
-      // Yellow callout card enters with subtle spring bounce (scale: 0.96 to 1, ease: 'back.out(1.8)')
-      if (calloutCard) {
-        masterTl.to(calloutCard, {
-          scale: 1,
-          opacity: 1,
-          duration: 0.20,
-          ease: 'back.out(1.8)',
-          force3D: true
-        }, 0.60);
-      }
-
-      // Left yellow accent line draws downward (scaleY: 0 to 1)
-      if (calloutLine) {
-        masterTl.to(calloutLine, {
-          scaleY: 1,
-          duration: 0.18,
-          ease: 'power2.out',
-          force3D: true
-        }, 0.64);
-      }
-
-      // Uncle Pat quote drifts in
-      if (patsays) {
-        masterTl.to(patsays, {
-          y: 0,
-          opacity: 1,
-          duration: 0.16,
-          ease: 'power2.out',
-          force3D: true
-        }, 0.68);
-      }
-
-      // 5. Stationary Reading Pause: Holds docked card in full view
-      masterTl.to({}, { duration: 0.25 }, 0.75);
+      // 4. Stationary Reading Pause: Holds docked card in full view
+      masterTl.to({}, { duration: 0.55 }, 0.45);
 
       // Interactive number roll-up for breakdown table
       let figuresRolled = false;
@@ -6573,153 +6523,257 @@
   // ─────────────────────────────────────────────────────────────
   
   // ─────────────────────────────────────────────────────────────
-  // TAX RESOURCES: DESK PARALLAX, DEADLINES CASCADE & KEY FIGURES
+  // TAX RESOURCES: COMPREHENSIVE SCROLL CHOREOGRAPHY
+  // Hero · Parallax Band · Deadlines · Reference Figures · Cards
+  // Checklists · Official Tools · Uncle Pat Quote · Callout
   // ─────────────────────────────────────────────────────────────
   function initResourcesTransitions() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-    const sechead = document.querySelector('#main > section.tight:first-child .sechead');
-    const imgband = document.querySelector('#main .imgband');
-    const datesSection = document.querySelector('#main section.night.tight .dates');
-    const tables = document.querySelectorAll('#main .ptab tbody tr');
-    const cards = document.querySelectorAll('#main .card, #main .question, #main figure');
-
-    if (!sechead && !datesSection && !imgband) return;
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // 1. Hero Entrance
-    if (sechead) {
-      gsap.fromTo(sechead.children,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.08, duration: 0.65, ease: 'power3.out' }
+    // ── DOM References ──────────────────────────────────────────
+    const heroSechead   = document.querySelector('#main > section.tight:first-child .sechead');
+    const imgband       = document.querySelector('#main .imgband');
+    const calendarSec   = document.querySelector('#main section.night.tight');
+    const datesSection  = calendarSec ? calendarSec.querySelector('.dates') : null;
+    const calSechead    = calendarSec ? calendarSec.querySelector('.sechead') : null;
+    const figsSec       = document.querySelector('#main .figcols');
+    const figsTables    = document.querySelectorAll('#main .figcols .figs');
+    const figSechead    = figsSec ? figsSec.closest('section')?.querySelector('.sechead') : null;
+    const explainSec    = document.querySelectorAll('#main section.night.tight')[1];
+    const explainSechead = explainSec ? explainSec.querySelector('.sechead') : null;
+    const explainCards  = document.querySelectorAll('#main section.night.tight .card');
+    const patsays       = document.querySelector('#main .patsays');
+    const checkSec      = document.querySelector('#main section:not(.tight):not(.night) .split');
+    const checkSechead  = checkSec ? checkSec.closest('section')?.querySelector('.sechead') : null;
+    const tickLists     = document.querySelectorAll('#main .ticks');
+    const toolsSec      = document.querySelector('#main .res');
+    const toolsSechead  = toolsSec ? toolsSec.closest('section')?.querySelector('.sechead') : null;
+    const toolsLinks    = document.querySelectorAll('#main .res a');
+    const callout       = document.querySelector('#main .callout');
+
+    if (!heroSechead && !datesSection && !imgband) return;
+
+    // ── 1. HERO ENTRANCE — staggered children float up ──────────
+    if (heroSechead) {
+      gsap.fromTo(heroSechead.children,
+        { y: 32, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.09, duration: 0.7, ease: 'power3.out' }
       );
     }
 
-    // 2. 2026 Reference Desk Image Band Parallax
+    // ── 2. IMAGE BAND PARALLAX + inner text reveal ───────────────
     if (imgband) {
       gsap.fromTo(imgband,
         { backgroundPositionY: '65%' },
         {
           backgroundPositionY: '35%',
           ease: 'none',
-          scrollTrigger: {
-            trigger: imgband,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
+          scrollTrigger: { trigger: imgband, start: 'top bottom', end: 'bottom top', scrub: true }
         }
       );
+      // Inner text: translate-only (no opacity) so text is never invisible
       const inner = imgband.querySelector('.imgband-inner');
       if (inner) {
-        gsap.fromTo(inner.children,
-          { y: 20, opacity: 0 },
+        gsap.fromTo(Array.from(inner.children),
+          { y: 18 },
           {
-            y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'power3.out',
-            scrollTrigger: { trigger: imgband, start: 'top 80%', toggleActions: 'play none none none' }
+            y: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+            scrollTrigger: {
+              trigger: imgband, start: 'top 90%', toggleActions: 'play none none none',
+              onEnter: () => ScrollTrigger.refresh()
+            }
           }
         );
       }
     }
 
-    // 3. Upcoming Deadlines (.dates .d) Stagger & Gold Soon Pulse
+    // ── 3. CALENDAR SECTION SECHEAD ─────────────────────────────
+    if (calSechead) {
+      gsap.fromTo(calSechead.children,
+        { y: 28, opacity: 0 },
+        {
+          y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: calSechead, start: 'top 85%', toggleActions: 'play none none none' }
+        }
+      );
+    }
+
+    // ── 4. DEADLINE ITEMS — slide in left + gold pulse on .soon ──
     if (datesSection) {
       const dateItems = datesSection.querySelectorAll('.d');
       if (dateItems.length) {
         gsap.fromTo(dateItems,
-          { x: -25, opacity: 0 },
+          { x: -28, opacity: 0 },
           {
-            x: 0,
-            opacity: 1,
-            stagger: 0.08,
-            duration: 0.55,
-            ease: 'back.out(1.2)',
-            scrollTrigger: {
-              trigger: datesSection,
-              start: 'top 82%',
-              toggleActions: 'play none none none'
-            }
+            x: 0, opacity: 1, stagger: 0.07, duration: 0.55, ease: 'back.out(1.2)',
+            scrollTrigger: { trigger: datesSection, start: 'top 82%', toggleActions: 'play none none none' }
           }
         );
-
-        // Gold pulse for imminent deadlines (.soon)
+        // Gold ambient pulse on upcoming (.soon) items
         const soonItems = datesSection.querySelectorAll('.d.soon');
         soonItems.forEach(item => {
           gsap.fromTo(item,
-            { boxShadow: '0 0 0 rgba(234, 228, 47, 0)' },
-            {
-              boxShadow: '0 0 18px rgba(234, 228, 47, 0.28)',
-              duration: 1.6,
-              repeat: -1,
-              yoyo: true,
-              ease: 'sine.inOut'
-            }
+            { boxShadow: '0 0 0px rgba(234, 228, 47, 0)' },
+            { boxShadow: '0 0 20px rgba(234, 228, 47, 0.25)', duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut' }
           );
         });
       }
     }
 
-    // 4. Tax Reference Table Rows Cascade
-    if (tables.length) {
-      gsap.fromTo(tables,
-        { opacity: 0, y: 15 },
+    // ── 5. REFERENCE FIGURES SECHEAD ────────────────────────────
+    if (figSechead) {
+      gsap.fromTo(figSechead.children,
+        { y: 28, opacity: 0 },
         {
-          opacity: 1,
-          y: 0,
-          stagger: 0.03,
-          duration: 0.45,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: tables[0],
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          }
+          y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: figSechead, start: 'top 85%', toggleActions: 'play none none none' }
         }
       );
     }
 
-    // 5. Question & Guide Cards Cascade & Hover/Touch Physics
-    if (cards.length) {
-      gsap.fromTo(cards,
-        { y: 35, opacity: 0, scale: 0.96 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          stagger: 0.08,
-          duration: 0.6,
-          ease: 'back.out(1.3)',
-          scrollTrigger: {
-            trigger: cards[0],
-            start: 'top 82%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
+    // ── 6. REFERENCE FIGURES TABLES — left column first, then right ──
+    if (figsTables.length) {
+      const leftTables  = Array.from(figsTables).filter((_, i) => i < Math.ceil(figsTables.length / 2));
+      const rightTables = Array.from(figsTables).filter((_, i) => i >= Math.ceil(figsTables.length / 2));
 
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          gsap.to(card, {
-            y: -6,
-            boxShadow: '0 18px 36px -8px rgba(1, 159, 255, 0.2)',
-            borderColor: '#019FFF',
-            duration: 0.25,
-            ease: 'power2.out',
-            overwrite: 'auto'
+      if (leftTables.length) {
+        gsap.fromTo(leftTables,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+            scrollTrigger: { trigger: leftTables[0], start: 'top 85%', toggleActions: 'play none none none' }
+          }
+        );
+      }
+      if (rightTables.length) {
+        gsap.fromTo(rightTables,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+            scrollTrigger: { trigger: rightTables[0], start: 'top 85%', toggleActions: 'play none none none' }
+          }
+        );
+      }
+
+      // Row highlight shimmer on each table
+      figsTables.forEach(table => {
+        const rows = table.querySelectorAll('tr');
+        rows.forEach(row => {
+          row.addEventListener('mouseenter', () => {
+            gsap.to(row, { backgroundColor: 'rgba(1, 159, 255, 0.06)', duration: 0.18, ease: 'power1.out', overwrite: 'auto' });
           });
-        });
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, {
-            y: 0,
-            boxShadow: '0 4px 16px rgba(10, 28, 40, 0.04)',
-            borderColor: '',
-            duration: 0.3,
-            ease: 'power3.out',
-            overwrite: 'auto'
+          row.addEventListener('mouseleave', () => {
+            gsap.to(row, { backgroundColor: 'rgba(0, 0, 0, 0)', duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
           });
         });
       });
+    }
+
+    // ── 7. PLAIN ENGLISH SECHEAD ─────────────────────────────────
+    if (explainSechead) {
+      gsap.fromTo(explainSechead.children,
+        { y: 28, opacity: 0 },
+        {
+          y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: explainSechead, start: 'top 85%', toggleActions: 'play none none none' }
+        }
+      );
+    }
+
+    // ── 8. EXPLAINER CARDS — 3D cascade with hover lift ─────────
+    if (explainCards.length) {
+      gsap.fromTo(explainCards,
+        { y: 38, opacity: 0, scale: 0.96, rotationX: -4, transformPerspective: 900, transformOrigin: '50% 0%' },
+        {
+          y: 0, opacity: 1, scale: 1, rotationX: 0, stagger: 0.09, duration: 0.65, ease: 'back.out(1.3)',
+          scrollTrigger: { trigger: explainCards[0], start: 'top 82%', toggleActions: 'play none none none' }
+        }
+      );
+      explainCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { y: -7, boxShadow: '0 20px 40px -8px rgba(1, 159, 255, 0.22)', borderColor: '#019FFF', duration: 0.22, ease: 'power2.out', overwrite: 'auto' });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { y: 0, boxShadow: '', borderColor: '', duration: 0.3, ease: 'power3.out', overwrite: 'auto' });
+        });
+      });
+    }
+
+    // ── 9. UNCLE PAT QUOTE — slide in from left ─────────────────
+    if (patsays) {
+      gsap.fromTo(patsays,
+        { x: -30, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+          scrollTrigger: { trigger: patsays, start: 'top 88%', toggleActions: 'play none none none' }
+        }
+      );
+    }
+
+    // ── 10. CHECKLIST SECTION SECHEAD ───────────────────────────
+    if (checkSechead) {
+      gsap.fromTo(checkSechead.children,
+        { y: 28, opacity: 0 },
+        {
+          y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: checkSechead, start: 'top 85%', toggleActions: 'play none none none' }
+        }
+      );
+    }
+
+    // ── 11. CHECKLIST TICK ITEMS — reveal stagger ───────────────
+    tickLists.forEach(list => {
+      const items = list.querySelectorAll('li');
+      if (!items.length) return;
+      gsap.fromTo(items,
+        { x: -20, opacity: 0 },
+        {
+          x: 0, opacity: 1, stagger: 0.05, duration: 0.45, ease: 'power2.out',
+          scrollTrigger: { trigger: list, start: 'top 88%', toggleActions: 'play none none none' }
+        }
+      );
+    });
+
+    // ── 12. OFFICIAL TOOLS SECHEAD ──────────────────────────────
+    if (toolsSechead) {
+      gsap.fromTo(toolsSechead.children,
+        { y: 28, opacity: 0 },
+        {
+          y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: toolsSechead, start: 'top 85%', toggleActions: 'play none none none' }
+        }
+      );
+    }
+
+    // ── 13. OFFICIAL TOOLS LINKS — staggered cascade + hover ────
+    if (toolsLinks.length) {
+      gsap.fromTo(toolsLinks,
+        { y: 30, opacity: 0 },
+        {
+          y: 0, opacity: 1, stagger: 0.07, duration: 0.55, ease: 'power3.out',
+          scrollTrigger: { trigger: toolsSec, start: 'top 83%', toggleActions: 'play none none none' }
+        }
+      );
+      toolsLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          gsap.to(link, { x: 6, duration: 0.2, ease: 'power2.out', overwrite: 'auto' });
+        });
+        link.addEventListener('mouseleave', () => {
+          gsap.to(link, { x: 0, duration: 0.25, ease: 'power3.out', overwrite: 'auto' });
+        });
+      });
+    }
+
+    // ── 14. DISCLAIMER CALLOUT — fade up ────────────────────────
+    if (callout) {
+      gsap.fromTo(callout,
+        { y: 24, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: callout, start: 'top 90%', toggleActions: 'play none none none' }
+        }
+      );
     }
   }
 
