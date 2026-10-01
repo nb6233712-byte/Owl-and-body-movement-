@@ -1860,7 +1860,11 @@ ul.ticks.lime li:before {
 .legal-callout-shield.blue {
   background: var(--blue-light);
   border-color: rgba(1, 159, 255, 0.25);
-  color: var(--blue-dk);
+  color: #08557F !important;
+}
+
+.legal-callout-shield.blue p {
+  color: #08557F !important;
 }
 
 .legal-callout-shield p {
@@ -2490,9 +2494,9 @@ ul.ticks.lime li:before {
 /* 2. Verification Status Banner */
 .verification-banner {
   margin-top: 28px;
-  background: #F8FAFC;
+  background: #F8FAFC !important;
   border: 1px solid var(--line, #E2E8F0);
-  border-left: 3px solid #019FFF !important;
+  border-left: 3px solid #08557F !important;
   border-radius: 4px;
   padding: 24px 28px;
   position: relative;
@@ -2505,10 +2509,19 @@ ul.ticks.lime li:before {
   font-size: 0.74rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue, #019FFF);
+  color: #08557F !important;
   margin-bottom: 12px;
   display: block;
   font-weight: 600;
+}
+
+.verification-banner p {
+  color: #2D4352 !important;
+}
+
+.verification-banner strong,
+.verification-banner b {
+  color: #0C1D28 !important;
 }
 
 /* 3. 2x2 IRS Primary Citation Grid & Ledger Cards */
@@ -3297,7 +3310,7 @@ footer .fine a:hover {
 }
 
 .diagnostic-eyebrow {
-  color: #019FFF !important;
+  color: #08557F !important;
   font-family: var(--f-mono, monospace);
   font-size: 0.74rem;
   letter-spacing: 0.12em;
@@ -3408,8 +3421,8 @@ footer .fine a:hover {
 
 .diagnostic-card:hover .diagnostic-btn {
   background: #F0F7FD !important;
-  border-color: #019FFF !important;
-  color: #019FFF !important;
+  border-color: #0A6BA8 !important;
+  color: #08557F !important;
 }
 
 .diagnostic-grid:hover .diagnostic-card:not(:hover) {
@@ -3731,7 +3744,7 @@ footer .fine a:hover {
 }
 
 .industry-eyebrow {
-  color: #019FFF !important;
+  color: #08557F !important;
   font-family: var(--f-mono, monospace);
   font-size: 0.74rem;
   letter-spacing: 0.12em;
@@ -3867,8 +3880,8 @@ footer .fine a:hover {
 
 .industry-card:hover .industry-btn {
   background: #F0F7FD !important;
-  border-color: #019FFF !important;
-  color: #019FFF !important;
+  border-color: #0A6BA8 !important;
+  color: #08557F !important;
 }
 
 .industry-card:hover .industry-arrow {

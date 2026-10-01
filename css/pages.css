@@ -102,6 +102,24 @@
    ============================================================ */
 
 /* Pinned wrapper container holding both the white stage and the incoming dark curtain sheet */
+/* Pinned White Stage base styling (applies across all viewport sizes and themes) */
+#white-pin-stage {
+  background: var(--paper, #F9F9F8);
+  color: #0C1D28;
+}
+
+#white-pin-stage .sechead .eyebrow {
+  color: #08557F !important;
+}
+
+#white-pin-stage .sechead h2 {
+  color: #0C1D28 !important;
+}
+
+#white-pin-stage .sechead .lede {
+  color: #2D4352 !important;
+}
+
 .pinned-wipe-wrapper {
   position: relative;
   width: 100%;
@@ -4130,7 +4148,7 @@ footer .fine a:hover {
   font-size: 0.65rem !important;
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  color: var(--ink-3, #728495) !important;
+  color: #475569 !important;
   display: block;
 }
 
@@ -4156,7 +4174,7 @@ footer .fine a:hover {
 
 .exposure-card p {
   font-size: 0.84rem !important;
-  color: var(--ink-2, #4A5B68) !important;
+  color: #334155 !important;
   line-height: 1.55 !important;
   margin: 0 !important;
 }
@@ -4169,8 +4187,16 @@ footer .fine a:hover {
 }
 
 .exposure-card-after .exposure-num {
-  color: #0076C6 !important;
+  color: #0066A4 !important;
   font-weight: 400 !important;
+}
+
+.exposure-card-after .k {
+  color: #08557F !important;
+}
+
+.exposure-card-after p {
+  color: #2D4352 !important;
 }
 
 .exposure-card-after:hover {
@@ -4542,6 +4568,7 @@ footer .fine a:hover {
   position: relative;
   z-index: 10;
   background: #FFFFFF !important;
+  color: #0C1D28 !important;
   border-radius: 32px 32px 0 0;
   box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -4555,15 +4582,35 @@ footer .fine a:hover {
   will-change: transform, opacity;
 }
 
+.closing-white-left h3 {
+  color: #0C1D28 !important;
+}
+
+.closing-white-left .lede {
+  color: #2D4352 !important;
+}
+
+.closing-white-left .lede b {
+  color: #0C1D28 !important;
+}
+
 /* Crisp 1px border on IMPORTANT disclaimer card */
 .closing-disclaimer-card {
   border: 1px solid #E3E8ED !important;
-  border-left: 4px solid var(--ink-3, #475569) !important;
+  border-left: 4px solid #08557F !important;
   background: #F8FAFC !important;
   border-radius: 12px !important;
   padding: 24px 28px !important;
   will-change: transform, opacity;
   box-shadow: 0 4px 18px rgba(14, 22, 33, 0.04) !important;
+}
+
+.closing-disclaimer-card .h {
+  color: #08557F !important;
+}
+
+.closing-disclaimer-card p {
+  color: #2D4352 !important;
 }
 
 /* Responsive & Mobile Fallback (< 1024px) */
@@ -4610,6 +4657,7 @@ footer .fine a:hover {
 .engagement-scope-section {
   position: relative;
   background: #FFFFFF;
+  color: #0C1D28 !important;
   padding: 80px 0 100px;
   overflow: visible;
   z-index: 12;
@@ -4618,6 +4666,14 @@ footer .fine a:hover {
 .engagement-scope-head {
   margin-bottom: 40px;
   will-change: transform, opacity;
+}
+
+.engagement-scope-head .engagement-scope-eyebrow {
+  color: #08557F !important;
+}
+
+.engagement-scope-head .engagement-scope-h2 {
+  color: #0C1D28 !important;
 }
 
 /* Grid & Equal Vertical Height System */
@@ -4753,6 +4809,7 @@ footer .fine a:hover {
 .persona-tracks-stage {
   position: relative;
   background: #FFFFFF;
+  color: #0C1D28 !important;
   padding: 80px 0 100px;
   overflow: visible;
   z-index: 14;
@@ -4760,6 +4817,26 @@ footer .fine a:hover {
 
 .persona-tracks-head {
   will-change: transform, opacity;
+}
+
+.persona-tracks-head .persona-tracks-eyebrow {
+  color: #08557F !important;
+}
+
+.persona-tracks-head .persona-tracks-h2 {
+  color: #0C1D28 !important;
+}
+
+.persona-tracks-head .persona-tracks-lede {
+  color: #2D4352 !important;
+}
+
+.persona-track-body ul.ticks li {
+  color: #2D4352 !important;
+}
+
+.persona-track-body ul.ticks li b {
+  color: #0C1D28 !important;
 }
 
 .persona-cards-wrap {
@@ -5044,6 +5121,7 @@ footer .fine a:hover {
   position: relative;
   z-index: 22;
   background: #FFFFFF !important;
+  color: #0C1D28 !important;
   border-radius: 36px 36px 0 0;
   box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -5055,6 +5133,18 @@ footer .fine a:hover {
 
 .support-white-head {
   will-change: transform, opacity;
+}
+
+.support-white-sheet .support-eyebrow {
+  color: #08557F !important;
+}
+
+.support-white-sheet .support-h2 {
+  color: #0C1D28 !important;
+}
+
+.support-white-sheet .support-lede {
+  color: #2D4352 !important;
 }
 
 /* Responsive & Mobile Breakpoints */
@@ -5451,6 +5541,7 @@ footer .fine a:hover {
 .fit-white-sheet {
   position: relative;
   background: #ffffff;
+  color: #0C1D28 !important;
   border-radius: 36px 36px 0 0;
   box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.45);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -5474,7 +5565,7 @@ footer .fine a:hover {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #019FFF;
+  color: #08557F !important;
   margin-bottom: 10px;
 }
 
@@ -5482,13 +5573,13 @@ footer .fine a:hover {
   font-size: clamp(1.9rem, 3.8vw, 3rem);
   font-weight: 300;
   line-height: 1.08;
-  color: var(--ink);
+  color: #0C1D28 !important;
   margin: 0 0 16px;
 }
 
 .fit-lede {
   max-width: 62ch;
-  color: var(--ink-2);
+  color: #2D4352 !important;
 }
 
 /* ── Two-column ledger split ── */
@@ -5522,13 +5613,13 @@ footer .fine a:hover {
 }
 
 .fit-colhead-cyan {
-  color: #019FFF;
-  border-bottom-color: #019FFF;
+  color: #08557F !important;
+  border-bottom-color: #08557F !important;
 }
 
 .fit-colhead-warn {
-  color: var(--ink-3);
-  border-bottom-color: var(--line);
+  color: #475569 !important;
+  border-bottom-color: #CBD5E1 !important;
 }
 
 /* ── List items ── */
@@ -5554,13 +5645,13 @@ footer .fine a:hover {
 
 /* ── Hover micro-interaction ── */
 .fit-item:hover {
-  background-color: #F7F9FB;
+  background-color: #F0F7FD !important;
   transform: translateX(3px);
 }
 
 /* Illuminate the dash marker on hover */
 .fit-item:hover .fit-dash {
-  color: #019FFF;
+  color: #08557F !important;
   font-weight: 600;
 }
 
@@ -5571,7 +5662,7 @@ footer .fine a:hover {
 /* The leading em-dash marker */
 .fit-dash {
   flex-shrink: 0;
-  color: var(--ink-3);
+  color: #64748B !important;
   font-size: 0.95rem;
   line-height: 1.6;
   transition: color 0.18s ease;
@@ -5581,29 +5672,29 @@ footer .fine a:hover {
 .fit-item-text {
   font-size: 0.95rem;
   line-height: 1.65;
-  color: var(--ink);
+  color: #0C1D28 !important;
 }
 
 .fit-item-warn .fit-item-text {
-  color: var(--ink-2);
+  color: #2D4352 !important;
 }
 
 /* Service redirect links inside right column */
 .fit-redirect {
-  color: #019FFF;
+  color: #08557F !important;
   text-decoration: none;
-  border-bottom: 1px solid rgba(1, 159, 255, 0.3);
+  border-bottom: 1px solid rgba(8, 85, 127, 0.35) !important;
   transition: border-color 0.16s ease, color 0.16s ease;
 }
 
 .fit-redirect:hover {
-  color: var(--blue-dk);
-  border-bottom-color: var(--blue-dk);
+  color: #019FFF !important;
+  border-bottom-color: #019FFF !important;
 }
 
 /* Redirect note below the right column list */
 .fit-redirect-note {
-  color: var(--ink-3);
+  color: #475569 !important;
   font-size: 0.82rem;
   line-height: 1.6;
   max-width: 44ch;
@@ -6336,7 +6427,7 @@ footer .fine a:hover {
   margin-top: 24px;
   background: #F0F7FD !important;
   border: 1px solid rgba(1, 159, 255, 0.25) !important;
-  border-left: 4px solid #019FFF !important;
+  border-left: 4px solid #08557F !important;
   border-radius: var(--r-md);
   padding: 24px 28px;
   will-change: transform, opacity;
@@ -6351,7 +6442,7 @@ footer .fine a:hover {
 }
 
 .indiv-sched1a-h {
-  color: #019FFF !important;
+  color: #08557F !important;
   font-family: var(--f-mono);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
@@ -6361,10 +6452,15 @@ footer .fine a:hover {
 }
 
 .indiv-sched1a-callout p {
-  color: var(--ink-2);
+  color: #2D4352 !important;
   font-size: 0.92rem;
   line-height: 1.62;
   margin: 0;
+}
+
+.indiv-sched1a-callout strong,
+.indiv-sched1a-callout b {
+  color: #0C1D28 !important;
 }
 
 /* ── Responsive & Motion Safety ── */
@@ -7123,7 +7219,7 @@ footer .fine a:hover {
 /* ── Incoming State Section Typography & Layout ── */
 .state-conformity-sheet {
   background: #ffffff;
-  color: var(--ink);
+  color: #0C1D28 !important;
   padding: 80px 0;
 }
 
@@ -7134,7 +7230,7 @@ footer .fine a:hover {
   font-size: 0.72rem;
   margin-bottom: 12px;
   display: inline-block;
-  color: var(--blue, #019FFF);
+  color: #08557F !important;
   will-change: transform, opacity;
 }
 
@@ -7144,12 +7240,13 @@ footer .fine a:hover {
 }
 
 .state-headline {
+  color: #0C1D28 !important;
   margin-bottom: 14px;
   will-change: transform, opacity;
 }
 
 .state-lede {
-  color: var(--ink-2);
+  color: #2D4352 !important;
   max-width: 64ch;
   line-height: 1.65;
   will-change: transform, opacity;
@@ -7158,6 +7255,27 @@ footer .fine a:hover {
 .state-split-copy,
 .state-split-callout {
   will-change: transform, opacity;
+}
+
+.state-split-copy p {
+  color: #2D4352 !important;
+}
+
+.state-split-copy strong,
+.state-split-copy b {
+  color: #0C1D28 !important;
+}
+
+.state-split-callout {
+  color: #2D4352 !important;
+}
+
+.state-split-callout .h {
+  color: #08557F !important;
+}
+
+.state-split-callout p {
+  color: #2D4352 !important;
 }
 
 /* ── Tablet & Mobile Responsiveness (< 1024px) ── */
