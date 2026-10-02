@@ -866,35 +866,35 @@ ul.ticks.tight li::before {
   width: 8px;
 }
 
-/* Pricing add-ons & extension panel styling (High-contrast on dark section) */
+/* Pricing add-ons & extension panel styling (High-contrast typography) */
 #pricing-split,
 #addons-panel,
 #ext-panel {
-  color: var(--night-ink, #DCEBF3);
+  color: #0C1D28 !important;
 }
 
 #pricing-split .eyebrow,
 #addons-panel .eyebrow,
 #ext-panel .eyebrow {
-  color: #019FFF !important;
+  color: #08557F !important;
   font-family: var(--f-mono, 'JetBrains Mono', monospace);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 #pricing-split p.small,
 #addons-panel p.small,
 #ext-panel p.small {
-  color: var(--night-ink-2, #9FBECF);
+  color: #2D4352 !important;
 }
 
 #pricing-split ul.ticks li,
 #addons-panel ul.ticks li,
 #ext-panel ul.ticks li {
-  color: var(--night-ink-2, #A8C3D2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #2D4352 !important;
+  border-bottom: 1px solid var(--line-2, #E2E8F0);
   transition:
     background 0.22s ease,
     padding-left 0.22s cubic-bezier(0.16, 1, 0.3, 1),
@@ -906,50 +906,54 @@ ul.ticks.tight li::before {
 #pricing-split ul.ticks li:first-child,
 #addons-panel ul.ticks li:first-child,
 #ext-panel ul.ticks li:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid var(--line-2, #E2E8F0);
 }
 
 #pricing-split ul.ticks li::before,
 #addons-panel ul.ticks li::before,
 #ext-panel ul.ticks li::before {
-  background: #019FFF;
+  background: #08557F;
 }
 
 #pricing-split ul.ticks li b,
 #addons-panel ul.ticks li b,
 #ext-panel ul.ticks li b {
-  color: #FFFFFF !important;
-  font-weight: 600;
+  color: #0C1D28 !important;
+  font-weight: 700;
 }
 
 #addons-panel ul.ticks li:hover,
 #ext-panel ul.ticks li:hover {
-  background: rgba(1, 159, 255, 0.09);
+  background: #F0F7FD;
   padding-left: 24px;
-  color: #FFFFFF;
+  color: #0C1D28 !important;
 }
 
 #addons-panel ul.ticks li:hover b,
 #ext-panel ul.ticks li:hover b {
-  color: var(--gold, #EAE42F);
+  color: #08557F !important;
 }
 
 #ext-panel .btn-o,
-#pricing-split .btn-o {
-  color: #FFFFFF !important;
-  border-color: rgba(255, 255, 255, 0.32);
-  background: transparent;
+#ext-panel .btn-w,
+#pricing-split .btn-o,
+#pricing-split .btn-w {
+  color: #0C1D28 !important;
+  border-color: var(--line, #CBD5E1) !important;
+  background: transparent !important;
 }
 
 #ext-panel .btn-o:hover,
-#pricing-split .btn-o:hover {
-  border-color: var(--gold, #EAE42F);
-  color: var(--gold, #EAE42F) !important;
-  background: rgba(234, 228, 47, 0.08);
+#ext-panel .btn-w:hover,
+#pricing-split .btn-o:hover,
+#pricing-split .btn-w:hover {
+  border-color: #08557F !important;
+  color: #08557F !important;
+  background: #F0F7FD !important;
 }
 
 #pricing-footnote {
-  color: var(--night-ink-2, #8CAABF) !important;
+  color: #475569 !important;
 }
 
 /* ---------- Callouts & Uncle Pat Quotes ---------- */
