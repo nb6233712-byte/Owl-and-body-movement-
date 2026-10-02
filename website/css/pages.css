@@ -8,7 +8,7 @@
 
 .scroll-pin-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
 }
 

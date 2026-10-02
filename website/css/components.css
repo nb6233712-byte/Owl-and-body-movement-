@@ -866,85 +866,249 @@ ul.ticks.tight li::before {
   width: 8px;
 }
 
-/* Pricing add-ons & extension panel styling (High-contrast illuminated night styling) */
-#pricing-split,
+/* ============================================================
+   PRICING SECTION — HIGH-CONTRAST TYPOGRAPHY & CARD ILLUMINATION
+   Packages & pricing · Individual tax filing (1040) · Add-ons
+   ============================================================ */
+#pricing-section {
+  position: relative;
+  background: var(--ground, #F5F8FB);
+  color: var(--ink, #0C1D28);
+}
+
+/* Eyebrow: Packages & pricing */
+#pricing-section .sechead .eyebrow {
+  color: #08557F !important;
+  font-family: var(--f-mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+
+/* Heading: Only pay for the tax work you need. */
+#pricing-section .sechead h2 {
+  color: #0C1D28 !important;
+  font-family: var(--f-display, 'Fraunces', Georgia, serif) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.018em !important;
+}
+
+/* Lede: Get it right the first time... */
+#pricing-section .sechead .lede {
+  color: #2D4352 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.62 !important;
+}
+
+/* Category Subheads: Individual tax filing · Form 1040 & Business tax filing */
+#pricing-section .eyebrow.dim,
+#pricing-section .pricing-subhead,
+#pkg-subhead-individual,
+#pkg-subhead-business {
+  color: #08557F !important;
+  font-family: var(--f-mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#pricing-section .eyebrow.dim::before,
+#pricing-section .pricing-subhead::before,
+#pkg-subhead-individual::before,
+#pkg-subhead-business::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  background: #019FFF;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Package Cards Typography & Contrast */
+#pricing-section .pkg {
+  background: #FFFFFF !important;
+  border: 1px solid #D3E0E9 !important;
+  box-shadow: 0 4px 18px rgba(14, 22, 33, 0.04) !important;
+  color: #0C1D28 !important;
+}
+
+#pricing-section .pkg.flag {
+  background: #F0F7FD !important;
+  border-color: #A3D4F7 !important;
+}
+
+#pricing-section .pkg .nm {
+  color: #0C1D28 !important;
+  font-weight: 700 !important;
+  font-size: 1.22rem !important;
+}
+
+#pricing-section .pkg .for {
+  color: #2D4352 !important;
+  font-weight: 600 !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+#pricing-section .pkg .fig {
+  color: #08557F !important;
+  font-weight: 700 !important;
+  font-size: 2.15rem !important;
+}
+
+#pricing-section .pkg .fig sup {
+  color: #08557F !important;
+  font-weight: 600 !important;
+}
+
+#pricing-section .pkg ul {
+  border-top: 1px solid #E5EDF3 !important;
+}
+
+#pricing-section .pkg li {
+  color: #2D4352 !important;
+  font-size: 0.86rem !important;
+  line-height: 1.5 !important;
+}
+
+#pricing-section .pkg li b,
+#pricing-section .pkg li strong {
+  color: #0C1D28 !important;
+  font-weight: 700 !important;
+}
+
+#pricing-section .pkg li::before {
+  background: #019FFF !important;
+}
+
+#pricing-section .pkg li.no {
+  color: #6E8797 !important;
+}
+
+#pricing-section .pkg li.no::before {
+  background: #A8C3D2 !important;
+  opacity: 0.6 !important;
+}
+
+#pricing-section .pkg .btn-o {
+  color: #08557F !important;
+  border-color: #08557F !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+
+#pricing-section .pkg:hover .btn-o {
+  background: #019FFF !important;
+  color: #FFFFFF !important;
+  border-color: #019FFF !important;
+}
+
+#pricing-section .pkg.flag .btn-p {
+  background: #08557F !important;
+  color: #FFFFFF !important;
+  border-color: #08557F !important;
+}
+
+#pricing-section .pkg.flag:hover .btn-p {
+  background: #019FFF !important;
+  border-color: #019FFF !important;
+}
+
+/* Pricing Add-ons & Extension Panel */
+#pricing-split {
+  margin-top: 34px;
+}
+
 #addons-panel,
 #ext-panel {
-  color: #DCEBF3 !important;
+  background: #FFFFFF !important;
+  border: 1px solid #D3E0E9 !important;
+  border-radius: 8px !important;
+  padding: 26px 28px !important;
+  box-shadow: 0 4px 18px rgba(14, 22, 33, 0.04) !important;
+  color: #0C1D28 !important;
 }
 
-#pricing-split .eyebrow,
 #addons-panel .eyebrow,
 #ext-panel .eyebrow {
-  color: #019FFF !important;
-  font-family: var(--f-mono, 'JetBrains Mono', monospace);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  color: #08557F !important;
+  font-family: var(--f-mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
 }
 
-#pricing-split p.small,
 #addons-panel p.small,
 #ext-panel p.small {
-  color: #DCEBF3 !important;
-  font-size: 0.92rem;
-  line-height: 1.6;
+  color: #2D4352 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
 }
 
-#pricing-split ul.ticks li,
 #addons-panel ul.ticks li,
 #ext-panel ul.ticks li {
-  color: #DCEBF3 !important;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #2D4352 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  border-bottom: 1px solid #E5EDF3 !important;
   transition:
     background 0.22s ease,
     padding-left 0.22s cubic-bezier(0.16, 1, 0.3, 1),
     color 0.2s ease;
   border-radius: 4px;
-  will-change: background;
 }
 
-#pricing-split ul.ticks li:first-child,
 #addons-panel ul.ticks li:first-child,
 #ext-panel ul.ticks li:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-top: 1px solid #E5EDF3 !important;
 }
 
-#pricing-split ul.ticks li::before,
 #addons-panel ul.ticks li::before,
 #ext-panel ul.ticks li::before {
   background: #019FFF !important;
 }
 
-#pricing-split ul.ticks li b,
 #addons-panel ul.ticks li b,
 #ext-panel ul.ticks li b {
-  color: #FFFFFF !important;
+  color: #0C1D28 !important;
   font-weight: 700 !important;
 }
 
 #addons-panel ul.ticks li:hover,
 #ext-panel ul.ticks li:hover {
-  background: rgba(1, 159, 255, 0.1) !important;
+  background: #F0F7FD !important;
   padding-left: 24px;
-  color: #FFFFFF !important;
+  color: #0C1D28 !important;
 }
 
 #addons-panel ul.ticks li:hover b,
 #ext-panel ul.ticks li:hover b {
-  color: #FDE047 !important;
+  color: #08557F !important;
+}
+
+#ext-panel .btn-g {
+  background: #1F8A54 !important;
+  color: #FFFFFF !important;
 }
 
 #ext-panel .btn-o,
 #ext-panel .btn-w,
 #pricing-split .btn-o,
 #pricing-split .btn-w {
-  color: #FFFFFF !important;
-  border-color: rgba(255, 255, 255, 0.35) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
+  color: #0C1D28 !important;
+  border-color: #D3E0E9 !important;
+  background: #F8FAFC !important;
+  font-weight: 600 !important;
 }
 
 #ext-panel .btn-o:hover,
@@ -952,13 +1116,283 @@ ul.ticks.tight li::before {
 #pricing-split .btn-o:hover,
 #pricing-split .btn-w:hover {
   border-color: #019FFF !important;
-  color: #019FFF !important;
-  background: rgba(1, 159, 255, 0.14) !important;
+  color: #08557F !important;
+  background: #F0F7FD !important;
 }
 
 #pricing-footnote {
+  color: #3F5A6B !important;
+  font-size: 0.88rem !important;
+  line-height: 1.65 !important;
+}
+
+/* Dark Mode Theme Support for Pricing Section */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #pricing-section {
+    background: var(--ground, #0A2029);
+    color: var(--ink, #E6F1F7);
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .sechead .eyebrow {
+    color: #3FB4FF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .sechead h2 {
+    color: #FFFFFF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .sechead .lede {
+    color: #A8C3D2 !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .eyebrow.dim,
+  :root:not([data-theme="light"]) #pricing-section .pricing-subhead,
+  :root:not([data-theme="light"]) #pkg-subhead-individual,
+  :root:not([data-theme="light"]) #pkg-subhead-business {
+    color: #3FB4FF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .eyebrow.dim::before,
+  :root:not([data-theme="light"]) #pricing-section .pricing-subhead::before,
+  :root:not([data-theme="light"]) #pkg-subhead-individual::before,
+  :root:not([data-theme="light"]) #pkg-subhead-business::before {
+    background: #019FFF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg {
+    background: #0F2B38 !important;
+    border-color: #204558 !important;
+    color: #E6F1F7 !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg.flag {
+    background: #153545 !important;
+    border-color: #3FB4FF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg .nm {
+    color: #FFFFFF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg .for {
+    color: #A8C3D2 !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg .fig {
+    color: #7CCBFF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg .fig sup {
+    color: #7CCBFF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg ul {
+    border-top-color: #1A3948 !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg li {
+    color: #DCEBF3 !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg li b,
+  :root:not([data-theme="light"]) #pricing-section .pkg li strong {
+    color: #FFFFFF !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-section .pkg .btn-o {
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel,
+  :root:not([data-theme="light"]) #ext-panel {
+    background: #0F2B38 !important;
+    border-color: #204558 !important;
+    color: #DCEBF3 !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel .eyebrow,
+  :root:not([data-theme="light"]) #ext-panel .eyebrow {
+    color: #019FFF !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel p.small,
+  :root:not([data-theme="light"]) #ext-panel p.small {
+    color: #DCEBF3 !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel ul.ticks li,
+  :root:not([data-theme="light"]) #ext-panel ul.ticks li {
+    color: #DCEBF3 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel ul.ticks li:first-child,
+  :root:not([data-theme="light"]) #ext-panel ul.ticks li:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel ul.ticks li b,
+  :root:not([data-theme="light"]) #ext-panel ul.ticks li b {
+    color: #FFFFFF !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel ul.ticks li:hover,
+  :root:not([data-theme="light"]) #ext-panel ul.ticks li:hover {
+    background: rgba(1, 159, 255, 0.12) !important;
+    color: #FFFFFF !important;
+  }
+
+  :root:not([data-theme="light"]) #addons-panel ul.ticks li:hover b,
+  :root:not([data-theme="light"]) #ext-panel ul.ticks li:hover b {
+    color: #FDE047 !important;
+  }
+
+  :root:not([data-theme="light"]) #ext-panel .btn-o,
+  :root:not([data-theme="light"]) #ext-panel .btn-w,
+  :root:not([data-theme="light"]) #pricing-split .btn-o,
+  :root:not([data-theme="light"]) #pricing-split .btn-w {
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  :root:not([data-theme="light"]) #pricing-footnote {
+    color: #A8C3D2 !important;
+  }
+}
+
+:root[data-theme="dark"] #pricing-section {
+  background: var(--ground, #0A2029);
+  color: var(--ink, #E6F1F7);
+}
+
+:root[data-theme="dark"] #pricing-section .sechead .eyebrow {
+  color: #3FB4FF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .sechead h2 {
+  color: #FFFFFF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .sechead .lede {
   color: #A8C3D2 !important;
-  line-height: 1.65;
+}
+
+:root[data-theme="dark"] #pricing-section .eyebrow.dim,
+:root[data-theme="dark"] #pricing-section .pricing-subhead,
+:root[data-theme="dark"] #pkg-subhead-individual,
+:root[data-theme="dark"] #pkg-subhead-business {
+  color: #3FB4FF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .eyebrow.dim::before,
+:root[data-theme="dark"] #pricing-section .pricing-subhead::before,
+:root[data-theme="dark"] #pkg-subhead-individual::before,
+:root[data-theme="dark"] #pkg-subhead-business::before {
+  background: #019FFF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg {
+  background: #0F2B38 !important;
+  border-color: #204558 !important;
+  color: #E6F1F7 !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg.flag {
+  background: #153545 !important;
+  border-color: #3FB4FF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg .nm {
+  color: #FFFFFF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg .for {
+  color: #A8C3D2 !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg .fig {
+  color: #7CCBFF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg .fig sup {
+  color: #7CCBFF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg ul {
+  border-top-color: #1A3948 !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg li {
+  color: #DCEBF3 !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg li b,
+:root[data-theme="dark"] #pricing-section .pkg li strong {
+  color: #FFFFFF !important;
+}
+
+:root[data-theme="dark"] #pricing-section .pkg .btn-o {
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+:root[data-theme="dark"] #addons-panel,
+:root[data-theme="dark"] #ext-panel {
+  background: #0F2B38 !important;
+  border-color: #204558 !important;
+  color: #DCEBF3 !important;
+}
+
+:root[data-theme="dark"] #addons-panel .eyebrow,
+:root[data-theme="dark"] #ext-panel .eyebrow {
+  color: #019FFF !important;
+}
+
+:root[data-theme="dark"] #addons-panel p.small,
+:root[data-theme="dark"] #ext-panel p.small {
+  color: #DCEBF3 !important;
+}
+
+:root[data-theme="dark"] #addons-panel ul.ticks li,
+:root[data-theme="dark"] #ext-panel ul.ticks li {
+  color: #DCEBF3 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+:root[data-theme="dark"] #addons-panel ul.ticks li:first-child,
+:root[data-theme="dark"] #ext-panel ul.ticks li:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+:root[data-theme="dark"] #addons-panel ul.ticks li b,
+:root[data-theme="dark"] #ext-panel ul.ticks li b {
+  color: #FFFFFF !important;
+}
+
+:root[data-theme="dark"] #addons-panel ul.ticks li:hover,
+:root[data-theme="dark"] #ext-panel ul.ticks li:hover {
+  background: rgba(1, 159, 255, 0.12) !important;
+  color: #FFFFFF !important;
+}
+
+:root[data-theme="dark"] #addons-panel ul.ticks li:hover b,
+:root[data-theme="dark"] #ext-panel ul.ticks li:hover b {
+  color: #FDE047 !important;
+}
+
+:root[data-theme="dark"] #ext-panel .btn-o,
+:root[data-theme="dark"] #ext-panel .btn-w,
+:root[data-theme="dark"] #pricing-split .btn-o,
+:root[data-theme="dark"] #pricing-split .btn-w {
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+:root[data-theme="dark"] #pricing-footnote {
+  color: #A8C3D2 !important;
 }
 
 /* ---------- Callouts & Uncle Pat Quotes ---------- */

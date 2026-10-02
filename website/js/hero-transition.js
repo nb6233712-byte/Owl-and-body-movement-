@@ -37,6 +37,7 @@
 
       const hero = document.querySelector('.hero');
       const section2 = document.querySelector('.section-thesis');
+      const heroShell = hero ? hero.querySelector('.shell.in') : null;
       const heroText = hero ? hero.querySelector('.shell.in > div:first-child') : null;
       const owlContainer = document.getElementById('owl-container');
 
@@ -161,9 +162,15 @@
           end: '+=100%',            // Duration equals 1 full viewport height
           pin: true,                // Pins Section 01 firmly in place
           pinSpacing: false,        // Enables Section 02 to sweep smoothly over Section 01
-          scrub: 1.2,               // Smooth momentum scrub
+          scrub: 1.0,               // Smooth momentum scrub
+          fastScrollEnd: true,
           anticipatePin: 1,         // Eliminates pin-latch hitching
-          invalidateOnRefresh: true
+          invalidateOnRefresh: true,
+          onLeaveBack: () => {
+            if (heroShell) gsap.set(heroShell, { opacity: 1, y: 0, scale: 1, filter: 'none' });
+            if (owlContainer) gsap.set(owlContainer, { opacity: 1, y: 0, scale: 1 });
+            if (hero) gsap.set(hero, { clearProps: 'transform' });
+          }
         }
       });
 
@@ -183,23 +190,27 @@
       );
 
       // 2. Departing Hero Layer (Section 01): Scale down (1 -> 0.95), lift (y: -30px), fade (opacity: 0.2), blur (8px)
-      masterTl.to(hero, {
-        scale: 0.95,
-        y: -30,
-        opacity: 0.2,
-        filter: 'blur(8px)',
-        ease: 'power2.out',
-        force3D: true
-      }, 0);
+      if (heroShell) {
+        masterTl.to(heroShell, {
+          scale: 0.95,
+          y: -30,
+          opacity: 0.2,
+          filter: 'blur(8px)',
+          ease: 'power2.out',
+          force3D: true
+        }, 0);
+      }
 
       // 3. Uncle Pat Mascot: Independent parallax track (y: -50px, scale: 0.92, opacity: 0)
-      masterTl.to(owlContainer, {
-        y: -50,
-        scale: 0.92,
-        opacity: 0,
-        ease: 'power2.out',
-        force3D: true
-      }, 0);
+      if (owlContainer) {
+        masterTl.to(owlContainer, {
+          y: -50,
+          scale: 0.92,
+          opacity: 0,
+          ease: 'power2.out',
+          force3D: true
+        }, 0);
+      }
 
       // 4. Coordinated Internal Sequence:
       // A. Title & Subtext: Fade and float up
